@@ -1,0 +1,46 @@
+<?php
+namespace app\maker\controller;
+
+use think\Controller;
+use app\maker\model\Record;
+class Index extends Controller
+{
+    public function index() 
+    {
+        $name = "刘哲";
+        $this->assign('name',$name);
+        return $this->fetch();
+    }
+
+    //查获经过
+    
+    //主页面，录入驾驶人信息等等
+    public function index2(){
+        return $this->fetch("form");
+    }
+    
+    public function shenpibiao(){
+        return $this->fetch("shenpibiao");
+    }
+    
+    public function chahuojingguo(){
+        $list = Record::get(1);
+               
+        $result = 0;
+        $this->assign([
+            'name'  => '刘少乃',
+            'caughtTime' => '2018年04月07日11时15分'
+        ]);
+        
+        
+        return $this->fetch('chahuojingguo');
+    }
+    
+    public function footer(){
+       return $this->fetch('maker@common/footer');
+    }
+    
+    public function page($page){
+        
+    }
+}
