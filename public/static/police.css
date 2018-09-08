@@ -1,8 +1,15 @@
 .police-head{text-align: center;}
 .police-head-large{ font-size: 26pt; margin: 5pt; font-weight:bold;padding: 8pt}
+.police-content{font-size: 20pt; line-height: 30pt}
 .police-text{ font-size: 20pt; line-height: 30pt}
+.police-text-small{ font-size: 16pt; line-height: 28pt;}
 .police-sign-name{text-align: right; display: inline-block}
 .police-sign-block{ text-align: right; font-size: 20pt; padding: 8pt}
-.police-print-area{font-family: 仿宋; width: 210mm; height:297mm}
+.police-print-area{font-family: 仿宋; width: 210mm; height:307mm}
 .police-table{width: 100%; text-align: center;border-collapse: collapse;border-color: black; font-size: 20pt}
 td,tr{border:1px solid black; line-height: 38pt}
+.police-section{text-indent: 2em}
+.police-underline{height: 22pt; vertical-align: text-bottom; display: inline-block; text-align: center; border-bottom-style: solid;border-bottom-width: 1pt;}
+.police-name{min-width: 5em;display: inline-block;}
+.police-page-frame{width: 220mm; height: 290mm; position: absolute; border: solid 2pt black }
+.police-page-frame-inside{width: 210mm; height: 297mm; position: relative;left: 2em}

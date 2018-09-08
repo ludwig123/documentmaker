@@ -40,7 +40,11 @@ class Index extends Controller
        return $this->fetch('maker@common/footer');
     }
     
-    public function page($page){
-        
+    public function gaozhibilu(){
+        return $this->fetch('gaozhibilu');
+    }
+    
+    public function juedingshu(){
+        return $this->fetch('juedingshu');
     }
 }
