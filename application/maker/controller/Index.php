@@ -3,6 +3,7 @@ namespace app\maker\controller;
 
 use think\Controller;
 use app\maker\model\Record;
+use app\maker\model\TrafficCase;
 class Index extends Controller
 {
     public function index() 
@@ -16,6 +17,8 @@ class Index extends Controller
     
     //主页面，录入驾驶人信息等等
     public function index2(){
+        $trafficCase = new TrafficCase();
+        $case = $trafficCase->getDecisionNum();
         return $this->fetch("form");
     }
     
@@ -47,4 +50,6 @@ class Index extends Controller
     public function juedingshu(){
         return $this->fetch('juedingshu');
     }
+    
+    
 }
