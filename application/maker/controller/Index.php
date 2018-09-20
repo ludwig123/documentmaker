@@ -17,8 +17,8 @@ class Index extends Controller
     
     //主页面，录入驾驶人信息等等
     public function index2(){
-        $trafficCase = new TrafficCase();
-        $case = $trafficCase->getDecisionNum();
+//         $trafficCase = new TrafficCase();
+//         $case = $trafficCase->getDecisionNum();
         return $this->fetch("form");
     }
     
