@@ -16,7 +16,7 @@ class Index extends Controller
     //查获经过
     
     //主页面，录入驾驶人信息等等
-    public function index2(){
+    public function form(){
 //         $trafficCase = new TrafficCase();
 //         $case = $trafficCase->getDecisionNum();
         return $this->fetch("form");
@@ -49,6 +49,14 @@ class Index extends Controller
     
     public function juedingshu(){
         return $this->fetch('juedingshu');
+    }
+
+    public function mydoc(){
+        return $this->fetch('mydoc');
+    }
+
+    public function code(){
+        return $this->fetch('code');
     }
     
     

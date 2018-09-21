@@ -6,6 +6,7 @@
     <title>酸辣季真</title>
     {load href="__STATIC__/layui/css/layui.css" /} 
     {load href="__STATIC__/layui/css/global.css" /} 
+    {load href="__STATIC__/maker/tools.js" /} 
     {load href="__STATIC__/police.css"/} 
     {load href="__STATIC__/jquery-3.3.1.min.js"/} 
     {load href="__STATIC__/jquery.print.min.js"/} 
@@ -16,12 +17,12 @@
 <body>
     {include file="maker@common/menu" /}
     {block name="printmode"}{/block}
-    {block name="newmode"}{/block}
+    {block name="form"}{/block}
 
     
     {include file="maker@common/footer" /}
     
-    <script type="text/javascript">
+<!--     <script type="text/javascript">
     //主动加载jquery模块
     layui.use(['jquery', 'layer'], function() {
         var $ = layui.$ //重点处
@@ -32,7 +33,7 @@
     });
 
 
-</script>
+</script> -->
 </body>
 
 </html>

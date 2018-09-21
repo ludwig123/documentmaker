@@ -1,0 +1,43 @@
+{extend name="maker@common/base" /} 
+
+{block name="form"}
+
+
+
+<div style="margin-left: 100px">
+    <div class="layui-row" id="toolbar"></div>
+	<table id="demo" lay-filter="test"></table>
+</div>
+
+
+
+
+<script>
+	layui.use('table', function(){
+		var table = layui.table;
+
+  //第一个实例
+  table.render({
+  	elem: '#demo'
+  	,height: 600
+    ,url: '/documentmaker/public/index.php/maker/api/code' //数据接口
+    ,page: true //开启分页
+    ,limit: 20
+    ,toolbar: '#toolbar'
+    ,defaultToolbar: ['filter', 'print', 'exports']
+    ,cols: [[ //表头
+    {align: 'center',field: '违法代码', title: '代码', width:80, sort: true, fixed: 'left'}
+    ,{field: '违法内容', title: '违法内容', width:360}
+    ,{field: '违法条款', title: '违法条款', width:160}
+    ,{field: '处罚依据', title: '处罚依据', width:160} 
+    ,{field: '违法记分', title: '记分', width: 80, sort: true}
+    ,{field: '罚款金额', title: '金额', width: 80, sort: true}
+    ,{field: '强制措施类型', title: '强制措施类型', width: 80}
+    ,{field: '警告标记', title: '警告', width: 20, sort: true}
+    ,{field: '拘留标记', title: '拘留', width: 20, sort: true}
+    ]]
+});
+  
+});
+</script>
+{/block}
