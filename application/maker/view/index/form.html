@@ -4,13 +4,13 @@
 
 
 <div class="site-text se-block">
-	<form class="layui-form" action="">
+	<form class="layui-form" lay-filter="formDemo" action="">
 		<div class="site-title">
 			<fieldset><legend><a name="input">案卷信息</a></legend></fieldset>
 		</div>
 		<div class="layui-fluid">
 			<div class="layui-row">
-				<div class="layui-col-md6">
+				<div class="layui-col-md4">
 					<div class="layui-form-item">
 						<label class="layui-form-label">决定书编号</label>
 						<div class="layui-input-block">
@@ -21,12 +21,22 @@
 					</div>
 				</div>
 
-				<div class="layui-col-md6">
+				<div class="layui-col-md4">
+					<div class="layui-form-item">
+						<label class="layui-form-label">违法日期</label>
+						<div class="layui-input-block">
+							<input type="text" class="layui-input" name = "date" id="date" lay-verify="required"
+							placeholder="2018年8月15日" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+				</div>
+
+				<div class="layui-col-md4">
 					<div class="layui-form-item">
 						<label class="layui-form-label">违法时间</label>
 						<div class="layui-input-block">
 							<input type="text" class="layui-input" name = "time" id="time" lay-verify="required"
-							placeholder="请输入标题" autocomplete="off" class="layui-input">
+							placeholder="08：08" autocomplete="off" class="layui-input">
 						</div>
 					</div>
 				</div>
@@ -449,13 +459,26 @@
 
 
 <script>
-//Demo
+
 layui.use('form', function() {
     var form = layui.form;
 
+    form.val("formDemo",{
+    	"index": "43042219999999999"
+    	,"date": "2018-08-16"
+    	,"time": "20:18"
+    	,"place": "泉南高速公路衡南服务器东王西方向831公里100米处"
+    	,"code": "11110"
+    	,"docType": "1"
+    	,"docIndex": "4304352900000000"
+    })
+
+    $("#page-main").removeClass("layui-this");
+    $("#page-record").addClass("layui-this");
+
     //监听提交
     form.on('submit(formDemo)', function(data) {
-
+    	layer.msg(data.field);
         $.ajax({
             type: "POST",
             url: "/documentmaker/public/index.php/maker/api/createcase",
@@ -464,7 +487,7 @@ layui.use('form', function() {
             success: function(respMsg) {
             	var msg = respMsg;
                 
-                layer.msg("提交成功！");
+                // layer.msg("提交成功！");
             },
             error: function() {
             	layer.msg("提交失败")
@@ -481,7 +504,13 @@ layui.use('laydate', function() {
            laydate.render({ 
            	elem: '#time' 
            	,type: 'time'
-           	,format: 'HH:mm'
+           	,format: 'HH时mm分'
+    });
+
+                      laydate.render({ 
+           	elem: '#date' 
+           	,type: 'date'
+           	,format: 'yyyy年MM月dd日'
     });
 });
 
