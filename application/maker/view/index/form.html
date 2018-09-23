@@ -439,6 +439,7 @@
 			<div class="layui-input-block">
 				<button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
 				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+				<button class="layui-btn layui-btn-primary" id="getRecord">获取</button>
 			</div>
 		</div>
 
@@ -454,8 +455,7 @@ layui.use('form', function() {
 
     //监听提交
     form.on('submit(formDemo)', function(data) {
-        // var caseInfo = JSON.stringify(data.field);
-        // layer.msg(caseInfo);
+
         $.ajax({
             type: "POST",
             url: "/documentmaker/public/index.php/maker/api/createcase",
@@ -463,29 +463,52 @@ layui.use('form', function() {
             dataType: "json",
             success: function(respMsg) {
             	var msg = respMsg;
-                alert("提交成功！");
-                layer.msg();
+                
+                layer.msg("提交成功！");
             },
             error: function() {
-            	alert("提交失败")
-                 alert(textStatus);
-                 alert(XMLHttpRequest.status);
+            	layer.msg("提交失败")
             }
         });
     });
 });
 
+
+
 // 时间控件
 layui.use('laydate', function() {
-            var laydate = layui.laydate;
-
-            //执行一个laydate实例
-            laydate.render({
-        elem: '#time' //指定元素
-            ,
-        type: 'time',
-        format: 'HH:mm'
+           var laydate = layui.laydate; 
+           laydate.render({ 
+           	elem: '#time' 
+           	,type: 'time'
+           	,format: 'HH:mm'
     });
 });
+
+layui.use('jquery',function(){
+	// var $ = layui.$;
+	$('#getRecord').on('click',function(){
+		alert('you click me!');
+
+		$.ajax({
+			type: "POST",
+			url: "/documentmaker/public/index.php/maker/api/findcase",
+			data: "",
+			dataType: "json",
+			success: function(respMsg) {
+				var msg = respMsg;
+				layer.msg("获取数据成功！");
+				layer.msg(respMsg['index']);
+				$(":input[name='index']").val(respMsg['index']);
+			},
+			error: function() {
+				alert("获取数据失败，网络超时！")
+				
+			}
+		});
+	})
+	var self = $(this);
+
+})
 </script>
 {/block}

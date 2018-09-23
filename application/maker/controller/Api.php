@@ -2,6 +2,7 @@
 namespace app\maker\controller;
 
 use app\maker\model\Code;
+use app\maker\model\Record;
 use think\config\driver\Json;
 use think\facade\Request;
 
@@ -22,8 +23,10 @@ class Api {
 	/**通过决定书编号找到案卷所有信息
 	 * @param $String $caseNum
 	 */
-	public function findcase($caseNum) {
-	    ;  
+	public function findcase() {
+	    $record = Record::where('Id',1)->find();
+	    $data = json($record);
+	    return $data;
 	}
 	
 	/**创建一个案卷
