@@ -4,6 +4,7 @@ namespace app\maker\controller;
 use think\Controller;
 use app\maker\model\Record;
 use app\maker\model\TrafficCase;
+use phpDocumentor\Reflection\DocBlock\Tags\Return_;
 class Index extends Controller
 {
     public function index() 
@@ -57,6 +58,10 @@ class Index extends Controller
 
     public function code(){
         return $this->fetch('code');
+    }
+    
+    public function recordslist(){
+        return $this->fetch('recordslist');
     }
     
     

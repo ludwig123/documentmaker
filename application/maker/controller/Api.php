@@ -2,6 +2,7 @@
 namespace app\maker\controller;
 
 use app\maker\model\Code;
+use app\maker\model\Man;
 use app\maker\model\Record;
 use think\config\driver\Json;
 use think\facade\Request;
@@ -19,14 +20,44 @@ class Api {
 		return json($data);
 		
 	}
+	
+	public function recordsList(){
+	    $records = Record::with([
+            'man',
+            'driver',
+            'car'
+        ])->select();
+        $data = $records->toArray();
+        $lists = array();
+        foreach ($data as $v) {
+            $car = $v['car'];
+            unset($v['car']);
+            $driver = $v['driver'];
+            unset($v['driver']);
+            $man = $v['man'];
+            unset($v['man']);
+             $lists[]= array_merge($v, $car, $man, $driver);
+            
+	    }
+	    $data = array(
+	        'data'=>$lists,
+	        'code'=>'0',
+	        'count'=>"2"
+	    );
+
+	    return json($data);
+	}
 
 	/**通过决定书编号找到案卷所有信息
 	 * @param $String $caseNum
 	 */
 	public function findcase() {
-	    $record = Record::where('Id',1)->find();
-	    $data = json($record);
-	    return $data;
+	    $record= Record::where('identity','like','%0019')->find();
+	    return $record->man->sex;
+	    
+// 	    $record = Record::where('Id',1)->find();
+// 	    $data = json($record);
+// 	    return $data;
 	}
 	
 	/**创建一个案卷
@@ -57,5 +88,13 @@ class Api {
 	    ;
 	}
 	
+	
+	private function postInfo(){
+	    return Request::instance()->post();
+	}
+	
+	private function getInfo(){
+	    return Request::instance()->get();
+	}
 	
 }

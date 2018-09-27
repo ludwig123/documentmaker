@@ -1,0 +1,41 @@
+{extend name="maker@common/base" /} 
+
+{block name="main"}
+
+
+
+
+<div style="margin-left: 100px">
+    <div class="layui-row" id="toolbar"></div>
+	<table id="demo" lay-filter="test"></table>
+</div>
+
+
+
+
+<script>
+	layui.use('table', function(){
+		var table = layui.table;
+
+  //第一个实例
+  table.render({
+  	elem: '#demo'
+  	,height: 600
+    ,url: '/documentmaker/public/index.php/maker/api/recordslist' //数据接口
+    ,page: true //开启分页
+    ,limit: 20
+    ,toolbar: '#toolbar'
+    ,defaultToolbar: ['filter', 'print', 'exports']
+    ,cols: [[ //表头
+    {align: 'center',field: 'time', title: '违法时间', width:160, sort: true, fixed: 'left'}
+    ,{field: 'name', title: '当事人', width:100}
+    ,{field: 'car', title: '车辆', width:160}
+    ,{field: 'code_1', title: '违法行为', width:100} 
+    ,{field: 'index', title: '决定书编号', width: 160, sort: true}
+    ]]
+});
+  
+});
+</script>
+
+{/block}

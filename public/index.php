@@ -14,7 +14,7 @@ namespace think;
 use think\facade\Request;
 // 加载基础文件
 require __DIR__ . '/../thinkphp/base.php';
-
+$r = Request::rootUrl();
 define('__ROOT__', Request::rootUrl() . '/');
 
 // 支持事先使用静态方法设置Request对象和Config对象
