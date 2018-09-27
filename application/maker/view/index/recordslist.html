@@ -11,7 +11,13 @@
 </div>
 
 
-
+<script type="text/html" id="toolbarDemo">
+  <div class="layui-btn-container">
+    <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
+    <button class="layui-btn layui-btn-sm" lay-event="delete">删除</button>
+    <button class="layui-btn layui-btn-sm" lay-event="update">编辑</button>
+  </div>
+</script>
 
 <script>
 	layui.use('table', function(){
@@ -24,17 +30,27 @@
     ,url: '/documentmaker/public/index.php/maker/api/recordslist' //数据接口
     ,page: true //开启分页
     ,limit: 20
-    ,toolbar: '#toolbar'
+    ,toolbar:  '#toolbarDemo' 
     ,defaultToolbar: ['filter', 'print', 'exports']
     ,cols: [[ //表头
-    {align: 'center',field: 'time', title: '违法时间', width:160, sort: true, fixed: 'left'}
+     {title:'', type: 'radio', width:30, fixed: 'left'}
+    ,{align: 'center', field: 'time', title: '违法时间', width:160, sort: true}
     ,{field: 'name', title: '当事人', width:100}
     ,{field: 'car', title: '车辆', width:160}
+    ,{field: 'car_type', title: '车辆类型', width:160}
     ,{field: 'code_1', title: '违法行为', width:100} 
     ,{field: 'index', title: '决定书编号', width: 160, sort: true}
     ]]
 });
   
+
+  //监听行单击事件
+table.on('row(test)', function(obj){
+  console.log(obj.tr) //得到当前行元素对象
+  console.log(obj.data) //得到当前行数据
+  //obj.del(); //删除当前行
+  //obj.update(fields) //修改当前行数据
+});
 });
 </script>
 
