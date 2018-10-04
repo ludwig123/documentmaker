@@ -51,11 +51,12 @@ class Index extends Controller
      * @return mixed|string
      */
     public function gaozhibilu($index){
+        $record = (new Record())->getRecordByIndex($index);
         
         $this->assign([
-            'zhidui'=>'衡阳',
+            'zhidui'=>$record->record(),
             'dadui'=>'衡阳西',
-            'code_1_content'=>'没带驾驶证',
+            'code_1_content'=>'没带驾驶证', 
             'code_1_against'=>'违反的法律',
             'code_1_punish'=>'处罚的依据',
             'code_1_money'=>'200',

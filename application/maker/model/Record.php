@@ -90,6 +90,9 @@ class Record extends Model
             'code_2'
         ])->select();
             $record = $reocrd->toArray();
+            if (empty($record)){
+                return NULL;
+            }
             $record = $record[0];
             
             $lists = $this->flatArray($record);
