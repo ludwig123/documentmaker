@@ -27,6 +27,9 @@ class Index extends Controller
         return $this->fetch("shenpibiao");
     }
     
+    /**查获经过
+     * @return mixed|string
+     */
     public function chahuojingguo(){
         $list = Record::get(1);
                
@@ -44,7 +47,32 @@ class Index extends Controller
        return $this->fetch('maker@common/footer');
     }
     
-    public function gaozhibilu(){
+    /**告知笔录
+     * @return mixed|string
+     */
+    public function gaozhibilu($index){
+        
+        $this->assign([
+            'zhidui'=>'衡阳',
+            'dadui'=>'衡阳西',
+            'code_1_content'=>'没带驾驶证',
+            'code_1_against'=>'违反的法律',
+            'code_1_punish'=>'处罚的依据',
+            'code_1_money'=>'200',
+            'code_2_content'=>'没带驾驶证2',
+            'code_2_against'=>'违反的法律2',
+            'code_2_punish'=>'处罚的依据2',
+            'code_2_money'=>'100',
+            'name'  => '刘少乃',
+            'time' => '2018年04月07日11时15分',
+            'place'=>'泉南高速',
+            'evidence'=>'陈述和沈变',
+            'car' =>'湘D',
+            'car_type' =>'小轿车',
+            
+            
+            
+        ]);
         return $this->fetch('gaozhibilu');
     }
     
