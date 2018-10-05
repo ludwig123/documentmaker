@@ -2,6 +2,7 @@
 namespace app\maker\model;
 
 
+
 use phpDocumentor\Reflection\DocBlock\Tags\Return_;
 
 /**
@@ -9,10 +10,10 @@ use phpDocumentor\Reflection\DocBlock\Tags\Return_;
  *
  */
 class TrafficCase {
-    private $case;
+    public $case;
     
-    function __construct($index){
-        $this->case = (new Record())->getRecordByIndex($index);
+    function __construct($id){
+        $this->case = (new Record())->getRecordById($id);
     }
     
     /**决定书编号
@@ -22,6 +23,14 @@ class TrafficCase {
         return $this->case['index'];
     }
     
+    public function getTime(){
+        return $this->case['time'];
+    }
+    
+    public function getPlace(){
+        return $this->case['place'];
+    }
+        
     /**当事人名字
      * 
      */
@@ -40,7 +49,7 @@ class TrafficCase {
         return $this->case['zhidui'];
     }
     
-    public function getDaduiadui(){
+    public function getDadui(){
         return $this->case['dadui'];
     }
     
@@ -124,47 +133,44 @@ class TrafficCase {
     }
     
     public function getCode1(){
-        return $this->case['违法代码'];
+        return $this->case['违法代码1'];
     }
     
     public function getCode1Content(){
-        return $this->case['违法内容'];
+        return $this->case['违法内容1'];
     }
     
     public function getCode1Against(){
-        return $this->case['违法条款'];
+        return $this->case['违法条款1'];
     }
         
     public function getCode1Punish(){
-        return $this->case['处罚依据'];
+        return $this->case['处罚依据1'];
     }
     
     public function getCode1Money(){
-        return $this->case['罚款金额'];
+        return $this->case['罚款金额1'];
     }
     
     public function getCode2(){
-        return $this->case['违法代码'];
+        return array_key_exists('code_2', $this->case)? NULL : $this->case['违法代码2'] ;
     }
     
     public function getCode2Content(){
-        return $this->case['违法内容'];
+        return array_key_exists('code_2', $this->case)? NULL :  $this->case['违法内容2'];
     }
     
     public function getCode2Against(){
-        return $this->case['违法条款'];
+        return array_key_exists('code_2', $this->case)? NULL : $this->case['违法条款2'];
     }
     
     public function getCode2Punish(){
-        return $this->case['处罚依据'];
+        return array_key_exists('code_2', $this->case)? NULL : $this->case['处罚依据2'];
     }
     
     public function getCode2Money(){
-        return $this->case['罚款金额'];
+        return array_key_exists('code_2', $this->case)? NULL : $this->case['罚款金额2'];
     }
-        
-        
-        
         
         
 }

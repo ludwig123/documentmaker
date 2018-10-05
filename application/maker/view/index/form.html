@@ -1,421 +1,360 @@
-{extend name="maker@common/base" /} 
-
+{extend name="maker@common/base" /}
 {block name="main"}
-
-
+<div id="id" value={$id}></div>
 <div class="site-text se-block">
-	<form class="layui-form" lay-filter="formDemo" action="">
-		<div class="site-title">
-			<fieldset><legend><a name="input">案卷信息</a></legend></fieldset>
-		</div>
-		<div class="layui-fluid">
-			<div class="layui-row">
-				<div class="layui-col-md4">
-					<div class="layui-form-item">
-						<label class="layui-form-label">决定书编号</label>
-						<div class="layui-input-block">
-							<input type="text" name="index" required
-							lay-verify="required" placeholder="请输入18位决定书编号"
-							autocomplete="off" class="layui-input">
-						</div>
-					</div>
-				</div>
-
-				<div class="layui-col-md4">
-					<div class="layui-form-item">
-						<label class="layui-form-label">违法日期</label>
-						<div class="layui-input-block">
-							<input type="text" class="layui-input" name = "date" id="date" lay-verify="required"
-							placeholder="2018年8月15日" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-				</div>
-
-				<div class="layui-col-md4">
-					<div class="layui-form-item">
-						<label class="layui-form-label">违法时间</label>
-						<div class="layui-input-block">
-							<input type="text" class="layui-input" name = "time" id="time" lay-verify="required"
-							placeholder="08：08" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="layui-fluid">
-			<div class="layui-row">
-				<div class="layui-col-md6">
-					<div class="layui-form-item">
-						<label class="layui-form-label">违法地点</label>
-						<div class="layui-input-block">
-							<input type="text" name="place" required
-							lay-verify="required" placeholder="请输入18位决定书编号"
-							autocomplete="off" class="layui-input">
-						</div>
-					</div>
-				</div>
-
-				<div class="layui-col-md6">
-					<div class="layui-form-item">
-						<label class="layui-form-label">违法代码</label>
-						<div class="layui-input-block">
-							<input type="text" name="code" required lay-verify="required"
-							placeholder="请输入标题" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="layui-fluid">
-			<div class="layui-row">
-				<div class="layui-col-md6">
-					<div class="layui-form-item">
-						<label class="layui-form-label">文书类型</label>
-
-						<div class="layui-input-block">
-							<select name="docType" lay-verify="required">
-								<option value=""></option>
-								<option value="0">通知书</option>
-								<option value="1">强制措施</option>
-							</select>
-						</div>
-					</div>
-				</div>
-
-				<div class="layui-col-md6">
-					<div class="layui-form-item">
-						<label class="layui-form-label">文书编号</label>
-						<div class="layui-input-block">
-							<input type="text" name="docIndex" required lay-verify=""
-							placeholder="请输入标题" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="layui-fluid">
-			<div class="layui-row">
-				<div class="layui-col-md6">
-					<div class="layui-form-item">
-						<label class="layui-form-label">支队</label>
-						<div class="layui-input-block">
-							<select name="zhidui" lay-verify="">
-								<option value=""></option>
-								<option value="0">衡阳</option>
-								<option value="1">长沙</option>
-								<option value="2">株洲</option>
-								<option value="3">湘潭</option>
-								<option value="4">永州</option>
-							</select>
-						</div>
-					</div>
-				</div>
-
-				<div class="layui-col-md6">
-					<div class="layui-form-item">
-						<label class="layui-form-label">大队</label>
-						<div class="layui-input-block">
-							<input type="text" name="dadui"  lay-verify=""
-							placeholder="请输入标题" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="layui-fluid">
-			<div class="layui-row">
-				<div class="layui-col-md6">
-					<div class="layui-form-item">
-						<label class="layui-form-label">主办民警</label>
-						<div class="layui-input-block">
-							<input type="text" name="police" 
-							lay-verify="" placeholder="请输入主办民警姓名"
-							autocomplete="off" class="layui-input">
-						</div>
-					</div>
-				</div>
-
-				<div class="layui-col-md6">
-					<div class="layui-form-item">
-						<label class="layui-form-label">协办民警</label>
-						<div class="layui-input-block">
-							<input type="text" name="police2"  lay-verify=""
-							placeholder="请输入协办民警姓名" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
-		<!-- 身份证信息 -->
-		<!-- <div class="site-title">
-			<fieldset><legend><a name="input">个人信息</a></legend></fieldset>
-		</div>
-
-		<div class="layui-fluid">
-			<div class="layui-row">
-				<div class="layui-col-md6">
-					<div class="layui-form-item">
-						<label class="layui-form-label">姓名</label>
-						<div class="layui-input-block">
-							<input type="text" name="title" required lay-verify="required"
-							placeholder="请输入姓名" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-				</div>
-				<div class="layui-col-md6">
-					<div class="layui-form-item">
-						<label class="layui-form-label">籍贯</label>
-						<div class="layui-input-block">
-							<input type="text" name="title" required lay-verify="required"
-							placeholder="请输入标题" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="layui-fluid">
-			<div class="layui-row">
-				<div class="layui-col-md6">
-					<div class="layui-form-item">
-						<label class="layui-form-label">民族</label>
-						<div class="layui-input-block">
-							<input type="text" name="title" required lay-verify="required"
-							placeholder="请输入标题" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-				</div>
-				<div class="layui-col-md6">
-					<div class="layui-form-item">
-						<label class="layui-form-label">性别</label>
-						<div class="layui-input-block">
-							<input type="radio" name="sex" value="男" title="男"> 
-							<input type="radio" name="sex" value="女" title="女" checked>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="layui-fluid">
-			<div class="layui-row">
-				<div class="layui-col-md6">
-					<div class="layui-form-item">
-						<label class="layui-form-label">身份证号码</label>
-						<div class="layui-input-block">
-							<input type="text" name="title" required lay-verify="required"
-							placeholder="请输入标题" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-				</div>
-				<div class="layui-col-md6">
-					<div class="layui-form-item">
-						<label class="layui-form-label">手机号码</label>
-						<div class="layui-input-block">
-							<input type="text" name="title" required lay-verify="required"
-							placeholder="请输入标题" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="layui-fluid">
-			<div class="layui-row">
-				<div class="layui-col-md12">
-					<div class="layui-form-item">
-						<label class="layui-form-label">身份证地址</label>
-						<div class="layui-input-block">
-							<input type="text" name="title" required lay-verify="required"
-							placeholder="请输入标题" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
-		<div class="layui-fluid">
-			<div class="layui-row">
-				<div class="layui-col-md6">
-					<div class="layui-form-item">
-						<label class="layui-form-label">学历</label>
-						<div class="layui-input-block">
-							<input type="text" name="title" required lay-verify="required"
-							placeholder="请输入标题" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-				</div>
-				
-				<div class="layui-col-md6">
-					<div class="layui-form-item">
-						<label class="layui-form-label">政治面貌</label>
-						<div class="layui-input-block">
-							<input type="text" name="title" required lay-verify="required"
-							placeholder="请输入标题" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="layui-fluid">
-			<div class="layui-row">
-				<div class="layui-col-md12">
-					<div class="layui-form-item">
-						<label class="layui-form-label">工作单位</label>
-						<div class="layui-input-block">
-							<input type="text" name="title" required lay-verify="required"
-							placeholder="请输入标题" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div> -->
-
-		<!-- 驾驶证信息 -->
-		<!-- <div class="site-title">
-			<fieldset><legend><a name="input">驾驶证信息</a></legend></fieldset>
-		</div>
-		<div class="layui-fluid">
-			<div class="layui-row">
-
-				<div class="layui-col-md6">
-					<div class="layui-form-item">
-						<label class="layui-form-label">档案编号</label>
-						<div class="layui-input-block">
-							<input type="text" name="title" required lay-verify="required"
-							placeholder="请输入标题" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-				</div>
-
-				<div class="layui-col-md6">
-					<div class="layui-form-item">
-						<label class="layui-form-label">准驾车型</label>
-						<div class="layui-input-block">
-							<input type="text" name="title" required lay-verify="required"
-							placeholder="请输入标题" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>	
-
-		<div class="layui-fluid">
-			<div class="layui-row">
-
-				<div class="layui-col-md6">
-					<div class="layui-form-item">
-						<label class="layui-form-label">发证机关</label>
-						<div class="layui-input-block">
-							<input type="text" name="title" required lay-verify="required"
-							placeholder="请输入标题" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-				</div>
-
-
-				<div class="layui-col-md6">
-					<div class="layui-form-item">
-						<label class="layui-form-label">保险有效期</label>
-						<div class="layui-input-block">
-							<input type="text" name="title" required lay-verify="required"
-							placeholder="请输入标题" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>	 -->
-
-		<!-- 车辆信息 -->
-		<!-- <div class="site-title">
-			<fieldset><legend><a name="input">车辆信息</a></legend></fieldset>
-		</div>
-		<div class="layui-fluid">
-			<div class="layui-row">
-
-				<div class="layui-col-md6">
-					<div class="layui-form-item">
-						<label class="layui-form-label">车牌号</label>
-						<div class="layui-input-block">
-							<input type="text" name="title" required lay-verify="required"
-							placeholder="请输入标题" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-				</div>
-
-				<div class="layui-col-md6">
-					<div class="layui-form-item">
-						<label class="layui-form-label">车辆类型</label>
-						<div class="layui-input-block">
-							<input type="text" name="title" required lay-verify="required"
-							placeholder="请输入标题" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>	
-
-		<div class="layui-fluid">
-			<div class="layui-row">
-
-				<div class="layui-col-md6">
-					<div class="layui-form-item">
-						<label class="layui-form-label">年检有效期</label>
-						<div class="layui-input-block">
-							<input type="text" name="title" required lay-verify="required"
-							placeholder="请输入标题" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-				</div>
-
-
-				<div class="layui-col-md6">
-					<div class="layui-form-item">
-						<label class="layui-form-label">保险有效期</label>
-						<div class="layui-input-block">
-							<input type="text" name="title" required lay-verify="required"
-							placeholder="请输入标题" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>	
-
-		<div class="layui-fluid">
-			<div class="layui-row">
-
-				<div class="layui-col-md6">
-					<div class="layui-form-item">
-						<label class="layui-form-label">车辆所有人</label>
-						<div class="layui-input-block">
-							<input type="text" name="title" required lay-verify="required"
-							placeholder="请输入标题" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-				</div>
-				<div class="layui-col-md6">
-					<div class="layui-form-item">
-						<label class="layui-form-label">输入框</label>
-						<div class="layui-input-block">
-							<input type="text" name="title" required lay-verify="required"
-							placeholder="请输入标题" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>		 -->
-
-
-
-<!-- 		<div class="site-title">
+    <form class="layui-form" lay-filter="formDemo" action="">
+        <div class="site-title">
+            <fieldset>
+                <legend><a name="input">案卷信息</a></legend>
+            </fieldset>
+        </div>
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">决定书编号</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="index" required lay-verify="required" placeholder="请输入18位决定书编号" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">违法日期</label>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input" name="date" id="date" lay-verify="required" placeholder="2018年8月15日" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md2">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">违法时间</label>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input" name="time" id="time" lay-verify="required" placeholder="08：08" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <div class="layui-col-md8">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">违法地点</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="place" required lay-verify="required" placeholder="请输入18位决定书编号" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">文书类型</label>
+                        <div class="layui-input-block">
+                            <select name="docType" lay-verify="">
+                                <option value=""></option>
+                                <option value="0">通知书</option>
+                                <option value="1">强制措施</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">文书编号</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="docIndex" required lay-verify="" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">违法代码1</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="code1" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">违法内容1</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="code1Content" required lay-verify="" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">违法代码2</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="code" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">违法内容2</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="docIndex" required lay-verify="" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">支队</label>
+                        <div class="layui-input-block">
+                            <select name="zhidui" lay-verify="">
+                                <option value=""></option>
+                                <option value="0">衡阳</option>
+                                <option value="1">长沙</option>
+                                <option value="2">株洲</option>
+                                <option value="3">湘潭</option>
+                                <option value="4">永州</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">大队</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="dadui" lay-verify="" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">主办民警</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="police_1" lay-verify="" placeholder="请输入主办民警姓名" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">协办民警</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="police_2" lay-verify="" placeholder="请输入协办民警姓名" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 身份证信息 -->
+        <div class="site-title">
+            <fieldset>
+                <legend><a name="input">当事人信息</a></legend>
+            </fieldset>
+        </div>
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">姓名</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="name" required lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">籍贯</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="birth_place" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">民族</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="nation" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">性别</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="sex" value="男" title="男">
+                            <input type="radio" name="sex" value="女" title="女" checked>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">身份证号码</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="identity" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">手机号码</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="phone" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">身份证地址</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="address" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">学历</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="education" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">政治面貌</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="political" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">工作单位</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="company" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 驾驶证信息 -->
+        <div class="site-title">
+            <fieldset>
+                <legend><a name="input">驾驶证信息</a></legend>
+            </fieldset>
+        </div>
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">档案编号</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="file_num" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">准驾车型</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="driver_type" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">发证机关</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="issuer" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 车辆信息 -->
+        <div class="site-title">
+            <fieldset>
+                <legend><a name="input">车辆信息</a></legend>
+            </fieldset>
+        </div>
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">车牌号</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="car" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">车辆类型</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="car_type" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">年检有效期</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="car_expire" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">车辆所有人</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="car_owner" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 		<div class="site-title">
 			<fieldset><legend><a name="input">案卷信息</a></legend></fieldset>
 		</div>
 		<div class="layui-form-item">
@@ -445,52 +384,65 @@
 				<textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
 			</div>
 		</div> -->
-		<div class="layui-form-item">
-			<div class="layui-input-block">
-				<button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
-				<button class="layui-btn layui-btn-primary" id="getRecord">获取</button>
-			</div>
-		</div>
-
-
-	</form>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                <button class="layui-btn layui-btn-primary" id="getRecord">获取</button>
+            </div>
+        </div>
+    </form>
 </div>
-
-
 <script>
-
 layui.use('form', function() {
     var form = layui.form;
+    var id = $("#id").attr('value');
+    $.ajax({
+        type: "POST",
+        url: "/documentmaker/public/index.php/maker/api/record/id/" + id,
+        data: '',
+        dataType: "json",
+        success: function(respMsg) {
+            var msg = respMsg;
+            var regDate = /20\d\d年\d{1,2}月\d{1,2}日/g;
+            form.val("formDemo", {
+                "index": msg['index'],
+                "date": msg['time'].match(regDate),
+                "time": msg['time'].substr(11),
+                "place": msg['place'],
+                "code": msg['code_1'],
+                "docType": msg['doc_type'],
+                "docIndex": msg['doc_index'],
+                "code1": msg['code_1'],
+                "code1Content": msg['code_1_content']
+            })
+        },
+        error: function() {
+            layer.msg("提交失败")
+        }
+    });
 
-    form.val("formDemo",{
-    	"index": "43042219999999999"
-    	,"date": "2018-08-16"
-    	,"time": "20:18"
-    	,"place": "泉南高速公路衡南服务器东王西方向831公里100米处"
-    	,"code": "11110"
-    	,"docType": "1"
-    	,"docIndex": "4304352900000000"
-    })
 
+
+    //设置导航栏下的指示器
     $("#page-main").removeClass("layui-this");
     $("#page-record").addClass("layui-this");
 
     //监听提交
     form.on('submit(formDemo)', function(data) {
-    	layer.msg(data.field);
+        layer.msg(data.field);
         $.ajax({
             type: "POST",
             url: "/documentmaker/public/index.php/maker/api/createcase",
             data: data.field,
             dataType: "json",
             success: function(respMsg) {
-            	var msg = respMsg;
-                
+                var msg = respMsg;
+
                 // layer.msg("提交成功！");
             },
             error: function() {
-            	layer.msg("提交失败")
+                layer.msg("提交失败")
             }
         });
     });
@@ -500,43 +452,43 @@ layui.use('form', function() {
 
 // 时间控件
 layui.use('laydate', function() {
-           var laydate = layui.laydate; 
-           laydate.render({ 
-           	elem: '#time' 
-           	,type: 'time'
-           	,format: 'HH时mm分'
+    var laydate = layui.laydate;
+    laydate.render({
+        elem: '#time',
+        type: 'time',
+        format: 'HH时mm分'
     });
 
-                      laydate.render({ 
-           	elem: '#date' 
-           	,type: 'date'
-           	,format: 'yyyy年MM月dd日'
+    laydate.render({
+        elem: '#date',
+        type: 'date',
+        format: 'yyyy年MM月dd日'
     });
 });
 
-layui.use('jquery',function(){
-	// var $ = layui.$;
-	$('#getRecord').on('click',function(){
-		alert('you click me!');
+layui.use('jquery', function() {
+    // var $ = layui.$;
+    $('#getRecord').on('click', function() {
+        alert('you click me!');
 
-		$.ajax({
-			type: "POST",
-			url: "/documentmaker/public/index.php/maker/api/findcase",
-			data: "",
-			dataType: "json",
-			success: function(respMsg) {
-				var msg = respMsg;
-				layer.msg("获取数据成功！");
-				layer.msg(respMsg['index']);
-				$(":input[name='index']").val(respMsg['index']);
-			},
-			error: function() {
-				alert("获取数据失败，网络超时！")
-				
-			}
-		});
-	})
-	var self = $(this);
+        $.ajax({
+            type: "POST",
+            url: "/documentmaker/public/index.php/maker/api/findcase",
+            data: "",
+            dataType: "json",
+            success: function(respMsg) {
+                var msg = respMsg;
+                layer.msg("获取数据成功！");
+                layer.msg(respMsg['index']);
+                $(":input[name='index']").val(respMsg['index']);
+            },
+            error: function() {
+                alert("获取数据失败，网络超时！")
+
+            }
+        });
+    })
+    var self = $(this);
 
 })
 </script>

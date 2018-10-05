@@ -17,9 +17,10 @@ class Index extends Controller
     //查获经过
     
     //主页面，录入驾驶人信息等等
-    public function form(){
-//         $trafficCase = new TrafficCase();
-//         $case = $trafficCase->getDecisionNum();
+    public function form($id){
+        $this->assign([
+            'id'  => $id
+        ]);
         return $this->fetch("form");
     }
     
@@ -51,27 +52,25 @@ class Index extends Controller
      * @return mixed|string
      */
     public function gaozhibilu($index){
-        $record = (new Record())->getRecordByIndex($index);
+        $case = new TrafficCase($index);
         
         $this->assign([
-            'zhidui'=>$record->record(),
-            'dadui'=>'衡阳西',
-            'code_1_content'=>'没带驾驶证', 
-            'code_1_against'=>'违反的法律',
-            'code_1_punish'=>'处罚的依据',
-            'code_1_money'=>'200',
-            'code_2_content'=>'没带驾驶证2',
-            'code_2_against'=>'违反的法律2',
-            'code_2_punish'=>'处罚的依据2',
-            'code_2_money'=>'100',
-            'name'  => '刘少乃',
-            'time' => '2018年04月07日11时15分',
-            'place'=>'泉南高速',
-            'evidence'=>'陈述和沈变',
-            'car' =>'湘D',
-            'car_type' =>'小轿车',
-            
-            
+            'zhidui'=>$case->getZhidui(),
+            'dadui'=>$case->getDadui(),
+            'code_1_content'=>$case->getCode1Content(), 
+            'code_1_against'=>$case->getCode1Against(),
+            'code_1_punish'=>$case->getCode1Punish(),
+            'code_1_money'=>$case->getCode1Money(),
+            'code_2_content'=>$case->getCode2Content(),
+            'code_2_against'=>$case->getCode2Against(),
+            'code_2_punish'=>$case->getCode2Punish(),
+            'code_2_money'=>$case->getCode2Money(),
+            'name'  => $case->getName(),
+            'time' => $case->getTime(),
+            'place'=>$case->getPlace(),
+            'evidence'=>$case->getEvidence(),
+            'car' =>$case->getCar(),
+            'car_type' =>$case->getCarType(),
             
         ]);
         return $this->fetch('gaozhibilu');

@@ -6,6 +6,7 @@ use app\maker\model\Man;
 use app\maker\model\Record;
 use think\config\driver\Json;
 use think\facade\Request;
+use app\maker\model\TrafficCase;
 
 class Api {
 	public function code(){
@@ -38,9 +39,9 @@ class Api {
 	/**通过决定书编号找到案卷所有信息
 	 * @param $String $caseNum
 	 */
-	public function record() {
-	    $record = new Record();
-	    return json($record->getRecordByIndex("333"));
+	public function record($id) {
+	    $case = new TrafficCase($id);
+	    return json($case->case);
 	}
 	
 	/**创建一个案卷

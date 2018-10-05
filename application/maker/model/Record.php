@@ -57,30 +57,16 @@ class Record extends Model
         $data = $records->toArray();
         $lists = array();
         foreach ($data as $v) {
-            $car = $v['car'];
-            unset($v['car']);
-            
-            $driver = $v['driver'];
-            unset($v['driver']);
-            
-            $man = $v['man'];
-            unset($v['man']);
-            
-            $code_1 = $v['code_1'];
-            unset($v['code_1']);
-            
-            //防止$code_2不存在造成的错误
-            $code_2 = array();
-            if (!empty($v['code_2'])){
-                $code_2 = $v['code_2'];
-                unset($v['code_2']);
-            }
-            
-            $lists[]= array_merge($v, $car, $man, $driver,$code_1,$code_2);
+            $v = $this->separateCode($v);
+            $lists[]= $this->flatArray($v);
     }
     return $lists;
     }
     
+    /**通过案卷编号来查找案卷，暂不支持模糊查询
+     * @param string $index
+     * @return NULL|NULL|array
+     */
     public function getRecordByIndex($index){
         $reocrd = Record::where('index',$index)->with([
             'man',
@@ -94,11 +80,35 @@ class Record extends Model
                 return NULL;
             }
             $record = $record[0];
-            
+            $record = $this->separateCode($record);
             $lists = $this->flatArray($record);
             
             return $lists;
             
+    }
+    
+    /**通过Id号来查找案卷，暂不支持模糊查询
+     * @param string $index
+     * @return NULL|NULL|array
+     */
+    public function getRecordById($id){
+        $reocrd = Record::where('Id',$id)->with([
+            'man',
+            'driver',
+            'car',
+            'code_1',
+            'code_2'
+        ])->select();
+        $record = $reocrd->toArray();
+        if (empty($record)){
+            return NULL;
+        }
+        $record = $record[0];
+        $record = $this->separateCode($record);
+        $lists = $this->flatArray($record);
+        
+        return $lists;
+        
     }
     
     /**将value中包含的数组，放入该数组中
@@ -118,6 +128,32 @@ class Record extends Model
         }
         
         return $des;
+    }
+    
+    /**把几个违法行为区分开来，依次命名为1，2，3
+     * 
+     */
+    public function separateCode($record){
+        $code_1 = $record['code_1'];
+        $code_2 = $record['code_2'];
+        
+        foreach ($code_1 as $k => $v){
+            unset($code_1[$k]);
+            $code_1[$k.'1'] = $v; 
+        }
+        
+        if (!empty($code_2)){
+        foreach ($code_2 as $k => $v){
+            unset($code_2[$k]);
+            $code_2[$k.'2'] = $v;
+        }
+        }
+        
+         $record['code_1'] = $code_1;
+         $record['code_2'] = $code_2;
+         
+         return $record;
+        
     }
     
     public function addRecord(){
