@@ -56,8 +56,8 @@
                         <div class="layui-input-block">
                             <select name="docType" lay-verify="">
                                 <option value=""></option>
-                                <option value="0">通知书</option>
-                                <option value="1">强制措施</option>
+                                <option value="通知书">通知书</option>
+                                <option value="强措">强制措施</option>
                             </select>
                         </div>
                     </div>
@@ -98,7 +98,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">违法代码2</label>
                         <div class="layui-input-block">
-                            <input type="text" name="code" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                            <input type="text" name="code2" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">违法内容2</label>
                         <div class="layui-input-block">
-                            <input type="text" name="docIndex" required lay-verify="" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                            <input type="text" name="code2Content" required lay-verify="" placeholder="请输入标题" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -120,11 +120,11 @@
                         <div class="layui-input-block">
                             <select name="zhidui" lay-verify="">
                                 <option value=""></option>
-                                <option value="0">衡阳</option>
-                                <option value="1">长沙</option>
-                                <option value="2">株洲</option>
-                                <option value="3">湘潭</option>
-                                <option value="4">永州</option>
+                                <option value="衡阳">衡阳</option>
+                                <option value="长沙">长沙</option>
+                                <option value="株洲">株洲</option>
+                                <option value="湘潭">湘潭</option>
+                                <option value="永州">永州</option>
                             </select>
                         </div>
                     </div>
@@ -145,7 +145,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">主办民警</label>
                         <div class="layui-input-block">
-                            <input type="text" name="police_1" lay-verify="" placeholder="请输入主办民警姓名" autocomplete="off" class="layui-input">
+                            <input type="text" name="police1" lay-verify="" placeholder="请输入主办民警姓名" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -153,7 +153,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">协办民警</label>
                         <div class="layui-input-block">
-                            <input type="text" name="police_2" lay-verify="" placeholder="请输入协办民警姓名" autocomplete="off" class="layui-input">
+                            <input type="text" name="police2" lay-verify="" placeholder="请输入协办民警姓名" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -179,7 +179,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">籍贯</label>
                         <div class="layui-input-block">
-                            <input type="text" name="birth_place" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                            <input type="text" name="birthPlace" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -404,17 +404,27 @@ layui.use('form', function() {
         dataType: "json",
         success: function(respMsg) {
             var msg = respMsg;
-            var regDate = /20\d\d年\d{1,2}月\d{1,2}日/g;
+            
             form.val("formDemo", {
                 "index": msg['index'],
-                "date": msg['time'].match(regDate),
-                "time": msg['time'].substr(11),
+                "date": msg['time'].match(/20\d\d年\d{1,2}月\d{1,2}日/g),
+                "time": msg['time'].match(/\d\d时\d\d分/g),
                 "place": msg['place'],
                 "code": msg['code_1'],
                 "docType": msg['doc_type'],
                 "docIndex": msg['doc_index'],
-                "code1": msg['code_1'],
-                "code1Content": msg['code_1_content']
+                "code1": msg['违法代码1'],
+                "code1Content": msg['违法内容1'],
+                "code2": msg['违法代码2'],
+                "code2Content": msg['违法内容2'],
+                "zhidui": msg['zhidui'],
+                "dadui":msg['dadui'],
+                "police1": msg["police_1"],
+                "police2": msg['police_2'],
+                //当事人信息
+                "name": msg['name'],
+                "birthPlace": msg['birth_place'],
+
             })
         },
         error: function() {
