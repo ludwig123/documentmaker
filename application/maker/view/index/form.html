@@ -282,7 +282,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">档案编号</label>
                         <div class="layui-input-block">
-                            <input type="text" name="file_num" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                            <input type="text" name="fileNum" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -290,7 +290,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">准驾车型</label>
                         <div class="layui-input-block">
-                            <input type="text" name="driver_type" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                            <input type="text" name="driverType" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -328,7 +328,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">车辆类型</label>
                         <div class="layui-input-block">
-                            <input type="text" name="car_type" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                            <input type="text" name="carType" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -336,7 +336,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">年检有效期</label>
                         <div class="layui-input-block">
-                            <input type="text" name="car_expire" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                            <input type="text" name="carExpire" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -348,7 +348,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">车辆所有人</label>
                         <div class="layui-input-block">
-                            <input type="text" name="car_owner" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                            <input type="text" name="carOwner" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -424,7 +424,21 @@ layui.use('form', function() {
                 //当事人信息
                 "name": msg['name'],
                 "birthPlace": msg['birth_place'],
-
+                "nation": msg['nation'],
+                "sex": msg['sex'],
+                "identity": msg['identity'],
+                "phone": msg['phone'],
+                "address": msg['address'],
+                "education": msg['education'],
+                "political": msg['political'],
+                "company": msg['company'],
+                "fileNum": msg['file_num'],
+                "driverType": msg['driver_type'],
+                "issuer": msg['issuer'],
+                "car": msg['car'],
+                "carType": msg['car_type'],
+                "carExpire": msg['car_expire'],
+                "carOwner": msg['car_owner']
             })
         },
         error: function() {
