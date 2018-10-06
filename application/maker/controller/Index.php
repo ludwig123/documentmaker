@@ -17,7 +17,7 @@ class Index extends Controller
     //查获经过
     
     //主页面，录入驾驶人信息等等
-    public function form($id){
+    public function form($id = ""){
         $this->assign([
             'id'  => $id
         ]);
