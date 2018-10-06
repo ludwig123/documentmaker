@@ -14,7 +14,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">决定书编号</label>
                         <div class="layui-input-block">
-                            <input type="text" name="index" required lay-verify="required" placeholder="请输入18位决定书编号" autocomplete="off" class="layui-input">
+                            <input type="text" name="index" lay-verify="required|index" placeholder="请输入18位决定书编号" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">文书编号</label>
                         <div class="layui-input-block">
-                            <input type="text" name="docIndex" required lay-verify="" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                            <input type="text" name="docIndex" lay-verify="required|docIndex" placeholder="请输入标题" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -171,7 +171,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">姓名</label>
                         <div class="layui-input-block">
-                            <input type="text" name="name" required lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                            <input type="text" name="name" lay-verify="name" placeholder="请输入姓名" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -179,7 +179,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">籍贯</label>
                         <div class="layui-input-block">
-                            <input type="text" name="birthPlace" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                            <input type="text" name="birthPlace" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -212,7 +212,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">身份证号码</label>
                         <div class="layui-input-block">
-                            <input type="text" name="identity" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                            <input type="text" name="identity" required lay-verify="identity" placeholder="请输入标题" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -220,7 +220,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">手机号码</label>
                         <div class="layui-input-block">
-                            <input type="text" name="phone" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                            <input type="text" name="phone" required lay-verify="phone" placeholder="请输入标题" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -336,7 +336,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">年检有效期</label>
                         <div class="layui-input-block">
-                            <input type="text" name="carExpire" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                            <input type="text" id="carExpire" name="carExpire" required lay-verify="required" placeholder="eg:2018年11月30日" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -404,7 +404,7 @@ layui.use('form', function() {
         dataType: "json",
         success: function(respMsg) {
             var msg = respMsg;
-            
+
             form.val("formDemo", {
                 "index": msg['index'],
                 "date": msg['time'].match(/20\d\d年\d{1,2}月\d{1,2}日/g),
@@ -418,7 +418,7 @@ layui.use('form', function() {
                 "code2": msg['违法代码2'],
                 "code2Content": msg['违法内容2'],
                 "zhidui": msg['zhidui'],
-                "dadui":msg['dadui'],
+                "dadui": msg['dadui'],
                 "police1": msg["police_1"],
                 "police2": msg['police_2'],
                 //当事人信息
@@ -432,9 +432,11 @@ layui.use('form', function() {
                 "education": msg['education'],
                 "political": msg['political'],
                 "company": msg['company'],
+                //驾驶证信息
                 "fileNum": msg['file_num'],
                 "driverType": msg['driver_type'],
                 "issuer": msg['issuer'],
+                //车辆信息
                 "car": msg['car'],
                 "carType": msg['car_type'],
                 "carExpire": msg['car_expire'],
@@ -470,6 +472,19 @@ layui.use('form', function() {
             }
         });
     });
+
+
+
+    form.verify({
+
+        name: [/^[\u4e00-\u9fa5]{2,6}$/g, '名字只能包含汉字'],
+        index: [
+            /^\d{6,12}$/, '决定书编号必须16位数字，且不能出现空格'
+        ],
+        docIndex: [
+            /^\d{16,16}$/, '法律文书必须是16位数字，且不能出现空格'
+        ],
+    });
 });
 
 
@@ -485,6 +500,12 @@ layui.use('laydate', function() {
 
     laydate.render({
         elem: '#date',
+        type: 'date',
+        format: 'yyyy年MM月dd日'
+    });
+
+    laydate.render({
+        elem: '#carExpire',
         type: 'date',
         format: 'yyyy年MM月dd日'
     });
