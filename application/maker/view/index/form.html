@@ -1,6 +1,6 @@
 {extend name="maker@common/base" /}
 {block name="main"}
-<div id="id" value={$id}></div>
+<div id="Id" value={$Id}></div>
 <div class="site-text se-block">
     <form class="layui-form" lay-filter="formDemo" action="">
         <div class="site-title">
@@ -320,7 +320,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">车牌号</label>
                         <div class="layui-input-block">
-                            <input type="text" name="car" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                            <input type="text" name="carNum" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -354,36 +354,7 @@
                 </div>
             </div>
         </div>
-        <!-- 		<div class="site-title">
-			<fieldset><legend><a name="input">案卷信息</a></legend></fieldset>
-		</div>
-		<div class="layui-form-item">
-			<label class="layui-form-label">复选框</label>
-			<div class="layui-input-block">
-				<input type="checkbox" name="like[write]" title="写作"> <input
-				type="checkbox" name="like[read]" title="阅读" checked> <input
-				type="checkbox" name="like[dai]" title="发呆">
-			</div>
-		</div>
-		<div class="layui-form-item">
-			<label class="layui-form-label">开关</label>
-			<div class="layui-input-block">
-				<input type="checkbox" name="switch" lay-skin="switch">
-			</div>
-		</div>
-		<div class="layui-form-item">
-			<label class="layui-form-label">单选框</label>
-			<div class="layui-input-block">
-				<input type="radio" name="sex" value="男" title="男"> <input
-				type="radio" name="sex" value="女" title="女" checked>
-			</div>
-		</div>
-		<div class="layui-form-item layui-form-text">
-			<label class="layui-form-label">文本域</label>
-			<div class="layui-input-block">
-				<textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
-			</div>
-		</div> -->
+        
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
@@ -396,10 +367,10 @@
 <script>
 layui.use('form', function() {
     var form = layui.form;
-    var id = $("#id").attr('value');
+    var id = $("#Id").attr('value');
     $.ajax({
         type: "POST",
-        url: "/documentmaker/public/index.php/maker/api/record/id/" + id,
+        url: "/documentmaker/public/index.php/maker/api/record/Id/" + id,
         data: '',
         dataType: "json",
         success: function(respMsg) {
@@ -437,14 +408,14 @@ layui.use('form', function() {
                 "driverType": msg['driver_type'],
                 "issuer": msg['issuer'],
                 //车辆信息
-                "car": msg['car'],
+                "carNum": msg['car_num'],
                 "carType": msg['car_type'],
                 "carExpire": msg['car_expire'],
                 "carOwner": msg['car_owner']
             })
         },
         error: function() {
-            layer.msg("提交失败")
+            layer.msg("初始化案件失败")
         }
     });
 
@@ -459,13 +430,13 @@ layui.use('form', function() {
         layer.msg(data.field);
         $.ajax({
             type: "POST",
-            url: "/documentmaker/public/index.php/maker/api/createcase",
+            url: "/documentmaker/public/index.php/maker/api/updateCase?XDEBUG_SESSION_START",
             data: data.field,
             dataType: "json",
             success: function(respMsg) {
                 var msg = respMsg;
 
-                // layer.msg("提交成功！");
+                 layer.msg("提交成功！");
             },
             error: function() {
                 layer.msg("提交失败")
@@ -479,7 +450,7 @@ layui.use('form', function() {
 
         name: [/^[\u4e00-\u9fa5]{2,6}$/g, '名字只能包含汉字'],
         index: [
-            /^\d{6,12}$/, '决定书编号必须16位数字，且不能出现空格'
+            /^\d{16,16}$/, '决定书编号必须16位数字，且不能出现空格'
         ],
         docIndex: [
             /^\d{16,16}$/, '法律文书必须是16位数字，且不能出现空格'
@@ -518,7 +489,7 @@ layui.use('jquery', function() {
 
         $.ajax({
             type: "POST",
-            url: "/documentmaker/public/index.php/maker/api/findcase",
+            url: "/documentmaker/public/index.php/maker/api/updateCase?XDEBUG_SESSION_START",
             data: "",
             dataType: "json",
             success: function(respMsg) {

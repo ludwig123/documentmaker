@@ -17,7 +17,7 @@ class Record extends Model
      * @return \think\model\relation\HasOne
      */
     public function car(){
-        return $this->hasOne('Car','car','car');
+        return $this->hasOne('Car','car_num','car_num');
     }
     
     /**关联驾驶证信息
@@ -108,7 +108,6 @@ class Record extends Model
         $lists = $this->flatArray($record);
         
         return $lists;
-        
     }
     
     /**将value中包含的数组，放入该数组中
@@ -130,8 +129,8 @@ class Record extends Model
         return $des;
     }
     
-    /**把几个违法行为区分开来，依次命名为1，2，3
-     * 
+    /**把几个违法行为区分开来，依次命名为1，2，3,
+     * 防止不同违法行为的相同列名覆盖
      */
     public function separateCode($record){
         $code_1 = $record['code_1'];
@@ -156,7 +155,7 @@ class Record extends Model
         
     }
     
-    public function addRecord(){
+    public function newRecord($case){
         
     }
 }

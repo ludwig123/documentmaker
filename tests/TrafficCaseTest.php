@@ -24,7 +24,7 @@ class TrafficCaseTest extends PHPUnit_Framework_TestCase
         
         // TODO Auto-generated TrafficCaseTest::setUp()
         
-        $this->trafficCase = new TrafficCase(/* parameters */);
+        $this->trafficCase = new TrafficCase('1');
     }
 
     /**
@@ -60,12 +60,10 @@ class TrafficCaseTest extends PHPUnit_Framework_TestCase
     /**
      * Tests TrafficCase->getDriverName()
      */
-    public function testGetDriverName()
+    public function testSave()
     {
-        // TODO Auto-generated TrafficCaseTest->testGetDriverName()
-        $this->markTestIncomplete("getDriverName test not implemented");
-        
-        $this->trafficCase->getDriverName(/* parameters */);
+
+        $this->trafficCase->update();
     }
 
     /**
@@ -73,7 +71,8 @@ class TrafficCaseTest extends PHPUnit_Framework_TestCase
      */
     public function testGetCarNum()
     {
-        $this->assertTrue(false);
+        // TODO Auto-generated TrafficCaseTest->testGetDriverName()
+        $this->markTestIncomplete("getDriverName test not implemented");
     }
 }
 
