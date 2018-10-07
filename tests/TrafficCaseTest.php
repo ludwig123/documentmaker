@@ -65,6 +65,12 @@ class TrafficCaseTest extends PHPUnit_Framework_TestCase
 
         $this->trafficCase->update();
     }
+    
+    public function testFindById(){
+        $Id = '1';
+       $case =  $this->trafficCase->findById($Id);
+       var_dump($case);
+    }
 
     /**
      * Tests TrafficCase->getCarNum()

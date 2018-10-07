@@ -63,7 +63,7 @@ class ApiTest extends PHPUnit_Framework_TestCase
     public function testRecordsList()
     {
         $response = $this->api->recordsList();
-        var_dump($response);
+//         var_dump($response);
     }
 
     /**

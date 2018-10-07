@@ -1,6 +1,8 @@
 <?php
 namespace app\maker\model;
 
+use think\Db;
+
 /**
  * 单个案件的抽象接口，通过其访问模型
  *
@@ -36,30 +38,24 @@ class TrafficCase
     }
     
     public function update(){
-        $record = Record::get(1);
-        echo  $record->man->sex;
-        $record->identity = '2222';
-        
-        $record->man->name = '陶打爆';
-        
-        $record->car->car_type = '火车';
-        
-        
-        $record->together('man', 'car')->save();
+
     }
     
+    public function findById($Id){
+       $case =  Db::table('record')       
+         ->leftjoin('car', 'record.car_num = car.car_num')
+         ->leftJoin('man','record.identity = man.identity')
+         ->join('driver', 'record.identity = driver.identity')
+        ->leftJoin('code c1', 'record.code_1 = c1.违法代码')
+        //->leftJoin('code c2', 'record.code_2 = c2.违法代码')
+         ->where('record.Id','1')
+        ->select();
+        
+        return $case;
+    }
     
     public function save(){
-        $record = Record::where('Id','2')->find();
 
-        $record->identity = '9999999999999';
-        
-        $record->man->name = '陶打爆';
-        
-        $record->car->car_type = '火车';
-        
-        
-        $record->together('man', 'car')->save();
     }
     
     public function delete(){
