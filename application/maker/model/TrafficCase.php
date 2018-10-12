@@ -72,11 +72,26 @@ class TrafficCase
       if (empty($record)){
           return NULL;
       }
-      $man = Man::get( $record->man);
-      $driver = Driver::get($record->car);
-      $car = Car::get($record->car);
       
-      $case = array_merge($record->toArray(),$man->toArray(), $driver->toArray(), $car->toArray());
+      $man = Man::where('Id', $record->man)->field(['Id'],true)->find();
+      $driver = Driver::where('Id', $record->driver)->field(['Id'],true)->find();
+      $car = Car::where('Id', $record->car)->field(['Id'],true)->find();
+      
+      $code_1 = $code_2 = array();
+      $code = Code::where('违法代码', $record->code_1)->field( '违法代码,违法内容')->find();
+      $code = $code->toArray();
+      foreach ($code as $k =>$v){
+          $code_1[$k.'_1'] = $v;
+      }
+      
+      if (!empty($record->code_2)){
+          $code = Code::where('违法代码', $record->code_2)->field( '违法代码,违法内容')->find();
+          $code = $code->toArray();
+          foreach ($code as $k =>$v){
+              $code_2[$k.'_2'] = $v;
+          }
+      }
+      $case = array_merge($record->toArray(),$man->toArray(), $driver->toArray(), $car->toArray(), $code_1, $code_2);
         
         return $case;
     }

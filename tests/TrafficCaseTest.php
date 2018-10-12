@@ -70,7 +70,7 @@ class TrafficCaseTest extends PHPUnit_Framework_TestCase
     public function testFindById(){
         $Id = '1';
         $case =  $this->trafficCase::findById($Id);
-        $this->assertCount(36, $case, "应该返回36个键值对");
+        $this->assertCount(40, $case, "应该返回36个键值对");
     }
 
     /**

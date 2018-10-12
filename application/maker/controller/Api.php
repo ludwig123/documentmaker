@@ -49,7 +49,6 @@ class Api {
 	public function record($Id) {
 	    $case = TrafficCase::findById($Id);
 	    return json($case);
-	   
 	}
 	
 	/**创建一个案卷
