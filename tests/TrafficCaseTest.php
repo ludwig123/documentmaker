@@ -60,25 +60,27 @@ class TrafficCaseTest extends PHPUnit_Framework_TestCase
     /**
      * Tests TrafficCase->getDriverName()
      */
-    public function testSave()
+    public function testFindByUndefinedId()
     {
-
-        $this->trafficCase->update();
+        $Id = '999';
+        $case =  $this->trafficCase::findById($Id);
+        $this->assertNull($case);
     }
     
     public function testFindById(){
         $Id = '1';
-       $case =  $this->trafficCase->findById($Id);
-       var_dump($case);
+        $case =  $this->trafficCase::findById($Id);
+        $this->assertCount(36, $case, "应该返回36个键值对");
     }
 
     /**
      * Tests TrafficCase->getCarNum()
      */
-    public function testGetCarNum()
+    public function testFindAll()
     {
-        // TODO Auto-generated TrafficCaseTest->testGetDriverName()
-        $this->markTestIncomplete("getDriverName test not implemented");
+        $cases = $this->trafficCase->all();
+        $this->assertNotEmpty($cases);
+        
     }
 }
 

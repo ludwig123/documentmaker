@@ -21,35 +21,62 @@ class TrafficCase
      */
     function __construct($val = '', $type = '')
     {
-            switch ($type){
-                case 'new':
-                    $this->case = (new Record())->newRecord($val);
-                    break;
-                case 'Id':
-                    $this->case = (new Record())->getRecordById($val);
-                    break;
-                case 'index':  
-                    $this->case = (new Record())->getRecordByIndex($val);
-                    break;
+//             switch ($type){
+//                 //这个地方先保留，factory方法似乎是多余的
+//                 case '':
+//                 case 'new':
+//                     $this->case = (new Record())->newRecord($val);
+//                     break;
+//                 case 'Id':
+//                     $this->case = (new Record())->getRecordById($val);
+//                     break;
+//                 case 'index':  
+//                     $this->case = (new Record())->getRecordByIndex($val);
+//                     break;
+//                 case 'update':
+//                     $this->update($val);
                    
-            }
+//             }
             
         
     }
     
-    public function update(){
+    /**更新Id指明的数据
+     * @param string $data
+     */
+    public function update($data){
 
     }
     
-    public function findById($Id){
-       $case =  Db::table('record')       
-         ->leftjoin('car', 'record.car_num = car.car_num')
-         ->leftJoin('man','record.identity = man.identity')
-         ->join('driver', 'record.identity = driver.identity')
-        ->leftJoin('code c1', 'record.code_1 = c1.违法代码')
-        //->leftJoin('code c2', 'record.code_2 = c2.违法代码')
-         ->where('record.Id','1')
-        ->select();
+    public function all(){
+        $records = Record::field(['identity','car_num','car_type'],true)->select();
+        if (empty($records)){
+            return NULL;
+        }
+        $cases = array();
+        foreach ($records as  $k =>$record){
+            $man = Man::get( $record->man);
+            $driver = Driver::get($record->car);
+            $car = Car::get($record->car);
+            
+            $case = array_merge($record->toArray(),$man->toArray(), $driver->toArray(), $car->toArray());
+            $cases[$k] = $case;
+        }
+        
+        return $cases;
+    }
+    
+    //这里不应该把违法的详细内容提供出去，应该等需要的时候再查询
+    public  static function findById($Id){
+        $record = Record::where('Id', $Id)->field(['identity','car_num','car_type'],true)->find();
+      if (empty($record)){
+          return NULL;
+      }
+      $man = Man::get( $record->man);
+      $driver = Driver::get($record->car);
+      $car = Car::get($record->car);
+      
+      $case = array_merge($record->toArray(),$man->toArray(), $driver->toArray(), $car->toArray());
         
         return $case;
     }
@@ -61,6 +88,8 @@ class TrafficCase
     public function delete(){
         
     }
+    
+    
 
     private function init($val){
         $this->setIndex($val['index']);

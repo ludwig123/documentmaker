@@ -15,4 +15,8 @@ class TrafficCaseFactory{
         return new TrafficCase($case, 'new');
     }
     
+    public static function update($case){
+        return new TrafficCase();
+    }
+    
 }

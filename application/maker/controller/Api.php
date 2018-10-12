@@ -36,13 +36,20 @@ class Api {
 
 	    return json($response);
 	}
+	
+	public function records(){
+	    $trafficCase = new TrafficCase();
+	    $records = $trafficCase->all();
+	    return json($records);
+	}
 
 	/**通过决定书编号找到案卷所有信息
 	 * @param $String $caseNum
 	 */
 	public function record($Id) {
-	    $case = TrafficCaseFactory::getById($Id);
-	    return json($case->case);
+	    $case = TrafficCase::findById($Id);
+	    return json($case);
+	   
 	}
 	
 	/**创建一个案卷
@@ -63,8 +70,11 @@ class Api {
 	 * @param
 	 */
 	public function updateCase(){
-	    $case = new TrafficCase();
-	    $case->update();
+	    $info = $this->postInfo();
+ 	    $case = new TrafficCase();
+ 	    $case->update($case);
+	    
+	    return json('已经收到post') ;
 	}
 	
 
@@ -78,7 +88,8 @@ class Api {
 	
 	
 	private function postInfo(){
-	    return Request::instance()->post();
+	    if (Request::isPost())
+	    return Request::post();
 	}
 	
 	private function getInfo(){

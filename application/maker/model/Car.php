@@ -5,5 +5,5 @@ use think\Model;
 
 class Car extends Model
 {
-    
+
 }
