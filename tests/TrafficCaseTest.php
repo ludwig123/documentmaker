@@ -80,6 +80,8 @@ class TrafficCaseTest extends PHPUnit_Framework_TestCase
     {
         $cases = $this->trafficCase->all();
         $this->assertNotEmpty($cases);
+        $this->assertEquals(1, $cases[0]['Id']);
+        $this->assertCount(2, $cases);
         
     }
 }

@@ -40,7 +40,13 @@ class Api {
 	public function records(){
 	    $trafficCase = new TrafficCase();
 	    $records = $trafficCase->all();
-	    return json($records);
+	    
+	    $response = array(
+	        'data'=>$records,
+	        'code'=>'0',
+	        'count'=>count($records)
+	    );
+	    return json($response);
 	}
 
 	/**通过决定书编号找到案卷所有信息
