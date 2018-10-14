@@ -68,8 +68,8 @@ class TrafficCaseTest extends PHPUnit_Framework_TestCase
     }
     
     public function testFindById(){
-        $Id = '1';
-        $case =  $this->trafficCase::findById($Id);
+        $id = '1';
+        $case =  $this->trafficCase::findById($id);
         $this->assertCount(40, $case, "应该返回36个键值对");
     }
 
@@ -77,7 +77,7 @@ class TrafficCaseTest extends PHPUnit_Framework_TestCase
     {
         $cases = $this->trafficCase->all();
         $this->assertNotEmpty($cases);
-        $this->assertEquals(1, $cases[0]['Id']);
+        $this->assertEquals(1, $cases[0]['id']);
         $this->assertCount(2, $cases);
         
     }
@@ -85,11 +85,11 @@ class TrafficCaseTest extends PHPUnit_Framework_TestCase
     public function testUpdateUndefinedCase()
     {
         $data = array(
-            'Id' => '9999'
+            'id' => '9999'
         );
         
-       $Id =  $this->trafficCase->update($data);
-        $this->assertNull($Id);
+       $id =  $this->trafficCase->update($data);
+        $this->assertNull($id);
     }
     
     public function testUpdate()

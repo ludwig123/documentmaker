@@ -59,12 +59,13 @@ class CarTest extends PHPUnit_Framework_TestCase
         
         
         
-        $data = ['car_num' => '湘0HT19'
+        $data = ['car_num' => '湘0HT13'
             ,'car_type' => '小型轿车'];
         
         $id = $this->car->refresh($id, $data);
-        
         $this->assertNotFalse($id);
+        
+        $this->assertNotFalse($this->car->remove($id));
         
         
     }

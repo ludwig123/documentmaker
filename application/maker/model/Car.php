@@ -5,7 +5,11 @@ use think\Model;
 
 class Car extends Model
 {
-    public static function add($dataArr = Array(), $field = NULL){
+    /**添加一个新车辆
+     * @param array $dataArr
+     * @return integer|boolean 成功返回id,失败返回false
+     */
+    public static function add($dataArr){
         $car = new Car;
         $car->car_num = empty($dataArr['car_num']) ? NULL : $dataArr['car_num'];
         $car->car_type = empty($dataArr['car_type']) ? NULL : $dataArr['car_type'];
@@ -17,8 +21,11 @@ class Car extends Model
             return false;
     }
     
-    public static function remove(){
-        
+    public static function remove($id){
+        $car = Car::get($id);
+        if (!empty($car))
+            return $car->delete();
+        return false;
     }
     
     public static function refresh($id, $dataArr){

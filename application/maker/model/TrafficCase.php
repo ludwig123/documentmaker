@@ -112,15 +112,15 @@ class TrafficCase
     }
     
     
-    public function new($data){
+    public function add($data){
+      $car_id = Car::add($data);  
+    }
+    
+    public function refresh($id, $data){
         
     }
     
-    public function save(){
-
-    }
-    
-    public function delete(){
+    public function delete($id){
         
     }
     
