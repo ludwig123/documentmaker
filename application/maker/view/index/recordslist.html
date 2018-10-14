@@ -46,7 +46,7 @@
 });
   
 table.on('radio(test)', function(obj){
-	checkedId = obj.data['Id'];
+	checkedId = obj.data['id'];
 	console.log(checkedId); //当前是否选中状态
 });
 
@@ -64,7 +64,7 @@ table.on('toolbar(test)', function(obj){
 		
 		if (checkedId == null) {layer.msg('请先选择一个案件');}
 		else {
-			window.location.href = "/documentmaker/public/index.php/maker/index/form/Id/" + checkedId;
+			window.location.href = "/documentmaker/public/index.php/maker/index/form/id/" + checkedId;
 		}
 		break;
 	};
@@ -73,7 +73,7 @@ table.on('toolbar(test)', function(obj){
   //监听行双击事件
 table.on('rowDouble(test)', function(obj){
   var record = obj.data;
-  window.location.href = "/documentmaker/public/index.php/maker/index/form/Id/" + record['Id'];
+  window.location.href = "/documentmaker/public/index.php/maker/index/form/id/" + record['id'];
 });
 
 });

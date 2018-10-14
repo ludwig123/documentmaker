@@ -73,9 +73,6 @@ class TrafficCaseTest extends PHPUnit_Framework_TestCase
         $this->assertCount(40, $case, "应该返回36个键值对");
     }
 
-    /**
-     * Tests TrafficCase->getCarNum()
-     */
     public function testFindAll()
     {
         $cases = $this->trafficCase->all();
@@ -84,5 +81,21 @@ class TrafficCaseTest extends PHPUnit_Framework_TestCase
         $this->assertCount(2, $cases);
         
     }
+    
+    public function testUpdateUndefinedCase()
+    {
+        $data = array(
+            'Id' => '9999'
+        );
+        
+       $Id =  $this->trafficCase->update($data);
+        $this->assertNull($Id);
+    }
+    
+    public function testUpdate()
+    {
+        $this->markTestIncomplete();
+    }
+    
 }
 

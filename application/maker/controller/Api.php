@@ -17,25 +17,11 @@ class Api {
 		    'code'=>'0',
 		    'count'=>count($code)
 		);
-
 		
 		return json($data);
 		
 	}
 	
-	public function recordsList(){
-	    $records = new Record();
-	    $lists = $records->records();
-            
-	    
-	    $response = array(
-	        'data'=>$lists,
-	        'code'=>'0',
-	        'count'=>count($lists)
-	    );
-
-	    return json($response);
-	}
 	
 	public function records(){
 	    $trafficCase = new TrafficCase();
@@ -52,8 +38,9 @@ class Api {
 	/**通过决定书编号找到案卷所有信息
 	 * @param $String $caseNum
 	 */
-	public function record($Id) {
-	    $case = TrafficCase::findById($Id);
+	public function record($id) {
+	    $case = TrafficCase::findById($id);
+	    //不能直接返回json_encode是因为框架会自动给他套上json，根据请求类型转换为为html或json
 	    return json($case);
 	}
 	
@@ -74,10 +61,10 @@ class Api {
 	/**更新案卷信息
 	 * @param
 	 */
-	public function updateCase(){
+	public function update(){
 	    $info = $this->postInfo();
  	    $case = new TrafficCase();
- 	    $case->update($case);
+ 	    $case->update($info);
 	    
 	    return json('已经收到post') ;
 	}

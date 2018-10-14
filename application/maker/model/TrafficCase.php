@@ -1,7 +1,6 @@
 <?php
 namespace app\maker\model;
 
-use think\Db;
 
 /**
  * 单个案件的抽象接口，通过其访问模型
@@ -21,30 +20,24 @@ class TrafficCase
      */
     function __construct($val = '', $type = '')
     {
-//             switch ($type){
-//                 //这个地方先保留，factory方法似乎是多余的
-//                 case '':
-//                 case 'new':
-//                     $this->case = (new Record())->newRecord($val);
-//                     break;
-//                 case 'Id':
-//                     $this->case = (new Record())->getRecordById($val);
-//                     break;
-//                 case 'index':  
-//                     $this->case = (new Record())->getRecordByIndex($val);
-//                     break;
-//                 case 'update':
-//                     $this->update($val);
-                   
-//             }
-            
-        
     }
     
     /**更新Id指明的数据
      * @param string $data
      */
     public function update($data){
+        $record = Record::get($data['id']);
+        if (empty($record)){
+            return NUll;
+        }
+        $car = new Car;
+        $man = new Man;
+        $driver = new Driver;
+        
+        $car->save($data);
+        $man->save($data);
+        $driver->save($data);
+        
 
     }
     
@@ -56,13 +49,13 @@ class TrafficCase
         $cases = array();
         foreach ($records as  $index =>$record){
             
-            $record = Record::where('Id', $record->Id)->field(['Id','time','index','code_1','code_2','man','driver', 'car'])->find();
+            $record = Record::where('id', $record->id)->field(['id','time','index','code_1','code_2','man','driver', 'car'])->find();
             if (empty($record)){
                 return NULL;
             }
             
-            $man = Man::where('Id', $record->man)->field(['name'])->find();
-            $car = Car::where('Id', $record->car)->field(['car_num', 'car_type'])->find();
+            $man = Man::where('id', $record->man)->field(['name'])->find();
+            $car = Car::where('id', $record->car)->field(['car_num', 'car_type'])->find();
             
             $code_1 = $code_2 = array();
             $code = Code::where('违法代码', $record->code_1)->field( '违法内容')->find();
@@ -89,15 +82,15 @@ class TrafficCase
     }
     
     //这里不应该把违法的详细内容提供出去，应该等需要的时候再查询
-    public  static function findById($Id){
-        $record = Record::where('Id', $Id)->field(['identity','car_num','car_type'],true)->find();
+    public  static function findById($id){
+        $record = Record::where('id', $id)->field(['identity','car_num','car_type'],true)->find();
       if (empty($record)){
           return NULL;
       }
       
-      $man = Man::where('Id', $record->man)->field(['Id'],true)->find();
-      $driver = Driver::where('Id', $record->driver)->field(['Id'],true)->find();
-      $car = Car::where('Id', $record->car)->field(['Id'],true)->find();
+      $man = Man::where('id', $record->man)->field(['id'],true)->find();
+      $driver = Driver::where('id', $record->driver)->field(['id'],true)->find();
+      $car = Car::where('id', $record->car)->field(['id'],true)->find();
       
       $code_1 = $code_2 = array();
       $code = Code::where('违法代码', $record->code_1)->field( '违法代码,违法内容')->find();
@@ -116,6 +109,11 @@ class TrafficCase
       $case = array_merge($record->toArray(),$man->toArray(), $driver->toArray(), $car->toArray(), $code_1, $code_2);
         
         return $case;
+    }
+    
+    
+    public function new($data){
+        
     }
     
     public function save(){

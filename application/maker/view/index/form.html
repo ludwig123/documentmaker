@@ -1,6 +1,6 @@
 {extend name="maker@common/base" /}
 {block name="main"}
-<div id="Id" value={$Id}></div>
+<div id="id" value={$id}></div>
 <div class="site-text se-block">
     <form class="layui-form" lay-filter="formDemo" action="">
         <div class="site-title">
@@ -365,10 +365,10 @@
 <script>
 layui.use(['form', 'jquery'], function() {
     var form = layui.form;
-    var id = $("#Id").attr('value');
+    var id = $("#id").attr('value');
     $.ajax({
         type: "POST",
-        url: "/documentmaker/public/index.php/maker/api/record/Id/" + id,
+        url: "/documentmaker/public/index.php/maker/api/record/id/" + id,
         data: '',
         dataType: "json",
         success: function(respMsg) {
