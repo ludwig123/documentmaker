@@ -19,7 +19,7 @@ class Driver extends Model
     }
     
     
-    public function refresh()
+    public function refresh($id, $dataArr)
     {
         $driver = Driver::get($id);
         $driver->car_num = empty($dataArr['car_num']) ? NULL : $dataArr['car_num'];
@@ -32,7 +32,7 @@ class Driver extends Model
             return false;
     }
     
-    public function remove()
+    public function remove($id)
     {
         $driver = Driver::get($id);
         if (!empty($driver))

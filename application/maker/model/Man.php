@@ -25,7 +25,7 @@ class Man extends Model
     }
     
     
-    public function refresh($id)
+    public function refresh($id, $dataArr)
     {
         $man = Man::get($id);
         $man->identity = empty($dataArr['caridentity']) ? NULL : $dataArr['identity'];
