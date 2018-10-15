@@ -114,6 +114,7 @@ class TrafficCase
     
     public function add($data){
       $car_id = Car::add($data);  
+      $man_id = Man::add($data);
     }
     
     public function refresh($id, $data){

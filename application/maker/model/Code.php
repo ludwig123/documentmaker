@@ -5,5 +5,19 @@ use think\Model;
 
 class Code extends Model
 {
+    public function add()
+    {
+        
+    }
     
+    
+    public function refresh()
+    {
+        
+    }
+    
+    public function remove()
+    {
+        
+    }
 }

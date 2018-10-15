@@ -5,6 +5,22 @@ use think\Model;
 
 class Record extends Model
 {
+    public function add()
+    {
+        
+    }
+    
+    
+    public function refresh()
+    {
+        
+    }
+    
+    public function remove()
+    {
+        
+    }
+    
     //以下是关联模型的定义
     /**关联个人信息，含身份证
      * @return \think\model\relation\HasOne
