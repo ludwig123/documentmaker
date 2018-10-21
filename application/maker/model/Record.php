@@ -5,7 +5,7 @@ use think\Model;
 
 class Record extends Model
 {
-    public function add($dataArr)
+    public static function add($dataArr)
     {
         $record = new Record;
         $record->index = empty($dataArr['index']) ? NULL : $dataArr['index'];
@@ -23,13 +23,14 @@ class Record extends Model
         $record->police_2 = empty($dataArr['police_2']) ? NULL : $dataArr['police_2'];
         
         $man_id = Man::add($dataArr);
-        $record->man = $man_id ? NULL : $man_id;
+        $record->man = is_bool( $man_id) ? NULL : $man_id;
         
         $car_id = Car::add($dataArr);
-        $record->car = $car_id ? NULL : $car_id;
+        $record->car =  is_bool($car_id) ? NULL : $car_id;
         
         $driver_id = Driver::add($dataArr);
-        $record->driver = $driver_id ? NULL : $driver_id;
+        $record->driver =  is_bool($driver_id) ? NULL : $driver_id;
+        
         if ($record->save())
             return $record->id;
             
@@ -37,30 +38,49 @@ class Record extends Model
     }
     
     
-    public function refresh($id, $dataArr)
+    public static function refresh($id, $dataArr)
     {
-        $man = Record::get($id);
-        $man->identity = empty($dataArr['caridentity']) ? NULL : $dataArr['identity'];
-        $man->name = empty($dataArr['name']) ? NULL : $dataArr['name'];
-        $man->sex = empty($dataArr['sex']) ? NULL : $dataArr['sex'];
-        $man->phone = empty($dataArr['phone']) ? NULL : $dataArr['phone'];
-        $man->address = empty($dataArr['address']) ? NULL : $dataArr['address'];
-        $man->education= empty($dataArr['education']) ? NULL : $dataArr['education'];
-        $man->political= empty($dataArr['political']) ? NULL : $dataArr['political'];
-        $man->company = empty($dataArr['company']) ? NULL : $dataArr['company'];
-        $man->nation = empty($dataArr['nation']) ? NULL : $dataArr['nation'];
-        $man->birth_place = empty($dataArr['birth_place']) ? NULL : $dataArr['birth_place'];
-        if ($man->save())
-            return $man->id;
+        $record = Record::get($id);
+        $record->index = empty($dataArr['index']) ? NULL : $dataArr['index'];
+        $record->code_1 = empty($dataArr['code_1']) ? NULL : $dataArr['code_1'];
+        $record->code_2 = empty($dataArr['code_2']) ? NULL : $dataArr['code_2'];
+        $record->time = empty($dataArr['time']) ? NULL : $dataArr['time'];
+        $record->place = empty($dataArr['place']) ? NULL : $dataArr['place'];
+        $record->caughtTime= empty($dataArr['caughtTime']) ? NULL : $dataArr['caughtTime'];
+        $record->zhidui= empty($dataArr['zhidui']) ? NULL : $dataArr['zhidiu'];
+        $record->dadui = empty($dataArr['dadui']) ? NULL : $dataArr['dadui'];
+        $record->evidence = empty($dataArr['evidence']) ? NULL : $dataArr['evidence'];
+        $record->doc_type = empty($dataArr['doc_type']) ? NULL : $dataArr['doc_type'];
+        $record->doc_index = empty($dataArr['doc_index']) ? NULL : $dataArr['doc_index'];
+        $record->police_1 = empty($dataArr['police_1']) ? NULL : $dataArr['police_1'];
+        $record->police_2 = empty($dataArr['police_2']) ? NULL : $dataArr['police_2'];
+        
+        $man_id = Man::refresh($record->man, $dataArr);
+        $record->man = is_bool( $man_id) ? NULL : $man_id;
+        
+        $car_id = Car::refresh($record->car, $dataArr);
+        $record->car =  is_bool($car_id) ? NULL : $car_id;
+        
+        $driver_id = Driver::refresh($record->driver, $dataArr);
+        $record->driver =  is_bool($driver_id) ? NULL : $driver_id;
+        
+        if ($record->save())
+            return $record->id;
             
             return false;
     }
     
-    public function remove($id)
+    public static function remove($id)
     {
         $record = Record::get($id);
-        if (!empty($record))
+        if (!empty($record)){
+            if(!empty($record->man))  {
+                Man::remove($record->man);
+            }
+            if(!empty($record->driver))  Driver::remove($record->driver);
+            if(!empty($record->car))  Car::remove($record->car);
             return $record->delete();
+        }
             return false;
     }
     

@@ -161,10 +161,35 @@ class RecordTest extends PHPUnit_Framework_TestCase
      */
     public function testAddRecord()
     {
-        // TODO Auto-generated RecordTest->testAddRecord()
-        $this->markTestIncomplete("addRecord test not implemented");
+        $data = ['name' => '陶怡瑾22'
+            ,'identity' => '430444198912222222'
+            ,'car_num' => '湘D8888'  //car
+            ,'file_num' =>'4224110000'
+            ,'name' => '陶一斤'
+            ,'sex' => '女'
+            ,'index' => '435405000029018'
+        ];
         
-        $this->record->addRecord(/* parameters */);
+        $id = Record::add($data);
+        $this->assertNotFalse($id);
+        
+        
+        
+        $data = ['name' => '陶怡瑾33'
+            ,'identity' => '4304441989133333'
+            ,'car_num' => '湘D8885'  //car
+            ,'file_num' =>'4224113333'
+            ,'name' => '陶一斤'
+            ,'sex' => '女'
+            ,'index' => '435405000029014'
+        ];
+        
+        
+        $id = Record::refresh($id, $data);
+        $this->assertNotFalse($id);
+        
+        $this->assertNotFalse(Record::remove($id));
+        
     }
 }
 
