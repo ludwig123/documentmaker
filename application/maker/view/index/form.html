@@ -373,18 +373,27 @@ layui.use(['form', 'jquery'], function() {
         dataType: "json",
         success: function(respMsg) {
             var msg = respMsg;
+            var tt = null ;
+            if (msg.hasOwnProperty('time') && msg['time'] != null) {
+            	tt = msg['time'].match(/20\d\d年\d{1,2}月\d{1,2}日/g);
+            }
+
+            var dd = null ;
+            if (msg.hasOwnProperty('time') && msg['time'] != null) {
+            	tt = msg['time'].match(/\d\d时\d\d分/g);
+            }
 
             form.val("formDemo", {
                 "index": msg['index'],
-                "date": msg['time'].match(/20\d\d年\d{1,2}月\d{1,2}日/g),
-                "time": msg['time'].match(/\d\d时\d\d分/g),
+                "date": tt,
+                "time": dd,
                 "place": msg['place'],
                 "code": msg['code_1'],
                 "doc_type": msg['doc_type'],
                 "doc_index": msg['doc_index'],
-                "code_1": msg['违法代码_1'],
+                "code_1": msg['code_1'],
                 "code_1_content": msg['违法内容_1'],
-                "code_2": msg['违法代码_2'],
+                "code_2": msg['code_2'],
                 "code_2_content": msg['违法内容_2'],
                 "zhidui": msg['zhidui'],
                 "dadui": msg['dadui'],

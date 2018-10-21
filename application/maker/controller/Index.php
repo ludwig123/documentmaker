@@ -32,13 +32,11 @@ class Index extends Controller
      * @return mixed|string
      */
     public function chahuojingguo(){
-        $list = Record::get(1);
+        $list = TrafficCase::findById(1);
+        if (!empty($list)){
+            $this->assign('data', $list);
+        }
                
-        $result = 0;
-        $this->assign([
-            'name'  => '刘少乃',
-            'caughtTime' => '2018年04月07日11时15分'
-        ]);
         
         
         return $this->fetch('chahuojingguo');
