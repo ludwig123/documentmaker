@@ -21,9 +21,15 @@ class Record extends Model
         $record->doc_index = empty($dataArr['doc_index']) ? NULL : $dataArr['doc_index'];
         $record->police_1 = empty($dataArr['police_1']) ? NULL : $dataArr['police_1'];
         $record->police_2 = empty($dataArr['police_2']) ? NULL : $dataArr['police_2'];
-        $record->man = empty($dataArr['man']) ? NULL : $dataArr['man'];
-        $record->car = empty($dataArr['car']) ? NULL : $dataArr['car'];
-        $record->driver = empty($dataArr['driver']) ? NULL : $dataArr['driver'];
+        
+        $man_id = Man::add($dataArr);
+        $record->man = $man_id ? NULL : $man_id;
+        
+        $car_id = Car::add($dataArr);
+        $record->car = $car_id ? NULL : $car_id;
+        
+        $driver_id = Driver::add($dataArr);
+        $record->driver = $driver_id ? NULL : $driver_id;
         if ($record->save())
             return $record->id;
             

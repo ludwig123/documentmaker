@@ -46,15 +46,13 @@ class CarTest extends PHPUnit_Framework_TestCase
         // TODO Auto-generated constructor
     }
 
-    /**
-     * Tests Car->create()
-     */
-    public function testCreate()
+
+    public function testAdd()
     {
         $data = ['car_num' => '湘0HT09'
                 ,'car_type' => '小型轿车'];
         
-        $id = $this->car->add($data);
+        $id = Car::add($data);
         $this->assertNotFalse($id);
         
         
@@ -62,18 +60,15 @@ class CarTest extends PHPUnit_Framework_TestCase
         $data = ['car_num' => '湘0HT13'
             ,'car_type' => '小型轿车'];
         
-        $id = $this->car->refresh($id, $data);
+        $id = Car::refresh($id, $data);
         $this->assertNotFalse($id);
         
-        $this->assertNotFalse($this->car->remove($id));
+        $this->assertNotFalse(Car::remove($id));
         
         
     }
 
-    /**
-     * Tests Car->delete()
-     */
-    public function testDelete()
+    public function testRemove()
     {
         // TODO Auto-generated CarTest->testDelete()
         $this->markTestIncomplete("delete test not implemented");
