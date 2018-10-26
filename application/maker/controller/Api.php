@@ -44,6 +44,9 @@ class Api {
 	    return json($case);
 	}
 	
+// 	public function record($Id) {
+// 	    return $this->record($Id);
+// 	}
 	/**创建一个案卷
 	 * @param Array $param
 	 */
@@ -74,8 +77,17 @@ class Api {
 	/**删除一个案卷
 	 * @param  $param
 	 */
-	public function deleteCase($param) {
-	    ;
+	public function removeTrafficCase() {
+	    $info = $this->postInfo();
+	    $case = new TrafficCase();
+	    $case->remove($info['id']);
+	    
+	    if ($case !== false){
+	        return json('删除成功');
+	    }
+	    
+	    return json('删除失败');
+	    
 	}
 	
 	

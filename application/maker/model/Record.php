@@ -1,6 +1,7 @@
 <?php
 namespace app\maker\model;
 
+use think\Db;
 use think\Model;
 
 class Record extends Model
@@ -14,7 +15,7 @@ class Record extends Model
         $record->time = empty($dataArr['time']) ? NULL : $dataArr['time'];
         $record->place = empty($dataArr['place']) ? NULL : $dataArr['place'];
         $record->caughtTime= empty($dataArr['caughtTime']) ? NULL : $dataArr['caughtTime'];
-        $record->zhidui= empty($dataArr['zhidui']) ? NULL : $dataArr['zhidiu'];
+        $record->zhidui= empty($dataArr['zhidui']) ? NULL : $dataArr['zhidui'];
         $record->dadui = empty($dataArr['dadui']) ? NULL : $dataArr['dadui'];
         $record->evidence = empty($dataArr['evidence']) ? NULL : $dataArr['evidence'];
         $record->doc_type = empty($dataArr['doc_type']) ? NULL : $dataArr['doc_type'];
@@ -37,35 +38,41 @@ class Record extends Model
             return false;
     }
     
-    
+    //必须保证传入的每个数据库键值都存在
     public static function refresh($id, $dataArr)
     {
         $record = Record::get($id);
-        $record->index = empty($dataArr['index']) ? NULL : $dataArr['index'];
-        $record->code_1 = empty($dataArr['code_1']) ? NULL : $dataArr['code_1'];
-        $record->code_2 = empty($dataArr['code_2']) ? NULL : $dataArr['code_2'];
-        $record->time = empty($dataArr['time']) ? NULL : $dataArr['time'];
-        $record->place = empty($dataArr['place']) ? NULL : $dataArr['place'];
-        $record->caughtTime= empty($dataArr['caughtTime']) ? NULL : $dataArr['caughtTime'];
-        $record->zhidui= empty($dataArr['zhidui']) ? NULL : $dataArr['zhidiu'];
-        $record->dadui = empty($dataArr['dadui']) ? NULL : $dataArr['dadui'];
-        $record->evidence = empty($dataArr['evidence']) ? NULL : $dataArr['evidence'];
-        $record->doc_type = empty($dataArr['doc_type']) ? NULL : $dataArr['doc_type'];
-        $record->doc_index = empty($dataArr['doc_index']) ? NULL : $dataArr['doc_index'];
-        $record->police_1 = empty($dataArr['police_1']) ? NULL : $dataArr['police_1'];
-        $record->police_2 = empty($dataArr['police_2']) ? NULL : $dataArr['police_2'];
+        $record = $record->toArray();
+        $record['index'] = empty($dataArr['index']) ? NULL : $dataArr['index'];
+        $record['code_1'] = empty($dataArr['code_1']) ? NULL : $dataArr['code_1'];
+        $record['code_2'] = empty($dataArr['code_2']) ? NULL : $dataArr['code_2'];
+        $record['time'] = empty($dataArr['time']) ? NULL : $dataArr['time'];
+        $record['place'] = empty($dataArr['place']) ? NULL : $dataArr['place'];
+        $record['caughtTime'] = empty($dataArr['caughtTime']) ? NULL : $dataArr['caughtTime'];
+        $record['zhidui'] = empty($dataArr['zhidui']) ? NULL : $dataArr['zhidui'];
+        $record['dadui'] = empty($dataArr['dadui']) ? NULL : $dataArr['dadui'];
+        $record['evidence'] = empty($dataArr['evidence']) ? NULL : $dataArr['evidence'];
+        $record['doc_type'] = empty($dataArr['doc_type']) ? NULL : $dataArr['doc_type'];
+        $record['doc_index'] = empty($dataArr['doc_index']) ? NULL : $dataArr['doc_index'];
+        $record['police_1'] = empty($dataArr['police_1']) ? NULL : $dataArr['police_1'];
+        $record['police_2'] = empty($dataArr['police_2']) ? NULL : $dataArr['police_2'];
         
-        $man_id = Man::refresh($record->man, $dataArr);
-        $record->man = is_bool( $man_id) ? NULL : $man_id;
+        $man_id  = Man::refresh($record['man'], $dataArr);
+        $record['man'] = is_bool( $man_id) ? NULL : $man_id;
         
-        $car_id = Car::refresh($record->car, $dataArr);
-        $record->car =  is_bool($car_id) ? NULL : $car_id;
+        $car_id = Car::refresh($record['car'], $dataArr);
+        $record['car'] =  is_bool($car_id) ? NULL : $car_id;
         
-        $driver_id = Driver::refresh($record->driver, $dataArr);
-        $record->driver =  is_bool($driver_id) ? NULL : $driver_id;
+        $driver_id = Driver::refresh($record['driver'], $dataArr);
+        $record['driver'] =  is_bool($driver_id) ? NULL : $driver_id;
         
-        if ($record->save())
-            return $record->id;
+        //防止用NULL 覆盖了原值
+        foreach ($record as $k => $v){
+            if ($v == NULL) unset($record[$k]);
+        }
+        $effectRow = Db::name('record')->where('id', $id)->update($record);
+        if ($effectRow)
+            return $id;
             
             return false;
     }
@@ -74,9 +81,7 @@ class Record extends Model
     {
         $record = Record::get($id);
         if (!empty($record)){
-            if(!empty($record->man))  {
-                Man::remove($record->man);
-            }
+            if(!empty($record->man))  Man::remove($record->man);
             if(!empty($record->driver))  Driver::remove($record->driver);
             if(!empty($record->car))  Car::remove($record->car);
             return $record->delete();

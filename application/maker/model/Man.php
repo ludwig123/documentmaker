@@ -40,6 +40,9 @@ class Man extends Model
         $man['company'] = empty($dataArr['company']) ? NULL : $dataArr['company'];
         $man['nation'] = empty($dataArr['nation']) ? NULL : $dataArr['nation'];
         $man['birth_place'] = empty($dataArr['birth_place']) ? NULL : $dataArr['birth_place'];
+        foreach ($man as $k => $v){
+            if ($v == NULL) unset($man[$k]);
+        }
         $effectRow = Db::name('man')->where('id', $id)->update($man);
         if ($effectRow)
             return $id;

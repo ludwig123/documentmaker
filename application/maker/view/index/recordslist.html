@@ -58,10 +58,27 @@ table.on('toolbar(test)', function(obj){
 		layer.msg('添加');
 		break;
 		case 'delete':
-		layer.msg('删除');
+		if (checkedId == null) {layer.msg('请先选择一个案件');}
+		else {
+			var chooseId = {'id': checkedId};
+
+			$.ajax({
+				type: "POST",
+				url: "/documentmaker/public/index.php/maker/api/removeTrafficCase" ,
+				data: chooseId,
+				dataType: "json",
+				success: function(respMsg) {
+					layer.msg(respMsg);
+					window.location.href = "/documentmaker/public/index.php/maker/index/recordslist";
+				},
+				error: function() {
+					layer.msg("删除失败")
+				}
+			});
+		}
 		break;
+
 		case 'update':
-		
 		if (checkedId == null) {layer.msg('请先选择一个案件');}
 		else {
 			window.location.href = "/documentmaker/public/index.php/maker/index/form/id/" + checkedId;

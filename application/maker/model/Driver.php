@@ -1,6 +1,7 @@
 <?php
 namespace app\maker\model;
 
+use think\Db;
 use think\Model;
 
 class Driver extends Model
@@ -21,13 +22,18 @@ class Driver extends Model
     
     public static function refresh($id, $dataArr)
     {
-        $driver = Driver::get($id);
-        $driver->identity = empty($dataArr['identity']) ? NULL : $dataArr['identity'];
-        $driver->file_num = empty($dataArr['file_num']) ? NULL : $dataArr['file_num'];
-        $driver->issuer = empty($dataArr['issuer']) ? NULL : $dataArr['issuer'];
-        $driver->driver_type = empty($dataArr['driver_type']) ? NULL : $dataArr['driver_type'];
-        if ($driver->save())
-            return $driver->id;
+        $driver = array();
+        $driver['identity'] = empty($dataArr['identity']) ? NULL : $dataArr['identity'];
+        $driver['file_num'] = empty($dataArr['file_num']) ? NULL : $dataArr['file_num'];
+        $driver['issuer'] = empty($dataArr['issuer']) ? NULL : $dataArr['issuer'];
+        $driver['driver_type'] = empty($dataArr['driver_type']) ? NULL : $dataArr['driver_type'];
+
+        foreach ($driver as $k => $v){
+            if ($v == NULL) unset($driver[$k]);
+        }
+        $effectRow = Db::name('driver')->where('id', $id)->update($driver);
+        if ($effectRow)
+            return $id;
             
             return false;
     }

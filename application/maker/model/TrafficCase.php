@@ -12,34 +12,7 @@ class TrafficCase
 {
 
     public $case;
-
-
-    /**新建一个案件或者通过关键词查询一个案件
-     * @param string $val  查询案件的关键词
-     * @param string $type 关键词的种类
-     */
-    function __construct($val = '', $type = '')
-    {
-    }
     
-    /**更新Id指明的数据
-     * @param string $data
-     */
-    public function update($data){
-        $record = Record::get($data['id']);
-        if (empty($record)){
-            return NUll;
-        }
-        $car = new Car;
-        $man = new Man;
-        $driver = new Driver;
-        
-        $car->save($data);
-        $man->save($data);
-        $driver->save($data);
-        
-
-    }
     
     public function all(){
         $records = Record::field(['identity','car_num','car_type'],true)->select();
@@ -135,16 +108,15 @@ class TrafficCase
     
     
     public function add($data){
-      $car_id = Car::add($data);  
-      $man_id = Man::add($data);
+        return Record::add($data);
     }
     
-    public function refresh($id, $data){
-        
+    public function refresh($id, $dataArr){
+        return Record::refresh($id, $dataArr);
     }
     
-    public function delete($id){
-        
+    public function remove($id){
+       return Record::remove($id);
     }
     
 

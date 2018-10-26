@@ -2,6 +2,7 @@
 namespace app\maker\controller;
 
 use think\Controller;
+use app\maker\model\Code;
 use app\maker\model\Record;
 use app\maker\model\TrafficCase;
 use phpDocumentor\Reflection\DocBlock\Tags\Return_;
@@ -18,59 +19,69 @@ class Index extends Controller
     
     //主页面，录入驾驶人信息等等
     public function form($id = ""){
+        //在页面注入案件的ID
         $this->assign([
             'id'  => $id
         ]);
         return $this->fetch("form");
     }
     
-    public function shenpibiao(){
+    public function shenpibiao($id){
+        $list = TrafficCase::findById($id);
+        if (!empty($list)){
+            $this->assign('data', $list);
+        }
         return $this->fetch("shenpibiao");
     }
     
     /**查获经过
      * @return mixed|string
      */
-    public function chahuojingguo(){
-        $list = TrafficCase::findById(1);
+    public function chahuojingguo($id){
+        $list = TrafficCase::findById($id);
         if (!empty($list)){
             $this->assign('data', $list);
         }
                
-        
-        
         return $this->fetch('chahuojingguo');
     }
     
     public function footer(){
        return $this->fetch('maker@common/footer');
     }
-    
-    /**告知笔录
+
+    /**
+     * 告知笔录
+     *
      * @return mixed|string
      */
-    public function gaozhibilu($index){
-        $case = new TrafficCase($index);
+    public function gaozhibilu($id)
+    {
+        $list = TrafficCase::findById($id);
         
-        $this->assign([
-            'zhidui'=>$case->getZhidui(),
-            'dadui'=>$case->getDadui(),
-            'code_1_content'=>$case->getCode1Content(), 
-            'code_1_against'=>$case->getCode1Against(),
-            'code_1_punish'=>$case->getCode1Punish(),
-            'code_1_money'=>$case->getCode1Money(),
-            'code_2_content'=>$case->getCode2Content(),
-            'code_2_against'=>$case->getCode2Against(),
-            'code_2_punish'=>$case->getCode2Punish(),
-            'code_2_money'=>$case->getCode2Money(),
-            'name'  => $case->getName(),
-            'time' => $case->getTime(),
-            'place'=>$case->getPlace(),
-            'evidence'=>$case->getEvidence(),
-            'car' =>$case->getCar(),
-            'car_type' =>$case->getCarType(),
-            
-        ]);
+        $code_1 = $code_2 = array();
+        if (! empty($list['code_1'])) {
+            $code = Code::where('违法代码', $list['code_1'])->find();
+            if (! empty($code)) {
+                $code = $code->toArray();
+                foreach ($code as $k => $v) {
+                    $code_1[$k . '_1'] = $v;
+                }
+            }
+        }
+        if (! empty($list['code_2'])){
+            $code = Code::where('违法代码', $list['code_2'])->find();
+            $code = $code->toArray();
+            foreach ($code as $k =>$v){
+                $code_2[$k.'_2'] = $v;
+            }
+        }
+        
+        $list = array_merge($list, $code_1, $code_2);
+        
+        if (!empty($list)){
+            $this->assign('data', $list);
+        }
         return $this->fetch('gaozhibilu');
     }
     
