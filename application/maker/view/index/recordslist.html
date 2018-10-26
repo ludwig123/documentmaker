@@ -55,7 +55,7 @@ table.on('toolbar(test)', function(obj){
 	var checkStatus = table.checkStatus(obj.config.id);
 	switch(obj.event){
 		case 'add':
-		layer.msg('添加');
+		window.location.href = "/documentmaker/public/index.php/maker/index/form";
 		break;
 		case 'delete':
 		if (checkedId == null) {layer.msg('请先选择一个案件');}

@@ -50,24 +50,20 @@ class Api {
 	/**创建一个案卷
 	 * @param Array $param
 	 */
-	public function newCase() {
-	    $info = Request::instance()->post();
-	    
-	    $data = array(
-	        'data'=>"2",
-	        'code'=>'0',
-	        'count'=>"2"
-	    );
+	public function addTrafficCase() {
+	    $info = $this->postInfo();
+	    $case = new TrafficCase();
+	    $data = $case->add($info);
 	    return json($data) ;
 	}
 	
 	/**更新案卷信息
 	 * @param
 	 */
-	public function update(){
+	public function refreshTrafficCase(){
 	    $info = $this->postInfo();
  	    $case = new TrafficCase();
- 	    $case->update($info);
+ 	    $data = $case->refresh($info);
 	    
 	    return json('已经收到post') ;
 	}
