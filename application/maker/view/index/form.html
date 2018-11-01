@@ -357,6 +357,7 @@
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">打印预览</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
@@ -441,7 +442,7 @@ layui.use(['form', 'jquery'], function() {
     	if (id == '') {
     		$.ajax({
     			type: "POST",
-    			url: "/documentmaker/public/index.php/maker/api/addTrafficCase?XDEBUG_SESSION_START",
+    			url: "/documentmaker/public/index.php/maker/api/addTrafficCase",
     			data: data.field,
     			dataType: "json",
     			success: function(respMsg) {
@@ -457,7 +458,7 @@ layui.use(['form', 'jquery'], function() {
     		record.id  = id;
     		$.ajax({
     			type: "POST",
-    			url: "/documentmaker/public/index.php/maker/api/refreshTrafficCase?XDEBUG_SESSION_START",
+    			url: "/documentmaker/public/index.php/maker/api/refreshTrafficCase",
     			data: data.field,
     			dataType: "json",
     			success: function(respMsg) {

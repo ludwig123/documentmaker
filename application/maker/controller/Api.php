@@ -54,7 +54,7 @@ class Api {
 	    $info = $this->postInfo();
 	    $case = new TrafficCase();
 	    $data = $case->add($info);
-	    return json($data) ;
+	    return json('添加成功！') ;
 	}
 	
 	/**更新案卷信息
@@ -65,7 +65,7 @@ class Api {
  	    $case = new TrafficCase();
  	    $data = $case->refresh($info['id'], $info);
 	    
-	    return json('已经收到post') ;
+	    return json('更新成功！') ;
 	}
 	
 

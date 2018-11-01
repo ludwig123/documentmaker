@@ -80,7 +80,7 @@ class TrafficCase
           $carArr = $car->toArray();
       }
       
-      $driver = Driver::where('id', $record->car)->field(['id'],true)->find();
+      $driver = Driver::where('id', $record->driver)->field(['id'],true)->find();
       if (!empty($driver)){
           $driverArr = $driver->toArray();
       }
