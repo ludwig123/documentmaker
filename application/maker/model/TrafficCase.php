@@ -71,16 +71,16 @@ class TrafficCase
       $recordArr = $record->toArray();
       
       $carArr = $manArr = $driverArr = array();
-      $man = Man::where('id', $record->man)->find();
+      $man = Man::where('id', $record->man)->field(['id'],true)->find();
       if(!empty($man)){
           $manArr = $man->toArray();
       }
-      $car = Car::where('id', $record->car)->find();
+      $car = Car::where('id', $record->car)->field(['id'],true)->find();
       if (!empty($car)){
           $carArr = $car->toArray();
       }
       
-      $driver = Driver::where('id', $record->car)->find();
+      $driver = Driver::where('id', $record->car)->field(['id'],true)->find();
       if (!empty($driver)){
           $driverArr = $driver->toArray();
       }

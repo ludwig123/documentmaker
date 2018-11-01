@@ -381,7 +381,7 @@ layui.use(['form', 'jquery'], function() {
 
             var dd = null ;
             if (msg.hasOwnProperty('time') && msg['time'] != null) {
-            	tt = msg['time'].match(/\d\d时\d\d分/g);
+            	dd = msg['time'].match(/\d\d时\d\d分/g);
             }
 
             form.val("formDemo", {
@@ -441,7 +441,7 @@ layui.use(['form', 'jquery'], function() {
     	if (id == '') {
     		$.ajax({
     			type: "POST",
-    			url: "/documentmaker/public/index.php/maker/api/addTrafficCase",
+    			url: "/documentmaker/public/index.php/maker/api/addTrafficCase?XDEBUG_SESSION_START",
     			data: data.field,
     			dataType: "json",
     			success: function(respMsg) {
@@ -454,10 +454,10 @@ layui.use(['form', 'jquery'], function() {
     	}
     	//修改案卷
     	else {
-    		record.Id  = id;
+    		record.id  = id;
     		$.ajax({
     			type: "POST",
-    			url: "/documentmaker/public/index.php/maker/api/refreshTrafficCase",
+    			url: "/documentmaker/public/index.php/maker/api/refreshTrafficCase?XDEBUG_SESSION_START",
     			data: data.field,
     			dataType: "json",
     			success: function(respMsg) {

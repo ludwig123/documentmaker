@@ -63,7 +63,7 @@ class Api {
 	public function refreshTrafficCase(){
 	    $info = $this->postInfo();
  	    $case = new TrafficCase();
- 	    $data = $case->refresh($info);
+ 	    $data = $case->refresh($info['id'], $info);
 	    
 	    return json('已经收到post') ;
 	}
