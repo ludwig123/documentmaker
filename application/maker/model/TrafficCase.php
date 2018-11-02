@@ -1,6 +1,8 @@
 <?php
 namespace app\maker\model;
 
+use think\Db;
+
 
 /**
  * 单个案件的抽象接口，通过其访问模型
@@ -35,24 +37,11 @@ class TrafficCase
             if (!empty($car)){
                 $carArr = $car->toArray();
             }
-            $code_1 = $code_2 = array();
-            $code = Code::where('违法代码', $record->code_1)->field( '违法内容')->find();
-            if (!empty($code)){
-            $code = $code->toArray();
-            foreach ($code as $k =>$v){
-                $code_1[$k.'_1'] = $v;
-            }
-            }
             
-            if (!empty($record->code_2)){
-                $code = Code::where('违法代码', $record->code_2)->field( '违法内容')->find();
-                $code = $code->toArray();
-                foreach ($code as $k =>$v){
-                    $code_2[$k.'_2'] = $v;
-                }
-            }
             
-            $case = array_merge($recordArr,$manArr, $carArr, $code_1, $code_2);
+            $codeContentArr = self::getCodeContentArr($record);
+        
+            $case = array_merge($recordArr,$manArr, $carArr, $codeContentArr);
             
             
             $cases[] = $case;
@@ -84,24 +73,10 @@ class TrafficCase
       if (!empty($driver)){
           $driverArr = $driver->toArray();
       }
-      $code_1 = $code_2 = array();
-      $code = Code::where('违法代码', $record->code_1)->field( '违法内容')->find();
-      if (!empty($code)){
-          $code = $code->toArray();
-          foreach ($code as $k =>$v){
-              $code_1[$k.'_1'] = $v;
-          }
-      }
+
+      $codeContentArr = self::getCodeContentArr($record);
       
-      if (!empty($record->code_2)){
-          $code = Code::where('违法代码', $record->code_2)->field( '违法内容')->find();
-          $code = $code->toArray();
-          foreach ($code as $k =>$v){
-              $code_2[$k.'_2'] = $v;
-          }
-      }
-      
-      $case = array_merge($recordArr,$manArr, $carArr,$driverArr, $code_1, $code_2);
+      $case = array_merge($recordArr,$manArr, $carArr,$driverArr, $codeContentArr);
         
         return $case;
     }
@@ -120,6 +95,30 @@ class TrafficCase
     }
     
 
+    private static function getCodeContent($code){
+        return Db::table('code')->where("违法代码=".$code)->field('违法内容')->find();
+    }
+    
+    private static function getCodeContentArr($record){
+        $code_1 = $code_2 = array();
+        $code = self::getCodeContent($record['code_1']);
+        if (!empty($code)){
+            foreach ($code as $k =>$v){
+                $code_1[$k.'_1'] = $v;
+            }
+        }
+        
+        if (!empty($record->code_2)){
+            $code = self::getCodeContent($record['code_2']);
+            if (!empty($code)){
+                foreach ($code as $k =>$v){
+                    $code_2[$k.'_2'] = $v;
+                }
+            }
+        }
+        
+        return array_merge($code_1, $code_2);
+    }
    
         
 }

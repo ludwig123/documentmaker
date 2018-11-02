@@ -85,7 +85,33 @@ class Index extends Controller
         return $this->fetch('gaozhibilu');
     }
     
-    public function juedingshu(){
+    public function juedingshu($id){
+        $list = TrafficCase::findById($id);
+        
+        $code_1 = $code_2 = array();
+        if (! empty($list['code_1'])) {
+            $code = Code::where('违法代码', $list['code_1'])->find();
+            if (! empty($code)) {
+                $code = $code->toArray();
+                foreach ($code as $k => $v) {
+                    $code_1[$k . '_1'] = $v;
+                }
+            }
+        }
+        if (! empty($list['code_2'])){
+            $code = Code::where('违法代码', $list['code_2'])->find();
+            $code = $code->toArray();
+            foreach ($code as $k =>$v){
+                $code_2[$k.'_2'] = $v;
+            }
+        }
+        
+        $list = array_merge($list, $code_1, $code_2);
+        
+        if (!empty($list)){
+            $this->assign('data', $list);
+        }
+        
         return $this->fetch('juedingshu');
     }
 
@@ -101,5 +127,9 @@ class Index extends Controller
         return $this->fetch('recordslist');
     }
     
+    
+    private function addPage(){
+        
+    }
     
 }
