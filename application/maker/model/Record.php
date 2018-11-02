@@ -13,6 +13,7 @@ class Record extends Model
         $record->code_1 = empty($dataArr['code_1']) ? NULL : $dataArr['code_1'];
         $record->code_2 = empty($dataArr['code_2']) ? NULL : $dataArr['code_2'];
         $record->time = empty($dataArr['time']) ? NULL : $dataArr['time'];
+        $record->judge_time = empty($dataArr['judge_time']) ? NULL : $dataArr['judge_time'];
         $record->place = empty($dataArr['place']) ? NULL : $dataArr['place'];
         $record->caughtTime= empty($dataArr['caughtTime']) ? NULL : $dataArr['caughtTime'];
         $record->zhidui= empty($dataArr['zhidui']) ? NULL : $dataArr['zhidui'];
@@ -47,6 +48,7 @@ class Record extends Model
         $record['code_1'] = empty($dataArr['code_1']) ? NULL : $dataArr['code_1'];
         $record['code_2'] = empty($dataArr['code_2']) ? NULL : $dataArr['code_2'];
         $record['time'] = empty($dataArr['time']) ? NULL : $dataArr['time'];
+        $record['judge_time']= empty($dataArr['judge_time']) ? NULL : $dataArr['judge_time'];
         $record['place'] = empty($dataArr['place']) ? NULL : $dataArr['place'];
         $record['caughtTime'] = empty($dataArr['caughtTime']) ? NULL : $dataArr['caughtTime'];
         $record['zhidui'] = empty($dataArr['zhidui']) ? NULL : $dataArr['zhidui'];

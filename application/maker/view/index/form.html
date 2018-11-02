@@ -20,9 +20,9 @@
                 </div>
                 <div class="layui-col-md3">
                     <div class="layui-form-item">
-                        <label class="layui-form-label">违法日期</label>
+                        <label class="layui-form-label">裁决时间</label>
                         <div class="layui-input-block">
-                            <input type="text" class="layui-input" name="date" id="date"  placeholder="2018年8月15日" autocomplete="off" class="layui-input">
+                            <input type="text" class="layui-input" name="judge_time" id="judge_time"  placeholder="2018年8月15日" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -375,20 +375,12 @@ layui.use(['form', 'jquery'], function() {
         dataType: "json",
         success: function(respMsg) {
             var msg = respMsg;
-            var tt = null ;
-            if (msg.hasOwnProperty('time') && msg['time'] != null) {
-            	tt = msg['time'].match(/20\d\d年\d{1,2}月\d{1,2}日/g);
-            }
 
-            var dd = null ;
-            if (msg.hasOwnProperty('time') && msg['time'] != null) {
-            	dd = msg['time'].match(/\d\d时\d\d分/g);
-            }
 
             form.val("formDemo", {
                 "index": msg['index'],
-                "date": tt,
-                "time": dd,
+                "judge_time": msg['judge_time'],
+                "time": msg['time'],
                 "place": msg['place'],
                 "code": msg['code_1'],
                 "doc_type": msg['doc_type'],
@@ -513,14 +505,14 @@ layui.use('laydate', function() {
     var laydate = layui.laydate;
     laydate.render({
         elem: '#time',
-        type: 'time',
-        format: 'HH时mm分'
+        type: 'datetime',
+        format: 'yyyy年MM月dd日HH时mm分'
     });
 
     laydate.render({
-        elem: '#date',
-        type: 'date',
-        format: 'yyyy年MM月dd日'
+        elem: '#judge_time',
+        type: 'datetime',
+        format: 'yyyy年MM月dd日HH时mm分'
     });
 
     laydate.render({
