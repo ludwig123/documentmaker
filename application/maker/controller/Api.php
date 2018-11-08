@@ -85,14 +85,15 @@ class Api {
 	    
 	}
 	
+	public function getCodeDetail($code){
+	    return json(Code::getDetail($code));
+	}
+	
 	
 	private function postInfo(){
 	    if (Request::isPost())
 	    return Request::post();
 	}
 	
-	private function getInfo(){
-	    return Request::instance()->get();
-	}
 	
 }

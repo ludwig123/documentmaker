@@ -493,6 +493,59 @@ layui.use(['form', 'jquery'], function() {
         window.location.href = "/documentmaker/public/index.php/maker/index/gaozhibilu/id/" + id;
     })
 
+    $('input[name=code_1]').keyup(function(){ 
+        if ($('input[name=code_1]').val().length >= 5) {
+          $.ajax({
+            type: "GET",
+            url: "/documentmaker/public/index.php/maker/api/getcodedetail/code/"+$('input[name=code_1]').val(),
+            data: "",
+            dataType: "json",
+            success: function(respMsg) {
+                if (respMsg  == null) {
+                    alert("违法代码不存在！");
+                    $('input[name=code_1').val('');
+                    return
+                }
+                else{
+                    $('input[name=code_1_content]').val(respMsg['违法内容']);
+                }
+
+            },
+            error: function() {
+                alert("获取数据失败，网络超时！")
+
+            }
+        });
+        }
+        
+    });
+
+        $('input[name=code_2]').keyup(function(){ 
+        if ($('input[name=code_2]').val().length >= 5) {
+          $.ajax({
+            type: "GET",
+            url: "/documentmaker/public/index.php/maker/api/getcodedetail/code/"+$('input[name=code_2]').val(),
+            data: "",
+            dataType: "json",
+            success: function(respMsg) {
+                if (respMsg  == null) {
+                    alert("违法代码不存在！");
+                    $('input[name=code_2').val('');
+                    return
+                }
+                else{
+                    $('input[name=code_2_content]').val(respMsg['违法内容']);
+                }
+
+            },
+            error: function() {
+                alert("获取数据失败，网络超时！")
+
+            }
+        });
+        }
+        
+    });
 
 
     form.verify({
