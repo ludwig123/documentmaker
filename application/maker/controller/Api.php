@@ -4,7 +4,6 @@ namespace app\maker\controller;
 use app\maker\model\Code;
 use app\maker\model\Man;
 use app\maker\model\Record;
-use app\maker\model\TrafficCaseFactory;
 use think\config\driver\Json;
 use think\facade\Request;
 use app\maker\model\TrafficCase;

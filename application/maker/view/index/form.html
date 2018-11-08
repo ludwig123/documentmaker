@@ -10,7 +10,7 @@
         </div>
         <div class="layui-fluid">
             <div class="layui-row">
-                <div class="layui-col-md3">
+                <div class="layui-col-md2">
                     <div class="layui-form-item">
                         <label class="layui-form-label">决定书编号</label>
                         <div class="layui-input-block">
@@ -26,7 +26,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="layui-col-md2">
+                <div class="layui-col-md3">
                     <div class="layui-form-item">
                         <label class="layui-form-label">违法时间</label>
                         <div class="layui-input-block">
@@ -357,7 +357,7 @@
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-                <button type="reset" class="layui-btn layui-btn-primary">打印预览</button>
+                <button type="button" class="layui-btn layui-btn-primary" id="goPrint">打印预览</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
@@ -472,7 +472,7 @@ layui.use(['form', 'jquery'], function() {
 
         $.ajax({
             type: "POST",
-            url: "/documentmaker/public/index.php/maker/api/updateCase?XDEBUG_SESSION_START",
+            url: "/documentmaker/public/index.php/maker/api/updateCase",
             data: "",
             dataType: "json",
             success: function(respMsg) {
@@ -486,6 +486,11 @@ layui.use(['form', 'jquery'], function() {
 
             }
         });
+    })
+
+        $('#goPrint').on('click', function() {
+        alert('you click me!');
+        window.location.href = "/documentmaker/public/index.php/maker/index/gaozhibilu/id/" + id;
     })
 
 

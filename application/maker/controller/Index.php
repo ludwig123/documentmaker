@@ -2,6 +2,7 @@
 namespace app\maker\controller;
 
 use think\Controller;
+use think\Db;
 use app\maker\model\Code;
 use app\maker\model\Record;
 use app\maker\model\TrafficCase;
@@ -61,17 +62,17 @@ class Index extends Controller
         
         $code_1 = $code_2 = array();
         if (! empty($list['code_1'])) {
-            $code = Code::where('违法代码', $list['code_1'])->find();
+            //$code = Code::where('违法代码', $list['code_1'])->find();
+            $code =  Db::table('code')->where("违法代码=".$list['code_1'])->find();
             if (! empty($code)) {
-                $code = $code->toArray();
+               
                 foreach ($code as $k => $v) {
                     $code_1[$k . '_1'] = $v;
                 }
             }
         }
         if (! empty($list['code_2'])){
-            $code = Code::where('违法代码', $list['code_2'])->find();
-            $code = $code->toArray();
+            $code =  Db::table('code')->where("违法代码=".$list['code_2'])->find();
             foreach ($code as $k =>$v){
                 $code_2[$k.'_2'] = $v;
             }

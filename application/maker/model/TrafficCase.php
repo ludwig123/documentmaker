@@ -12,12 +12,9 @@ use think\Db;
  */
 class TrafficCase
 {
-
-    public $case;
-    
     
     public function all(){
-        $records = Record::field(['identity','car_num','car_type'],true)->select();
+        $records = Record::field(['identity'],true)->select();
         if (empty($records)){
             return NULL;
         }
@@ -95,7 +92,7 @@ class TrafficCase
     }
     
 
-    private static function getCodeContent($code){
+    public static function getCodeContent($code){
         return Db::table('code')->where("违法代码=".$code)->field('违法内容')->find();
     }
     
@@ -119,6 +116,6 @@ class TrafficCase
         
         return array_merge($code_1, $code_2);
     }
-   
+       
         
 }
