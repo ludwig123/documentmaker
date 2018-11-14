@@ -62,8 +62,7 @@ class Index extends Controller
         
         $code_1 = $code_2 = array();
         if (! empty($data['code_1'])) {
-            //$code = Code::where('违法代码', $list['code_1'])->find();
-            $code =  Db::table('code')->where("违法代码=".$data['code_1'])->find();
+            $code =  Code::getDetail($data['code_1']);
             if (! empty($code)) {
                
                 foreach ($code as $k => $v) {
@@ -72,7 +71,7 @@ class Index extends Controller
             }
         }
         if (! empty($data['code_2'])){
-            $code =  Db::table('code')->where("违法代码=".$data['code_2'])->find();
+            $code =  Code::getDetail($data['code_2']);
             foreach ($code as $k =>$v){
                 $code_2[$k.'_2'] = $v;
             }
@@ -84,21 +83,17 @@ class Index extends Controller
             $this->assign('data', $data);
         }
         
-        $content = $punish = '';
+        $content = $punish = $activity = '';        
         
-        $content = '<p class="police-section">
-						现查明你于<u>'.$data['time'].'，驾驶牌号为'.$data['car_num'].'的'.$data['car_num'].'行驶至'.$data['car_num'].'，实施'.$data['car_num'].'，被民警当场查获。</u>
-					</p>
-					<p class="police-section">
-						以上事实有<u>交通违法嫌疑人'.$data['car_num'].'的'.$data['car_num'].'</u>予以证实。
-					</p>';
-        $activity = '，'.$data['违法内容_2'];
+        
         if (!empty($data['违法内容_2'])){
-            $punish = '';
-            
+            $content = '。'.$data['违法内容_2'].'行为违反了'.$data['违法条款_2'].'之规定，根据'.$data['处罚依据_2'].'之规定，对你作出处罚';
+            $punish = ';对你'.$data['违法内容_2'].'的违法行为，给予罚款'.$data['罚款金额_2'].'元的处罚;以上两项违法行为，分别裁决、合并执行拟给予你罚款？？？元的处罚';
+            $activity = '，'.$data['违法内容_2'];
         }
         ;
-        
+        $this->assign('activity', $activity);
+        $this->assign('punish', $punish);
         $this->assign('content', $content);
         return $this->fetch('gaozhibilu');
     }

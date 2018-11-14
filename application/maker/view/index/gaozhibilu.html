@@ -36,19 +36,19 @@
 					<p class="police-section">
 						现查明你于<u>{$data.time}，驾驶牌号为{$data.car_num}的{$data.car_type}行驶至{$data.place}，实施{$data['违法内容_1']}{$activity}的违法行为，被民警当场查获。</u>
 					</p>
-					{$content|raw}
+					
 					<p class="police-section">
 						以上事实有<u>交通违法嫌疑人{$data.name}的{$data.evidence}</u>予以证实。
 					</p>
 					<p class="police-section">
-						你实施的<u>{$data['违法内容_1']}违法行为，违反了{$data['违法条款_1']}的规定，根据{$data['处罚依据_1']}之规定对你作出处罚。{$data['违法内容_2']}行为违反了{$data['违法条款_2']}之规定，根据{$data['处罚依据_1']}之规定，对你作出处罚</u>。
+						你实施的<u>{$data['违法内容_1']}违法行为，违反了{$data['违法条款_1']}的规定，根据{$data['处罚依据_1']}之规定对你作出处罚{$content|raw}。</u>
 					</p>
 					<p class="police-section">
 						对上述告知事项，你（单位）有权进行陈述和申辩。
 					</p>
 					<br>
 					<p class="police-section">
-						2、拟作出的行政处罚：<u>对你{$data['违法内容_1']}违法行为，给予罚款{$data['罚款金额_1']}元的处罚;对你{$data['违法内容_2']}的违法行为，给予罚款{$data['罚款金额_2']}元的处罚;以上两项违法行为，分别裁决、合并执行拟给予你罚款？？？元的处罚。</u>
+						2、拟作出的行政处罚：<u>对你{$data['违法内容_1']}违法行为，给予罚款{$data['罚款金额_1']}元的处罚{$punish|raw}。</u>
 					</p>
 					<br>
 					<p class="police-section">

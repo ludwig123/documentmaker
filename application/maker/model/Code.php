@@ -6,6 +6,10 @@ use think\Model;
 
 class Code extends Model
 {
+    /**
+     * @param string $code
+     * @return array|NULL
+     */
     public static function getDetail($code){
         return Db::table('code')->where("违法代码=".$code)->find();
     }
