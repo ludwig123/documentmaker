@@ -58,12 +58,12 @@ class Index extends Controller
      */
     public function gaozhibilu($id)
     {
-        $list = TrafficCase::findById($id);
+        $data = TrafficCase::findById($id);
         
         $code_1 = $code_2 = array();
-        if (! empty($list['code_1'])) {
+        if (! empty($data['code_1'])) {
             //$code = Code::where('违法代码', $list['code_1'])->find();
-            $code =  Db::table('code')->where("违法代码=".$list['code_1'])->find();
+            $code =  Db::table('code')->where("违法代码=".$data['code_1'])->find();
             if (! empty($code)) {
                
                 foreach ($code as $k => $v) {
@@ -71,18 +71,35 @@ class Index extends Controller
                 }
             }
         }
-        if (! empty($list['code_2'])){
-            $code =  Db::table('code')->where("违法代码=".$list['code_2'])->find();
+        if (! empty($data['code_2'])){
+            $code =  Db::table('code')->where("违法代码=".$data['code_2'])->find();
             foreach ($code as $k =>$v){
                 $code_2[$k.'_2'] = $v;
             }
         }
         
-        $list = array_merge($list, $code_1, $code_2);
+        $data = array_merge($data, $code_1, $code_2);
         
-        if (!empty($list)){
-            $this->assign('data', $list);
+        if (!empty($data)){
+            $this->assign('data', $data);
         }
+        
+        $content = $punish = '';
+        
+        $content = '<p class="police-section">
+						现查明你于<u>'.$data['time'].'，驾驶牌号为'.$data['car_num'].'的'.$data['car_num'].'行驶至'.$data['car_num'].'，实施'.$data['car_num'].'，被民警当场查获。</u>
+					</p>
+					<p class="police-section">
+						以上事实有<u>交通违法嫌疑人'.$data['car_num'].'的'.$data['car_num'].'</u>予以证实。
+					</p>';
+        $activity = '，'.$data['违法内容_2'];
+        if (!empty($data['违法内容_2'])){
+            $punish = '';
+            
+        }
+        ;
+        
+        $this->assign('content', $content);
         return $this->fetch('gaozhibilu');
     }
     
@@ -128,9 +145,6 @@ class Index extends Controller
         return $this->fetch('recordslist');
     }
     
-    
-    private function addPage(){
-        
-    }
+   
     
 }
