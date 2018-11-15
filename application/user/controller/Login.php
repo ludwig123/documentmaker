@@ -43,9 +43,9 @@ class Login extends Controller
             'login_num' => Db::raw('login_num+1'),
         ]);
         session('user', $user);
-        !empty($user['authorize']) && NodeService::applyAuthNode();
+        //!empty($user['authorize']) && NodeService::applyAuthNode();
         LogService::write('页面打印', '用户登录系统成功');
-        $this->success('登录成功，正在进入系统...', '@admin');
+        $this->success('登录成功，正在进入系统...', '@maker/index/recordslist');
     }
 }
 

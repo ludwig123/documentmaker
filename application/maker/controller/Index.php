@@ -9,12 +9,7 @@ use app\maker\model\TrafficCase;
 use phpDocumentor\Reflection\DocBlock\Tags\Return_;
 class Index extends Controller
 {
-    public function index() 
-    {
-        $name = "刘哲";
-        $this->assign('name',$name);
-        return $this->fetch();
-    }
+
 
     //查获经过
     
