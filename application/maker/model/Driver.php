@@ -6,6 +6,10 @@ use think\Model;
 
 class Driver extends Model
 {
+    public static function getDetail($id){
+        
+    }
+    
     public static function add($dataArr)
     {
         $driver = new Driver;

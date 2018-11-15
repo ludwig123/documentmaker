@@ -55,7 +55,7 @@ class CarTest extends PHPUnit_Framework_TestCase
         $id = Car::add($data);
         $this->assertNotFalse($id);
         
-        
+      
         
         $data = ['car_num' => '湘0HT13'
             ,'car_type' => '小型轿车'];

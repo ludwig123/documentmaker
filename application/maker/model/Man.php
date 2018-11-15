@@ -6,8 +6,8 @@ use think\Model;
 
 class Man extends Model
 {
-    public static function find(){
-        
+    public static function getDetail($id){
+        return Man::where('id', $record->man)->field(['name'])->find();
     }
     
     public static function add($dataArr)

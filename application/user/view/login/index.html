@@ -21,7 +21,7 @@
                                     <div class="layui-form-item">
                                         <label for="L_email" class="layui-form-label">手机/邮箱</label>
                                         <div class="layui-input-inline">
-                                            <input type="text" id="L_loginName" name="userame" required lay-verify="required" autocomplete="off" class="layui-input">
+                                            <input type="text" id="L_loginName" name="username" required lay-verify="required" autocomplete="off" class="layui-input">
                                         </div>
                                         <div class="layui-form-mid layui-word-aux">使用手机或者邮箱中的任意一个均可（若采用手机，请确保你的帐号已绑定过该手机） </div>
                                     </div>
@@ -34,7 +34,7 @@
                                     <div class="layui-form-item">
                                         <label for="L_vercode" class="layui-form-label">图形码</label>
                                         <div class="layui-input-inline">
-                                            <input type="text" id="L_imagecode" name="imagecode" required lay-verify="required" autocomplete="off" class="layui-input">
+                                            <input type="text" id="L_imagecode" name="captcha" required lay-verify="required" autocomplete="off" class="layui-input">
                                         </div>
                                         <div class="layui-form-mid" style="padding: 0!important;">
                                             <img src="{:captcha_src()}" alt="captcha" class="fly-imagecode">
@@ -59,4 +59,8 @@
             </div>
         </div>
 
+
+<script type="text/javascript">
+
+</script>
 {/block}

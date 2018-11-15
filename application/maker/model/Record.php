@@ -6,6 +6,11 @@ use think\Model;
 
 class Record extends Model
 {
+    
+    public static function getDetail($id){
+        return Db::table('record')->where('id='.$id)->field(['id','time','index','code_1','code_2','man','driver', 'car'])->find();
+    }
+    
     public static function add($dataArr)
     {
         $record = new Record;

@@ -6,6 +6,10 @@ use think\Model;
 
 class Car extends Model
 {
+    public static function getDetail($id){
+        
+    }
+    
     /**添加一个新车辆
      * @param array $dataArr
      * @return integer|boolean 成功返回id,失败返回false

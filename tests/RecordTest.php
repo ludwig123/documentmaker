@@ -102,59 +102,20 @@ class RecordTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Record->records()
+     * Tests Record->getDetail()
      */
-    public function testRecords()
+    public function testGetDetail_IdNotExist_ReturnNull()
     {
-        // TODO Auto-generated RecordTest->testRecords()
-        $this->markTestIncomplete("records test not implemented");
-        
-        $this->record->records(/* parameters */);
+        $this->assertNull(Record::getDetail('999999'));
     }
 
-    /**
-     * Tests Record->getRecordByIndex()
-     */
-    public function testGetRecordByIndex()
+    public function testGetDetail_Default_ReturnArray()
     {
-        // TODO Auto-generated RecordTest->testGetRecordByIndex()
-        $this->markTestIncomplete("getRecordByIndex test not implemented");
-        
-        $this->record->getRecordByIndex(/* parameters */);
+        $id = '1';
+        $result  = Record::getDetail($id);
+        $this->assertEquals('1',$result['id']);
     }
-
-    /**
-     * Tests Record->getRecordById()
-     */
-    public function testGetRecordById()
-    {
-        // TODO Auto-generated RecordTest->testGetRecordById()
-        $this->markTestIncomplete("getRecordById test not implemented");
-        
-        $this->record->getRecordById(/* parameters */);
-    }
-
-    /**
-     * Tests Record->flatArray()
-     */
-    public function testFlatArray()
-    {
-        // TODO Auto-generated RecordTest->testFlatArray()
-        $this->markTestIncomplete("flatArray test not implemented");
-        
-        $this->record->flatArray(/* parameters */);
-    }
-
-    /**
-     * Tests Record->separateCode()
-     */
-    public function testSeparateCode()
-    {
-        // TODO Auto-generated RecordTest->testSeparateCode()
-        $this->markTestIncomplete("separateCode test not implemented");
-        
-        $this->record->separateCode(/* parameters */);
-    }
+    
 
     /**
      * Tests Record->addRecord()
