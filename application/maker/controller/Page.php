@@ -137,6 +137,31 @@ class Page extends Controller
         return $this->fetch('juedingshu');
     }
     
+    
+    public function shenpibiao(){
+        $id = getCurrentRecordId();
+        if (empty($id)){
+            $this->error('请先选择一个案件！', 'records');;
+        }
+        $list = TrafficCase::findById($id);
+        if (!empty($list)){
+            $this->assign('data', $list);
+        }
+        return $this->fetch("shenpibiao");
+    }
+    
+    public function fengmian(){
+        $id = getCurrentRecordId();
+        if (empty($id)){
+            $this->error('请先选择一个案件！', 'records');;
+        }
+        $list = TrafficCase::findById($id);
+        if (!empty($list)){
+            $this->assign('data', $list);
+        }
+        return $this->fetch("fengmian");
+    }
+    
     private function checkLogin(){
         if (!is_police_login()){
             $this->error('你还没有登陆！', '@user/Login');;
