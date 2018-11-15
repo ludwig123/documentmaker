@@ -1,0 +1,88 @@
+{extend name="maker@common/base" /} 
+
+
+{block name="printmode"}
+
+<div class="layui-main site-inline site-fix">
+	{include file="maker@common/sidebar"}
+	
+	<div class="site-content">
+		<div class="police-print-area">
+
+			<!-- 标题 -->
+			<div class="police-head">
+				<h2 class="police-head-large">湖南省高速公路交通警察局{$data.zhidui}支队{$data.dadui}大队</h2>
+				<h2 class="police-head-large">公安交通管理行政处罚告知笔录</h2>
+			</div>
+			<!-- 正文 -->
+
+			<!-- 告知头 -->
+			<div class="police-text-small">
+				<p>告知单位：<u>湖南省高速公路交通警察局{$data.zhidui}支队{$data.dadui}大队&nbsp</u>告知人：<u>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</u></p>
+
+
+				<p>被告知人：<u>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{$data.name}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</u></p>
+
+				<p ">被告知单位：<u>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp/&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</u>法定代表人：<u>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</u></p>
+
+				<!-- 告知内容 -->
+
+				<div>
+					<p>告知内容：</p>
+					<p class="police-section">
+						1、根据《中华人民共和国行政处罚法》第三十一条规定，现将拟作出行政处罚决定的事实、理由、依据告知如下：
+					</p>
+					
+					<p class="police-section">
+						现查明你于<u>{$data.time}，驾驶牌号为{$data.car_num}的{$data.car_type}行驶至{$data.place}，实施{$data['违法内容_1']}{$activity}的违法行为，被民警当场查获。</u>
+					</p>
+					
+					<p class="police-section">
+						以上事实有<u>交通违法嫌疑人{$data.name}的{$data.evidence}</u>予以证实。
+					</p>
+					<p class="police-section">
+						你实施的<u>{$data['违法内容_1']}违法行为，违反了{$data['违法条款_1']}的规定，根据{$data['处罚依据_1']}之规定对你作出处罚{$content|raw}。</u>
+					</p>
+					<p class="police-section">
+						对上述告知事项，你（单位）有权进行陈述和申辩。
+					</p>
+					<br>
+					<p class="police-section">
+						2、拟作出的行政处罚：<u>对你{$data['违法内容_1']}违法行为，给予罚款{$data['罚款金额_1']}元的处罚{$punish|raw}。</u>
+					</p>
+					<br>
+					<p class="police-section">
+						对公安机关拟作出的上述行政处罚，根据《湖南省行政处罚听证程序规定》第七条第三款的规定，你有权要求听证，如果要求听证，你应在被告知三日内向湖南省高速公路交通警察局{$data.zhidui}支队{$data.dadui}大队提出听证，逾期视为放弃听证。对要求听证的，公安机关将在二日内决定是否受理。符合听证条件的，公安机关将在十日内举行听证。对放弃听证的，公安机关将依法作出处理决定。
+					</p>
+					<br>
+					<p class="police-section">
+						问：对以上告知内容你听清楚了吗？
+					</p>
+					<p class="police-section">
+						答：
+					</p>
+					<p class="police-section">
+						问：对上述告知事项，你是否提出陈述和申辩？
+					</p>
+					<p class="police-section">
+						答：
+					</p>
+					<p class="police-section">
+						问：你是否要求听证？
+					</p>
+					<p class="police-section">
+						答：
+					</p>
+					<br>
+					<br>
+					<p class="police-section">
+						复核意见：
+					</p>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+{/block}

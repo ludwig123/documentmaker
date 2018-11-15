@@ -173,3 +173,27 @@ function get_cur_url($is_domain = false)
         
         return $_SERVER['REQUEST_URI'];
 }
+
+function is_police_login(){
+    $user = session ( 'user' );
+    if (empty ( $user ))
+    {
+        return false;
+    }
+    
+    return true;
+}
+
+function setCurrentRecordId($id){
+    session('nowReadRecord', $id);
+    return ;
+}
+
+function getCurrentRecordId(){
+   return session('nowReadRecord');
+}
+
+function clearCurrentRecordId(){
+    session('nowReadRecord', null);
+    return ;
+}

@@ -37,15 +37,26 @@ class Api {
 	/**通过决定书编号找到案卷所有信息
 	 * @param $String $caseNum
 	 */
-	public function record($id) {
+	public function record($id = '') {
+	    if (!is_police_login()){
+	        $this->error('你还没有登陆！', '@user/Login');;
+	    }
+	    $id = getCurrentRecordId();
 	    $case = TrafficCase::findById($id);
 	    //不能直接返回json_encode是因为框架会自动给他套上json，根据请求类型转换为为html或json
 	    return json($case);
 	}
 	
-// 	public function record($Id) {
-// 	    return $this->record($Id);
-// 	}
+
+	public function handleTrafficCase(){
+	    if (empty(getCurrentRecordId())){
+	        $this->addTrafficCase();
+	    }
+	    
+	    else $this->refreshTrafficCase();
+	}
+	
+	
 	/**创建一个案卷
 	 * @param Array $param
 	 */
