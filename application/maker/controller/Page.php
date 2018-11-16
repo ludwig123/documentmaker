@@ -1,13 +1,9 @@
 <?php
 namespace app\maker\controller;
 
-use think\Controller;
-use think\Db;
 use app\maker\model\Code;
-use app\maker\model\Record;
 use app\maker\model\TrafficCase;
-use phpDocumentor\Reflection\DocBlock\Tags\Return_;
-use phpDocumentor\Reflection\Types\Null_;
+use think\Controller;
 
 class Page extends Controller
 {

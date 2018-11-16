@@ -1,0 +1,41 @@
+{extend name="maker@common/base" /}
+{block name="printmode"}
+<div class="layui-main site-inline site-fix">
+    {include file="templet/sidebar"}
+    <div class="site-content">
+        <div class="row">
+            <div class="col-centered">
+                <textarea id='editor-div'></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+    new SquireUI({ replace: 'textarea#editor-div', height: 800 });
+});
+
+//拖放文字
+var dragged;
+document.addEventListener("dragstart", function(event) {
+    // 保存拖动元素的引用(ref.)
+    dragged = event.target;
+    event.target.style.opacity = .5;
+    // dragged = event.dataTransfer.setData("text/plain", 'ev.target.id');
+    
+}, false);
+
+
+// $(".col-centered").bind("drop", function(event) {
+//       // prevent default action (open as link for some elements)
+//       event.preventDefault();
+//       // move dragged elem to the selected drop target
+//       if ( event.target.className == "dropzone" ) {
+//           event.target.style.background = "";
+//           dragged.parentNode.removeChild( dragged );
+//           event.target.appendChild( dragged );
+//       }
+
+// }, false);
+</script>
+{/block}

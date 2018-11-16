@@ -67,7 +67,7 @@ class Record extends Model
         $man_id  = Man::refresh($record['man'], $dataArr);
         $record['man'] = is_bool( $man_id) ? NULL : $man_id;
         
-        $car_id = Car::refresh($record['car'], $dataArr);
+        $car_id = Templet::refresh($record['car'], $dataArr);
         $record['car'] =  is_bool($car_id) ? NULL : $car_id;
         
         $driver_id = Driver::refresh($record['driver'], $dataArr);
@@ -90,7 +90,7 @@ class Record extends Model
         if (!empty($record)){
             if(!empty($record->man))  Man::remove($record->man);
             if(!empty($record->driver))  Driver::remove($record->driver);
-            if(!empty($record->car))  Car::remove($record->car);
+            if(!empty($record->car))  Templet::remove($record->car);
             return $record->delete();
         }
             return false;
