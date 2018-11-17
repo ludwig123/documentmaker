@@ -26,6 +26,7 @@ $(document).ready(function() {
     }
     var iframe = document.createElement('iframe');
     var div = document.createElement('div');
+    iframe.id = 'frame1';
     div.className = 'Squire-UI';
     iframe.height = options.height;
     iframe.width = options.width;
