@@ -29,8 +29,8 @@
     </div>
 
     <div class="group">
-        <div data-action="undo"  class="item"><i class="fa fa-save"></i></div>
-        <div data-action="redo"  class="item"><i class="fa fa-sign-out-alt"></i></div>
+        <div data-action="saveUndoState"  class="item" id='save'><i class="fa fa-save"></i></div>
+        <div data-action="saveUndoState"  class="item" id='go_list' onclick=""><i class="fa fa-sign-out-alt"></i></div>
     </div>
 </div>
 <div class="templates hidden">
@@ -70,3 +70,35 @@
         <div class="btn sumbitImageURL">Insert</div>
     </div>
 </div>
+
+
+<script type="text/javascript">
+    
+    $('#go_list').on('click', function() {
+    window.location.href = "/documentmaker/public/index.php/maker/templet/index";
+});
+    $('#save').on('click',function() {
+        var templet = temp.contentWindow.editor.getDocument();
+        console.log(templet);
+                    $.ajax({
+                type: "POST",
+                url: "/documentmaker/public/index.php/maker/api/update",
+                data: "",
+                dataType: "json",
+                success: function(respMsg) {
+                    if (respMsg == null) {
+                        alert("违法代码不存在！");
+                        $('input[name=code_1').val('');
+                        return
+                    } else {
+                        $('input[name=code_1_content]').val(respMsg['违法内容']);
+                    }
+
+                },
+                error: function() {
+                    alert("获取数据失败，网络超时！")
+
+                }
+            });
+    });
+</script>

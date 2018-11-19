@@ -44,6 +44,17 @@ class Page extends Controller
         return $this->fetch('chahuojingguo');
     }
     
+    public function chahuojingguo2(){
+        $id = getCurrentRecordId();
+
+        $list = TrafficCase::findById($id);
+        if (!empty($list)){
+            $this->assign('data', $list);
+        }
+        
+        return $this->fetch('chahuojingguo2');
+    }
+    
     public function footer(){
         return $this->fetch('maker@common/footer');
     }

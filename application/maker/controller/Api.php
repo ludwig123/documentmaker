@@ -100,6 +100,18 @@ class Api {
 	    return json(Code::getDetail($code));
 	}
 	
+	public function getTempLets(){
+	    return json();
+	}
+	
+	public function refreshTemplet(){
+	    $info = $this->postInfo();
+
+	    Templet::refresh($info);
+	    
+	    return json('更新成功！') ;
+	}
+	
 	
 	private function postInfo(){
 	    if (Request::isPost())
