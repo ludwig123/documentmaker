@@ -2,9 +2,7 @@
 namespace app\maker\controller;
 
 use app\maker\model\Code;
-use app\maker\model\Man;
-use app\maker\model\Record;
-use think\config\driver\Json;
+use app\maker\model\Templet;
 use think\facade\Request;
 use app\maker\model\TrafficCase;
 
@@ -104,10 +102,12 @@ class Api {
 	    return json();
 	}
 	
-	public function refreshTemplet(){
+	public function refreshTemplet($id = ''){
 	    $info = $this->postInfo();
-
-	    Templet::refresh($info);
+	    if (empty($id)){
+	        Templet::add($info);
+	    }
+	    Templet::refresh(getCurrentTempletId(), $info);
 	    
 	    return json('更新成功！') ;
 	}

@@ -6,7 +6,8 @@ use think\Controller;
 
 class Templet extends Controller
 {
-    public function editor(){
+    public function editor($id = ''){
+        setCurrentTempletId($id);
        return $this->fetch();
     }
     

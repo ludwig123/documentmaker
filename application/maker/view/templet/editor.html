@@ -1,6 +1,6 @@
 {extend name="maker@common/base" /}
 {block name="printmode"}
-<div class="layui-main site-inline site-fix">
+<div class="layui-main site-inline ">
     {include file="templet/sidebar"}
     <div class="site-content">
         <div class="row">
@@ -11,17 +11,31 @@
     </div>
 </div>
 <script type="text/javascript">
-    var editor, temp;
+layui.use('form', function() {
+    var form = layui.form;
+
+    //监听提交
+    form.on('submit(formDemo)', function(data) {
+        layer.msg(JSON.stringify(data.field));
+        return false;
+    });
+});
+
+var editor, temp;
+var mydata = {};
 $(document).ready(function() {
     editor = new SquireUI({ replace: 'textarea#editor-div', height: 800 });
-    
+
     temp = $("#frame1", document.body)[0];
-    temp.ondragstart(function(event) {
-        event.dataTransfer.setData("text/plain", 'ev.target.i2d');
-    });
 
 
 });
+
+
+
+
+
+
 
 
 
@@ -39,8 +53,5 @@ document.addEventListener("dragstart", function(event) {
     // 使其半透明
     event.target.style.opacity = .5;
 }, false);
-
-
-
 </script>
 {/block}

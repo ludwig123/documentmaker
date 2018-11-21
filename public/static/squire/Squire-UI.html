@@ -73,32 +73,31 @@
 
 
 <script type="text/javascript">
-    
-    $('#go_list').on('click', function() {
-    window.location.href = "/documentmaker/public/index.php/maker/templet/index";
-});
-    $('#save').on('click',function() {
-        var templet = temp.contentWindow.editor.getDocument();
-        console.log(templet);
-                    $.ajax({
-                type: "POST",
-                url: "/documentmaker/public/index.php/maker/api/update",
-                data: "",
-                dataType: "json",
-                success: function(respMsg) {
-                    if (respMsg == null) {
-                        alert("违法代码不存在！");
-                        $('input[name=code_1').val('');
-                        return
-                    } else {
-                        $('input[name=code_1_content]').val(respMsg['违法内容']);
-                    }
+    $('#go_list').click( function() {
+        window.location.href = "/documentmaker/public/index.php/maker/templet/index";
+    });
 
-                },
-                error: function() {
-                    alert("获取数据失败，网络超时！")
+    $('#save').click(function() {
+        temp = temp.contentWindow.editor;
+        var templet_content = temp.getHTML();
+        var templet_catalog = $(":input[name='templet_catalog']").val();
+        var templet_name = $(":input[name='templet_name']").val();
+        mydata.templet_content = temp.getHTML();
+        mydata.templet_catalog = templet_catalog;
+        mydata.templet_name = templet_name;
 
-                }
-            });
+        $.ajax({
+            type: "POST",
+            url: "/documentmaker/public/index.php/maker/api/refreshTemplet?XDEBUG_SESSION_START",
+            data: mydata,
+            dataType: "json",
+            success: function(respMsg) {
+                alert("保存成功！");
+            },
+            error: function() {
+                alert("保存失败，网络故障，稍后再试！");
+
+            }
+        });
     });
 </script>

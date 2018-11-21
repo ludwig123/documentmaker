@@ -197,3 +197,19 @@ function clearCurrentRecordId(){
     session('nowReadRecord', null);
     return ;
 }
+
+function setCurrentTempletId($id){
+    session('nowReadRecord', $id);
+    return ;
+}
+
+function getCurrentTempletId(){
+    return session('nowReadRecord');
+}
+
+function clearCurrentTempletId(){
+    session('nowReadRecord', null);
+    return ;
+}
+
+

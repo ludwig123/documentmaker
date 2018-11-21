@@ -25,11 +25,10 @@ class Templet extends Model
      */
     public static function add($dataArr){
         $templet = new Templet;
-        $templet->catalog = empty($dataArr['catalog']) ? NULL : $dataArr['catalog'];
-        $templet->file_name = empty($dataArr['file_name']) ? NULL : $dataArr['file_name'];
+        $templet->templet_catalog = empty($dataArr['templet_catalog']) ? NULL : $dataArr['templet_catalog'];
         $templet->templet_name = empty($dataArr['templet_name']) ? NULL : $dataArr['templet_name'];
-        $templet->content = empty($dataArr['content']) ? NULL : $dataArr['content'];
-        $templet->owner = empty($dataArr['owner']) ? 0 : $dataArr['owner'];
+        $templet->templet_content = empty($dataArr['templet_content']) ? NULL : $dataArr['templet_content'];
+        $templet->templet_owner = empty($dataArr['templet_owner']) ? 0 : $dataArr['templet_owner'];
         if ($templet->save())
             return $templet->id;
             
@@ -43,17 +42,17 @@ class Templet extends Model
             return false;
     }
     
-    public static function refresh($id, $dataArr){
-        $car = array();
-        $car['car_num'] = empty($dataArr['car_num']) ? NULL : $dataArr['car_num'];
-        $car['car_type'] = empty($dataArr['car_type']) ? NULL : $dataArr['car_type'];
-        $car['car_owner'] = empty($dataArr['car_owner']) ? NULL : $dataArr['car_owner'];
-        $car['car_expire'] = empty($dataArr['car_expire']) ? NULL : $dataArr['car_expire'];
+    public static function refresh($id = '', $dataArr){
+        $templet = array();
+        $templet['templet_catalog'] = empty($dataArr['templet_catalog']) ? NULL : $dataArr['templet_catalog'];
+        $templet['templet_name'] = empty($dataArr['templet_name']) ? NULL : $dataArr['templet_name'];
+        $templet['templet_content'] = empty($dataArr['templet_content']) ? NULL : $dataArr['templet_content'];
+        $templet['templet_owner'] = empty($dataArr['templet_owner']) ? NULL : $dataArr['templet_owner'];
         
-        foreach ($car as $k => $v){
-            if ($v == NULL) unset($car[$k]);
+        foreach ($templet as $k => $v){
+            if ($v == NULL) unset($templet[$k]);
         }
-        $effectRow = Db::name('car')->where('id', $id)->update($car);
+        $effectRow = Db::name('templet')->where('id', $id)->update($templet);
         if ($effectRow)
             return $id;
             
