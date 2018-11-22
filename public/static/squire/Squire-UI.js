@@ -11,7 +11,7 @@ $(document).ready(function() {
   };
   SquireUI = function(options) {
     if (typeof options.buildPath == "undefined") {
-      options.buildPath = '../../../../static/squire/';
+      options.buildPath = '../../../../../static/squire/';
     }
     // Create instance of iFrame
     var container, editor;

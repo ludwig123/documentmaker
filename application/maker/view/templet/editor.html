@@ -11,14 +11,10 @@
     </div>
 </div>
 <script type="text/javascript">
+    var form;
 layui.use('form', function() {
-    var form = layui.form;
+     form = layui.form;
 
-    //监听提交
-    form.on('submit(formDemo)', function(data) {
-        layer.msg(JSON.stringify(data.field));
-        return false;
-    });
 });
 
 var editor, temp;
@@ -28,6 +24,58 @@ $(document).ready(function() {
 
     temp = $("#frame1", document.body)[0];
 
+    setTimeout(function(){
+        $.ajax({
+        type: "GET",
+        url: "/documentmaker/public/index.php/maker/api/editorHTML",
+        data: '',
+        dataType: "json",
+        success: function(respMsg) {
+            temp.contentWindow.editor.setHTML(respMsg.templet_content);
+
+            form.val("formDemo", {
+            'templet_catalog':respMsg.templet_catalog,
+            'templet_name':respMsg.templet_name
+        });
+
+        },
+        error: function() {
+            layer.msg("初始化编辑器失败");
+        }
+    });  
+
+
+
+$('#go_list').click(function() {
+    window.location.href = "/documentmaker/public/index.php/maker/templet/index";
+});
+
+$('#save').click(function() {
+    var myeditor = temp.contentWindow.editor;
+    var templet_content = myeditor.getHTML();
+    var templet_catalog = $(":input[name='templet_catalog']").val();
+    var templet_name = $(":input[name='templet_name']").val();
+    mydata.templet_content = templet_content;
+    mydata.templet_catalog = templet_catalog;
+    mydata.templet_name = templet_name;
+
+    $.ajax({
+        type: "POST",
+        url: "/documentmaker/public/index.php/maker/api/refreshTemplet",
+        data: mydata,
+        dataType: "json",
+        success: function(respMsg) {
+            alert("保存成功！");
+        },
+        error: function() {
+            alert("保存失败，网络故障，稍后再试！");
+
+        }
+    });
+});
+
+
+},200);
 
 });
 

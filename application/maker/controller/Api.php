@@ -98,18 +98,35 @@ class Api {
 	    return json(Code::getDetail($code));
 	}
 	
-	public function getTempLets(){
-	    return json();
+	public function tempLets(){
+	    
+	    $templets = Templet::getOwnerTemplets('0');   
+	    $response = array(
+	        'data'=>$templets,
+	        'code'=>'0',
+	        'count'=>count($templets)
+	    );
+	    return json($response);
 	}
 	
 	public function refreshTemplet($id = ''){
 	    $info = $this->postInfo();
+	    $id = getCurrentRecordId();
 	    if (empty($id)){
 	        Templet::add($info);
+	        return json('新增成功！') ;
 	    }
-	    Templet::refresh(getCurrentTempletId(), $info);
-	    
-	    return json('更新成功！') ;
+	    else{
+	        Templet::refresh(getCurrentTempletId(), $info);
+	        return json('更新成功！') ;
+	    }
+	}
+	
+	public function editorHTML(){
+	    $templetId = getCurrentTempletId();
+	    if (!empty($templetId)){
+	       return json(Templet::getTemplet($templetId));
+	    }
 	}
 	
 	

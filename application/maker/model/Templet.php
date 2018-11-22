@@ -10,12 +10,16 @@ class Templet extends Model
         return db('templet')->where('owner', '0')->find();
     }
     
-    public static function getTemplet($ownerId = '', $templetId){
+    public static function getTemplet($templetId,$ownerId = '' ){
+        if (empty($ownerId))
+            return db('templet')->where('id ='.$templetId)->find();
         
+            else return db('templet')->where('id ='.$templetId)
+                                     ->where('ownerId ='.$ownerId)->find();
     }
     
-    public static function getOwnerTemplet($ownerId){
-        
+    public static function getOwnerTemplets($ownerId){
+        return db('templet')->where('templet_owner ='.$ownerId)->select();
     }
     
     
