@@ -18,7 +18,8 @@
 		"php" : ">=5.6.0",
 		"topthink/framework" : "5.1.*",
 		"topthink/think-testing" : "2.*",
-		"topthink/think-captcha" : "2.*"
+		"topthink/think-captcha" : "2.*",
+		"topthink/think-mongo" : "~2.0"
 	},
 	"autoload" : {
 		"psr-4" : {

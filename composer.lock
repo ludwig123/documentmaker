@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e0da901be3f407c40b937e86332e5e8b",
+    "content-hash": "f0585cb0c2dbdfad1d07c4fb93d99dc6",
     "packages": [
         {
             "name": "doctrine/instantiator",
@@ -1375,16 +1375,16 @@
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v2.8.46",
+            "version": "v2.8.47",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "ba0b706b5ac1c1afcf7d34507a5a272f51cc7721"
+                "reference": "a02078d236b10cbd27e003734afd4cdd35dc7da9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/ba0b706b5ac1c1afcf7d34507a5a272f51cc7721",
-                "reference": "ba0b706b5ac1c1afcf7d34507a5a272f51cc7721",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/a02078d236b10cbd27e003734afd4cdd35dc7da9",
+                "reference": "a02078d236b10cbd27e003734afd4cdd35dc7da9",
                 "shasum": ""
             },
             "require": {
@@ -1428,7 +1428,7 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2018-09-21T12:46:38+00:00"
+            "time": "2018-10-02T03:12:00+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -1589,16 +1589,16 @@
         },
         {
             "name": "topthink/framework",
-            "version": "v5.1.28",
+            "version": "v5.1.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/top-think/framework.git",
-                "reference": "b5077520855a1f406205687c73cdeaee1ed618c2"
+                "reference": "f1d8ee3a91e8f504507edb5dcc49c50c47b4500f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/top-think/framework/zipball/b5077520855a1f406205687c73cdeaee1ed618c2",
-                "reference": "b5077520855a1f406205687c73cdeaee1ed618c2",
+                "url": "https://api.github.com/repos/top-think/framework/zipball/f1d8ee3a91e8f504507edb5dcc49c50c47b4500f",
+                "reference": "f1d8ee3a91e8f504507edb5dcc49c50c47b4500f",
                 "shasum": ""
             },
             "require": {
@@ -1636,7 +1636,7 @@
                 "orm",
                 "thinkphp"
             ],
-            "time": "2018-10-29T02:52:45+00:00"
+            "time": "2018-11-11T01:17:33+00:00"
         },
         {
             "name": "topthink/think-captcha",
@@ -1753,6 +1753,43 @@
                 }
             ],
             "time": "2018-05-11T06:45:42+00:00"
+        },
+        {
+            "name": "topthink/think-mongo",
+            "version": "v2.0.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/top-think/think-mongo.git",
+                "reference": "ec73c9a1f3d1a19008aab8fefe8104bdabe4c8c5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/top-think/think-mongo/zipball/ec73c9a1f3d1a19008aab8fefe8104bdabe4c8c5",
+                "reference": "ec73c9a1f3d1a19008aab8fefe8104bdabe4c8c5",
+                "shasum": ""
+            },
+            "require": {
+                "topthink/framework": "~5.1.20"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "think\\mongo\\": "src"
+                },
+                "files": []
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "liu21st",
+                    "email": "liu21st@gmail.com"
+                }
+            ],
+            "description": "mongodb driver for thinkphp5",
+            "time": "2018-07-27T15:29:54+00:00"
         },
         {
             "name": "topthink/think-testing",

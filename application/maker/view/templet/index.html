@@ -62,12 +62,12 @@ table.on('toolbar(test)', function(obj){
 
 			$.ajax({
 				type: "POST",
-				url: "/documentmaker/public/index.php/maker/api/removeTrafficCase" ,
+				url: "/documentmaker/public/index.php/maker/api/removeTemplet" ,
 				data: chooseId,
 				dataType: "json",
 				success: function(respMsg) {
 					layer.msg(respMsg);
-					window.location.href = "/documentmaker/public/index.php/maker/templet/editor";
+					window.location.href = "/documentmaker/public/index.php/maker/templet/";
 				},
 				error: function() {
 					layer.msg("删除失败")

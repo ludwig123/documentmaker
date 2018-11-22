@@ -5,16 +5,79 @@
     {include file="maker@common/sidebar"}
     <div class="site-content">
         <div class="police-print-area">
-        	<div>
-        		<p class="MsoNormal" style="text-indent:118.75pt;line-height:27.45pt;mso-pagination:
-none;layout-grid-mode:char"><br></p><div>&nbsp;<br></div><p><br></p><p class="MsoNormal" align="center" style="text-align:center;line-height:27.45pt;
-mso-pagination:none;layout-grid-mode:char"><br></p><div>&nbsp;<br></div><p><br></p><p class="MsoNormal" align="center" style="text-align:center;line-height:27.45pt;
-mso-pagination:none;layout-grid-mode:char"><br></p><div class=" align-center" style="text-align: center;"><b style="mso-bidi-font-weight:normal"><span class="font" style="font-family:宋体"><span class="size" style="font-size:24pt">查</span></span></b><b style="mso-bidi-font-weight:normal"><span class="size" style="font-size:24pt"><span style="mso-spacerun:yes">&nbsp; </span></span></b><b style="mso-bidi-font-weight:normal"><span class="font" style="font-family:宋体"><span class="size" style="font-size:24pt">获</span></span></b><b style="mso-bidi-font-weight:normal"><span class="size" style="font-size:24pt"><span style="mso-spacerun:yes">&nbsp; </span></span></b><b style="mso-bidi-font-weight:
-normal"><span class="font" style="font-family:宋体"><span class="size" style="font-size:24pt">经</span></span></b><b style="mso-bidi-font-weight:normal"><span class="size" style="font-size:24pt"><span style="mso-spacerun:yes">&nbsp; </span></span></b><b style="mso-bidi-font-weight:normal"><span class="font" style="font-family:宋体"><span class="size" style="font-size:24pt">过</span></span></b><br></div><p><br></p><p class="MsoNormal" style="text-indent:118.75pt;line-height:27.45pt;mso-pagination:
-none;layout-grid-mode:char"><br></p><div>&nbsp;<br></div><p><br></p><p class="MsoNormal" style="text-indent:35.1pt;line-height:26.35pt;mso-pagination:
-none;layout-grid-mode:char"><br></p><div><span class="font" style="font-family:仿宋_GB2312"><span class="size" style="font-size:14pt">&nbsp; &nbsp; &nbsp; 2017</span></span><span class="font" style="font-family:仿宋_GB2312"><span class="size" style="font-size:14pt">年<span lang="EN-US">04</span>月<span lang="EN-US">07</span>日</span></span><span class="font" style="font-family:仿宋_GB2312"><span class="size" style="font-size:14pt">11</span></span><span class="font" style="font-family:仿宋_GB2312"><span class="size" style="font-size:14pt">时<span lang="EN-US">15</span>分</span></span><span class="font" style="font-family:仿宋_GB2312"><span class="size" style="font-size:14pt">，</span></span><span class="font" style="font-family:仿宋_GB2312"><span class="size" style="font-size:14pt">湖南省衡南县</span></span><span class="font" style="font-family:仿宋_GB2312"><span class="size" style="font-size:14pt">冠市镇西头村上里组的刘少乃</span></span><span class="font" style="font-family:仿宋_GB2312"><span class="size" style="font-size:14pt">驾驶</span></span><span class="font" style="font-family:仿宋_GB2312"><span class="size" style="font-size:14pt">湘<span lang="EN-US">D22C08</span>轻型仓栅式货车</span></span><span class="font" style="font-family:仿宋_GB2312"><span class="size" style="font-size:14pt">行至</span></span><span class="font" style="font-family:仿宋_GB2312"><span class="size" style="font-size:14pt">泉南高速公路<span lang="EN-US">801</span>公里珠晖南收费站出口时</span></span><span class="font" style="font-family:仿宋_GB2312"><span class="size" style="font-size:14pt">,</span></span><span class="font" style="font-family:仿宋_GB2312"><span class="size" style="font-size:14pt">因实施</span></span><span class="font" style="font-family:仿宋_GB2312"><span class="size" style="font-size:14pt">未取得机动车驾驶证驾驶摩托车、拖拉机、营运载客汽车以外的机动车</span></span><span class="font" style="font-family:仿宋_GB2312"><span class="size" style="font-size:14pt">的违法行为，被我们当场查获。我们依法开具<span lang="EN-US">435405600000126</span>号《道路交通安全违法行为处理通知书》交付当事人，并通知当事人携带此凭证和相关合法手续<span lang="EN-US">15</span>日内到湖南省高速公路交通警察局衡阳支队衡阳西大队接受处理。</span></span><br></div><p><br></p><div><br></div>
+            <div class="row">
+                <div class="col-centered">
+                    <textarea id='editor-div'></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
 
-</div>
-</div>
-</div>
-{/block}
+    <script type="text/javascript">
+    	
+    	var editor, temp;
+var mydata = {};
+$(document).ready(function() {
+    editor = new SquireUI({ replace: 'textarea#editor-div', height: 800 });
+
+    temp = $("#frame1", document.body)[0];
+
+    setTimeout(function(){
+        $.ajax({
+        type: "GET",
+        url: "/documentmaker/public/index.php/maker/api/editorHTML",
+        data: '',
+        dataType: "json",
+        success: function(respMsg) {
+
+            if (respMsg) {
+            temp.contentWindow.editor.setHTML(respMsg.templet_content);
+
+            form.val("formDemo", {
+            'templet_catalog':respMsg.templet_catalog,
+            'templet_name':respMsg.templet_name
+        });
+        }
+
+        },
+        error: function() {
+            layer.msg("初始化编辑器失败");
+        }
+    });  
+
+
+
+$('#go_list').click(function() {
+    window.location.href = "/documentmaker/public/index.php/maker/templet/index";
+});
+
+$('#save').click(function() {
+    var myeditor = temp.contentWindow.editor;
+    var templet_content = myeditor.getHTML();
+    var templet_catalog = $(":input[name='templet_catalog']").val();
+    var templet_name = $(":input[name='templet_name']").val();
+    mydata.templet_content = templet_content;
+    mydata.templet_catalog = templet_catalog;
+    mydata.templet_name = templet_name;
+
+    $.ajax({
+        type: "POST",
+        url: "/documentmaker/public/index.php/maker/api/refreshTemplet",
+        data: mydata,
+        dataType: "json",
+        success: function(respMsg) {
+            alert("保存成功！");
+        },
+        error: function() {
+            alert("保存失败，网络故障，稍后再试！");
+
+        }
+    });
+});
+
+
+},100);
+
+});
+    </script>
+    {/block}

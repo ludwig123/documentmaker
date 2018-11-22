@@ -127,6 +127,8 @@ class Api {
 	    if (!empty($templetId)){
 	       return json(Templet::getTemplet($templetId));
 	    }
+	    
+	    else return null;
 	}
 	
 	

@@ -31,12 +31,15 @@ $(document).ready(function() {
         data: '',
         dataType: "json",
         success: function(respMsg) {
+
+            if (respMsg) {
             temp.contentWindow.editor.setHTML(respMsg.templet_content);
 
             form.val("formDemo", {
             'templet_catalog':respMsg.templet_catalog,
             'templet_name':respMsg.templet_name
         });
+        }
 
         },
         error: function() {
@@ -61,7 +64,7 @@ $('#save').click(function() {
 
     $.ajax({
         type: "POST",
-        url: "/documentmaker/public/index.php/maker/api/refreshTemplet",
+        url: "/documentmaker/public/index.php/repo/api/submitTemplet?XDEBUG_SESSION_START",
         data: mydata,
         dataType: "json",
         success: function(respMsg) {
@@ -75,22 +78,13 @@ $('#save').click(function() {
 });
 
 
-},200);
+},100);
 
 });
 
 
-
-
-
-
-
-
-
-//拖放文字
+//拖放文字var
 var dragged;
-
-
 
 document.addEventListener("dragstart", function(event) {
     // 保存拖动元素的引用(ref.)
