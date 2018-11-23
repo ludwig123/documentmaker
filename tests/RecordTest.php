@@ -128,7 +128,7 @@ class RecordTest extends PHPUnit_Framework_TestCase
             ,'file_num' =>'4224110000'
             ,'name' => '陶一斤'
             ,'sex' => '女'
-            ,'index' => '435405000029018'
+            ,'index' => '435405000029019'
         ];
         
         $id = Record::add($data);

@@ -4,11 +4,8 @@ namespace app\maker\model;
 use think\Db;
 use think\Model;
 
-class Car extends Model
+class Car extends Model implements iCURD
 {
-    public static function getDetail($id){
-        
-    }
     
     /**添加一个新车辆
      * @param array $dataArr
@@ -49,5 +46,8 @@ class Car extends Model
             
             return false;
     }
+    public static function getById($id)
+    {}
+
     
 }

@@ -98,11 +98,13 @@ class TrafficCase
     
     private static function getCodeContentArr($record){
         $code_1 = $code_2 = array();
+        if (!empty($record->code_2)){
         $code = self::getCodeContent($record['code_1']);
         if (!empty($code)){
             foreach ($code as $k =>$v){
                 $code_1[$k.'_1'] = $v;
             }
+        }
         }
         
         if (!empty($record->code_2)){

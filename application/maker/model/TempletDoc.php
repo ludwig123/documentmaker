@@ -7,11 +7,11 @@ use think\Model;
 class TempletDoc extends Model
 {
 
-    public static function getDefaultTemplet(){
-        return db('templet')->where('templet_owner', '0')->find();
+    public static function getById($id){
+        return db('templet')->where('id', $id)->find();
     }
     
-    public static function getTemplet($templetId,$ownerId = '' ){
+    public static function getByIdLogin($templetId,$ownerId = '' ){
         if (empty($ownerId))
             return db('templet')->where('id ='.$templetId)->find();
         
@@ -19,7 +19,7 @@ class TempletDoc extends Model
                                      ->where('templet_owner ='.$ownerId)->find();
     }
     
-    public static function getOwnerTemplets($ownerId){
+    public static function getByOwner($ownerId){
         return db('templet')->where('templet_owner ='.$ownerId)->select();
     }
     
@@ -41,9 +41,9 @@ class TempletDoc extends Model
     }
     
     public static function remove($id){
-        $car = TempletDoc::get($id);
-        if (!empty($car))
-            return $car->delete();
+        $obj = TempletDoc::get($id);
+        if (!empty($obj))
+            return $obj->delete();
             return false;
     }
     

@@ -6,7 +6,9 @@ class Index extends Controller
 {
     public function index()
     {
-
+        $data = array();
+        
+        $res = empty($data['sd']);
     
         return $this->fetch('index');
     }

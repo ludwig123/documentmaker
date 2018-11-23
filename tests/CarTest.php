@@ -1,7 +1,6 @@
 <?php
 use app\maker\model\Car;
 
-require_once 'application/maker/model/Car.php';
 
 /**
  * Car test case.
