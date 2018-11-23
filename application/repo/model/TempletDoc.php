@@ -10,4 +10,12 @@ class TempletDoc extends Model
        $id =  Db::table('templet_doc')->insertGetId($data);
        return $id;
     }
+    
+    public static function refresh(){
+        
+    }
+    
+    public static function remove(){
+        
+    }
 }

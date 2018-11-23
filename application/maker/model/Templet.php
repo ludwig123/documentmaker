@@ -6,6 +6,7 @@ use think\Model;
 
 class Templet extends Model
 {
+
     public static function getDefaultTemplet(){
         return db('templet')->where('templet_owner', '0')->find();
     }
