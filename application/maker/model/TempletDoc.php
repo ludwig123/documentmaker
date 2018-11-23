@@ -4,7 +4,7 @@ namespace app\maker\model;
 use think\Db;
 use think\Model;
 
-class Templet extends Model
+class TempletDoc extends Model
 {
 
     public static function getDefaultTemplet(){
@@ -29,7 +29,7 @@ class Templet extends Model
      * @return integer|boolean 成功返回id,失败返回false
      */
     public static function add($dataArr){
-        $templet = new Templet;
+        $templet = new TempletDoc;
         $templet->templet_catalog = empty($dataArr['templet_catalog']) ? NULL : $dataArr['templet_catalog'];
         $templet->templet_name = empty($dataArr['templet_name']) ? NULL : $dataArr['templet_name'];
         $templet->templet_content = empty($dataArr['templet_content']) ? NULL : $dataArr['templet_content'];
@@ -41,7 +41,7 @@ class Templet extends Model
     }
     
     public static function remove($id){
-        $car = Templet::get($id);
+        $car = TempletDoc::get($id);
         if (!empty($car))
             return $car->delete();
             return false;
