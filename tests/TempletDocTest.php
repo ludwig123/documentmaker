@@ -7,8 +7,10 @@ require_once 'application/maker/controller/Templet.php';
 /**
  * Templet test case.
  */
-class TempletTest extends PHPUnit_Framework_TestCase
+class TempletDocTest extends PHPUnit_Framework_TestCase
 {
+    
+    protected static $id;
 
     public function testGetDefaultTemplet(){
 
@@ -16,9 +18,9 @@ class TempletTest extends PHPUnit_Framework_TestCase
 
     public function testAdd_addDefaultTemplet_returnId()
     {
-        $data = ['catalog' => '陶怡瑾22'
+        $data = ['templet_catalog' => '陶怡瑾22'
             ,'templet_name' => '430444198912222222'
-            ,'content' => '<p class="MsoNormal" style="text-indent:118.75pt;line-height:27.45pt;mso-pagination:
+            ,'templet_content' => '<p class="MsoNormal" style="text-indent:118.75pt;line-height:27.45pt;mso-pagination:
 none;layout-grid-mode:char"><span lang="EN-US"><div>&nbsp;<br></div></span></p><p class="MsoNormal" align="center" style="text-align:center;line-height:27.45pt;
 mso-pagination:none;layout-grid-mode:char"><span class="size" style="font-size:24pt"><div>&nbsp;<br></div></span></p><p class="MsoNormal" align="center" style="text-align:center;line-height:27.45pt;
 mso-pagination:none;layout-grid-mode:char"><div><b style="mso-bidi-font-weight:normal"><span class="font" style="font-family:宋体"><span class="size" style="font-size:24pt">查</span></span></b><b style="mso-bidi-font-weight:normal"><span class="size" style="font-size:24pt"><span style="mso-spacerun:yes">&nbsp; </span></span></b><b style="mso-bidi-font-weight:normal"><span class="font" style="font-family:宋体"><span class="size" style="font-size:24pt">获</span></span></b><b style="mso-bidi-font-weight:normal"><span class="size" style="font-size:24pt"><span style="mso-spacerun:yes">&nbsp; </span></span></b><b style="mso-bidi-font-weight:
@@ -28,10 +30,11 @@ none;layout-grid-mode:char"><div><span class="font" style="font-family:仿宋_GB
 line-height:26.35pt;mso-pagination:none;layout-grid-mode:char"><span class="font" style="font-family:仿宋_GB2312"><span class="size" style="font-size:14pt"><div class=" align-center" style="text-align: center;">&nbsp;<span class="font" style="font-family:仿宋_GB2312"><span class="size" style="font-size:14pt"><span style="mso-spacerun:yes">&nbsp;</span>执勤民警：<u><span lang="EN-US"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></u></span></span>、<u><span lang="EN-US"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></u><br></div><div class=" align-center" style="text-align: center;"><span class="font" style="font-family:仿宋_GB2312"><span class="size" style="font-size:14pt"><span style="mso-spacerun:yes">&nbsp; </span></span></span><u style="text-underline:
 #000000"><span class="font" style="font-family:仿宋_GB2312"><span class="size" style="font-size:14pt"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></span></u>年<u><span lang="EN-US"><span style="mso-spacerun:yes">&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</span></span></u>月<u><span lang="EN-US"><span style="mso-spacerun:yes">&nbsp; &nbsp;&nbsp;&nbsp;</span></span></u>日<span style="mso-spacerun:yes">&nbsp; &nbsp; &nbsp; &nbsp;</span><br></div></span></span></p><p class="MsoNormal" align="right" style="text-align:right;line-height:26.35pt;
 mso-pagination:none;layout-grid-mode:char;word-break:break-all"><span class="font" style="font-family:仿宋_GB2312"><span class="size" style="font-size:14pt"><span lang="EN-US"></span></span></span></p><div><br></div>'
-            ,'owner' => 0
+            ,'templet_owner' => 0
         ];
         
-        
+        self::$id = TempletDoc::add($data);
+        $this->assertGreaterThan(14, self::$id);
     }
     
     public function testRefresh_default_returnId()
@@ -39,9 +42,13 @@ mso-pagination:none;layout-grid-mode:char;word-break:break-all"><span class="fon
         
     }
     
+    /**
+    *@depends testAdd_addDefaultTemplet_returnId
+    **/
     public function testRemove_default_returnId()
     {
-        
+        $effectRow = TempletDoc::remove(self::$id);
+        $this->assertEquals(1,$effectRow);
     }
 
     
