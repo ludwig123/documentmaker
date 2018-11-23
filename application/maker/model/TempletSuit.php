@@ -6,7 +6,7 @@ use think\Model;
 
 class TempletSuit extends Model implements iCURD
 {
-    public function add($dataArr)
+    public static function add($dataArr)
     {
         $suit = new TempletSuit;
         $suit->suit_catalog = empty($dataArr['suit_catalog']) ? NULL : $dataArr['suit_catalog'];
@@ -19,12 +19,12 @@ class TempletSuit extends Model implements iCURD
             return false;
     }
 
-    public function getById($id)
+    public static function getById($id)
     {
         return db('templet_suit')->where('id', $id)->find();
     }
 
-    public function refresh($id, $dataArr)
+    public static function refresh($id, $dataArr)
     {
         $suit = array();
         $suit['suit_catalog'] = empty($dataArr['suit_catalog']) ? NULL : $dataArr['suit_catalog'];
@@ -42,7 +42,7 @@ class TempletSuit extends Model implements iCURD
             return false;
     }
 
-    public function remove($id)
+    public static function remove($id)
     {
         $obj = TempletSuit::get($id);
         if (!empty($obj))

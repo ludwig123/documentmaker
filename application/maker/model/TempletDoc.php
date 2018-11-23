@@ -8,19 +8,19 @@ class TempletDoc extends Model
 {
 
     public static function getById($id){
-        return db('templet')->where('id', $id)->find();
+        return db('templet_doc')->where('id', $id)->find();
     }
     
     public static function getByIdLogin($templetId,$ownerId = '' ){
         if (empty($ownerId))
-            return db('templet')->where('id ='.$templetId)->find();
+            return db('templet_doc')->where('id ='.$templetId)->find();
         
-            else return db('templet')->where('id ='.$templetId)
+            else return db('templet_doc')->where('id ='.$templetId)
                                      ->where('templet_owner ='.$ownerId)->find();
     }
     
     public static function getByOwner($ownerId){
-        return db('templet')->where('templet_owner ='.$ownerId)->select();
+        return db('templet_doc')->where('templet_owner ='.$ownerId)->select();
     }
     
     
@@ -57,8 +57,8 @@ class TempletDoc extends Model
         foreach ($templet as $k => $v){
             if ($v == NULL) unset($templet[$k]);
         }
-        $effectRow = Db::name('templet')->where('id', $id)->update($templet);
-        if ($effectRow)
+        $effectRowId = Db::name('templet_doc')->where('id', $id)->update($templet);
+        if ($effectRowId)
             return $id;
             
             return false;
