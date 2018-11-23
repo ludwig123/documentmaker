@@ -7,7 +7,7 @@ use think\Model;
 class Templet extends Model
 {
     public static function getDefaultTemplet(){
-        return db('templet')->where('owner', '0')->find();
+        return db('templet')->where('templet_owner', '0')->find();
     }
     
     public static function getTemplet($templetId,$ownerId = '' ){
@@ -15,7 +15,7 @@ class Templet extends Model
             return db('templet')->where('id ='.$templetId)->find();
         
             else return db('templet')->where('id ='.$templetId)
-                                     ->where('ownerId ='.$ownerId)->find();
+                                     ->where('templet_owner ='.$ownerId)->find();
     }
     
     public static function getOwnerTemplets($ownerId){
