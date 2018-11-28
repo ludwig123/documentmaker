@@ -4,13 +4,13 @@
 <div class="layui-main site-inline site-fix">
     {include file="maker@common/sidebar"}
     <div class="site-content">
-        <div class="police-print-area">
+
             <div class="row">
                 <div class="col-centered">
                     <textarea id='editor-div'></textarea>
                 </div>
             </div>
-        </div>
+
     </div>
 
     <script type="text/javascript">
@@ -18,7 +18,7 @@
     	var editor, temp;
 var mydata = {};
 $(document).ready(function() {
-    editor = new SquireUI({ replace: 'textarea#editor-div', height: 800 });
+    editor = new SquireUI({ replace: 'textarea#editor-div', height: '900' });
 
     temp = $("#frame1", document.body)[0];
 
@@ -33,10 +33,6 @@ $(document).ready(function() {
             if (respMsg) {
             temp.contentWindow.editor.setHTML(respMsg.templet_content);
 
-            form.val("formDemo", {
-            'templet_catalog':respMsg.templet_catalog,
-            'templet_name':respMsg.templet_name
-        });
         }
 
         },
@@ -73,6 +69,10 @@ $('#save').click(function() {
 
         }
     });
+});
+
+$("#print").click(function(){
+	 $("#frame1", document.body)[0].contentWindow.print();
 });
 
 

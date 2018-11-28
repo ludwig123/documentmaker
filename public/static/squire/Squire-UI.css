@@ -95,7 +95,7 @@ iframe {
     border-radius: 4px;
 }
 
-input[type=text] {
+/*input[type=text] {
     background-color: #fff;
     vertical-align: middle;
     max-width: 100%;
@@ -111,7 +111,7 @@ input[type=text] {
     font-size: 14px;
     padding: 5px;
     width: 100%;
-}
+}*/
 
 .smenu .group .item:hover, .smenu .item:first-child:hover {
 	border-bottom: 3px #55ACEE solid;
@@ -293,3 +293,4 @@ input[type=text] {
 .fa-heart:before{content:"\f004"}
 .fa-save:before{content:"\f0c7"}
 .fa-sign-out-alt:before{content:"\f08b"}
+.fa-print:before{content:"\f02f";}

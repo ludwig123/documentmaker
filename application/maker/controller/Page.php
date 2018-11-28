@@ -45,12 +45,13 @@ class Page extends Controller
     }
     
     public function chahuojingguo2(){
+        setCurrentRecordId('1');
         $id = getCurrentRecordId();
-
-        $list = TrafficCase::findById($id);
-        if (!empty($list)){
-            $this->assign('data', $list);
-        }
+        
+//         $list = TrafficCase::findById($id);
+//         if (!empty($list)){
+//             $this->assign('data', $list);
+//         }
         
         return $this->fetch('chahuojingguo2');
     }

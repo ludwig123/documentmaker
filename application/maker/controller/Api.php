@@ -5,6 +5,7 @@ use app\maker\model\Code;
 use app\maker\model\Templet;
 use think\facade\Request;
 use app\maker\model\TrafficCase;
+use app\maker\model\TempletDoc;
 
 class Api {
 	public function code(){
@@ -100,7 +101,7 @@ class Api {
 	
 	public function tempLets(){
 	    
-	    $templets = Templet::getOwnerTemplets('0');   
+	    $templets = TempletDoc::getOwnerTemplets('0');   
 	    $response = array(
 	        'data'=>$templets,
 	        'code'=>'0',
@@ -113,11 +114,11 @@ class Api {
 	    $info = $this->postInfo();
 	    $id = getCurrentRecordId();
 	    if (empty($id)){
-	        Templet::add($info);
+	        TempletDoc::add($info);
 	        return json('新增成功！') ;
 	    }
 	    else{
-	        Templet::refresh(getCurrentTempletId(), $info);
+	        TempletDoc::refresh(getCurrentTempletId(), $info);
 	        return json('更新成功！') ;
 	    }
 	}
@@ -125,7 +126,7 @@ class Api {
 	public function editorHTML(){
 	    $templetId = getCurrentTempletId();
 	    if (!empty($templetId)){
-	       return json(Templet::getTemplet($templetId));
+	       return json(TempletDoc::getById($templetId));
 	    }
 	    
 	    else return null;
