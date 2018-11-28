@@ -101,7 +101,7 @@ class Api {
 	
 	public function tempLets(){
 	    
-	    $templets = TempletDoc::getOwnerTemplets('0');   
+	    $templets = TempletDoc::getByOwner('0');   
 	    $response = array(
 	        'data'=>$templets,
 	        'code'=>'0',
@@ -138,5 +138,27 @@ class Api {
 	    return Request::post();
 	}
 	
+	private function generateDoc(){
+	   $temple =  TempletDoc::getById('1');
+	   
+	}
+	
+	public function templetReplace($src, $record){
+	    
+	    $patterns = array();
+	    $replacements = array();
+
+	    $patterns[0] = '/{性别}/';
+	    $replacements[0] = $record['sex'];
+	    
+	    $patterns[1] = '/{姓名}/';
+	    $replacements[1] = $record['name'];
+	    
+	    $patterns[2] = '/{车牌号}/';
+	    $replacements[2] = $record['car_num'];
+	    
+	    
+	    return preg_replace($patterns, $replacements, $src);
+	}
 	
 }

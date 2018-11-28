@@ -31,14 +31,18 @@
     ,url: '/documentmaker/public/index.php/maker/api/templets' //数据接口
     ,page: true //开启分页
     ,limit: 20
+    ,initSort: {
+       field: 'update_time' //排序字段，对应 cols 设定的各字段名
+            ,type: 'desc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
+         }
     ,toolbar:  '#toolbarDemo' 
     ,defaultToolbar: ['filter', 'print', 'exports']
     ,cols: [[ //表头
      {title:'', type: 'radio', width:30, fixed: 'left'}
     ,{align: 'center', field: 'templet_name', title: '模板名称', width:280, sort: true}
     ,{field: 'templet_catalog', title: '模板类别', width:180}
-    ,{field: 'create_time', title: '创建时间', width:180}
-    ,{field: 'update_time', title: '更新时间', width:180}
+    ,{field: 'create_time', title: '创建时间', width:180, sort: true}
+    ,{field: 'update_time', title: '更新时间', width:180 ,sort: true}
     ]]
 });
   
