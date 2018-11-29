@@ -1,119 +1,45 @@
 <div class="site-tree">
     <form class="layui-form" lay-filter="formDemo" style="height: 80px; margin: 10px 13px 0 0;">
-    <select name='templet_catalog' lay-search="">
-      <option value="">选择模板类别</option>
-      {foreach $catalogs as $key=>$vo } 
-      <option value="{$vo.templet_catalog}">{$vo.templet_catalog}</option>
-{/foreach}
-    </select>
-
-
-    <input type="text" name="templet_name" required lay-verify="required" placeholder="模板名称:查获经过-无证" autocomplete="off" class="layui-input"> 
- 
-</form>
-    <ul class="layui-tree">
-        <li><h2>案件信息</h2>
-        </li>
-        <li class="site-tree-noicon ">
-            <a draggable="true">
-                        <cite>决定书编号</cite>
-                        <em>16位决定书</em>
-                    </a>
-        </li>
-        <li class="site-tree-noicon ">
-            <a draggable="true">
-                        <cite>案发时间</cite>
-                        <em>2018年8月18日</em>
-                    </a>
-        </li>
-        <li class="site-tree-noicon ">
-            <a draggable="true">
-                        <cite>案发地点</cite>
-                        <em>2018年8月18日</em>
-                    </a>
-        </li>
-        <li><h2>当事人信息</h2>
-        </li>
-        <li class="site-tree-noicon ">
-            <a draggable="true">
-                        <cite >姓名</cite>
-                        <em>当事人姓名</em>
-                    </a>
-        </li>
-        <li class="site-tree-noicon ">
-            <a draggable="true" >
-                        <cite>性别</cite>
-                        <em>当事人性别</em>
-                    </a>
-        </li>
-        <li class="site-tree-noicon ">
-            <a draggable="true">
-                        <cite>身份证号码</cite>
-                        <em>当事人身份证号码</em>
-                    </a>
-        </li>
-        <li>
-            <h2>案卷裁决信息</h2>
-        </li>
-        <li class="site-tree-noicon ">
-            <a draggable="true">
-                        <cite>裁决时间</cite>
-                        <em>2018年8月18日</em>
-                    </a>
-        </li>
-        <li class="site-tree-noicon ">
-            <a draggable="true">
-                        <cite>裁决单位</cite>
-                        <em>2018年8月18日</em>
-                    </a>
-        </li>
-        <li class="site-tree-noicon ">
-            <a draggable="true">
-                        <cite>主办民警</cite>
-                        <em></em>
-                    </a>
-        </li>
-        <li class="site-tree-noicon ">
-            <a draggable="true">
-                        <cite>协办民警</cite>
-                        <em></em>
-                    </a>
-        </li>
-        <li class="site-tree-noicon ">
-            <a draggable="true">
-                        <cite>满分学习通知书</cite>
-                        <em></em>
-                    </a>
-        </li>
-        <li>
-            <h2>车辆信息</h2>
-        </li>
-        <li class="">
-            <a draggable="true">
-                        <cite>车牌号</cite>
-                        <em></em>
-                    </a>
-        </li>
-        <li class="">
-            <a draggable="true">
-                        <cite>挂车车牌号</cite>
-                        <em></em>
-                    </a>
-        </li>
-        <li>
-            <h2>一案一档</h2>
-        </li>
-        <li class="">
-            <a draggable="true">
-                          <cite>领导审批表</cite>
-                          <em>扣留物品</em>
-                      </a>
-        </li>
-        <li class="">
-            <a draggable="true">
-                        <cite>一案一档</cite>
-                        <em>扣留物品</em>
-                    </a>
-        </li>
-    </ul>
+        <select name='templet_catalog' lay-search="">
+            <option value="">选择模板类别</option>
+            {foreach $catalogs as $key=>$vo }
+            <option value="{$vo.templet_catalog}">{$vo.templet_catalog}</option>
+            {/foreach}
+        </select>
+        <input type="text" name="templet_name" required lay-verify="required" placeholder="模板名称:查获经过-无证" autocomplete="off" class="layui-input">
+    </form>
+    <div class="layui-collapse">
+        {foreach $meta_labels as $key=>$vo}
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">{$key}</h2>
+            <div class="layui-colla-content">
+                <ul class="layui-tree">
+                    {foreach $vo as $k=>$v}
+                    <li><a draggable="true">
+                                   <cite>{$v.templet_meta_name}</cite>
+                       <em>{$v.templet_meta_remark}</em>
+                   </a>
+                    </li>
+                    {/foreach}
+                </ul>
+            </div>
+        </div>
+        {/foreach}
+    </div>
+    <div class="layui-btn-group">
+        <button class="layui-btn layui-btn-primary">
+            <i class="layui-icon">&#xe654;   添加</i>
+        </button>
+        <button class="layui-btn layui-btn-primary">
+            <i class="layui-icon">&#xe640;   删除</i>
+        </button>
+    </div>
 </div>
+<script>
+//注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
+layui.use('element', function() {
+    var element = layui.element;
+
+    //…
+});
+</script>

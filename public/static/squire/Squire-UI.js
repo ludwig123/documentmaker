@@ -53,28 +53,28 @@ $(document).ready(function() {
         });
       });
 
-      this.imageDrop = new Drop({
-        target: $('#insertImage').first()[0],
-        content: $('#drop-image').html(),
-        position: 'bottom center',
-        openOn: 'click'
-      });
+      // this.imageDrop = new Drop({
+      //   target: $('#insertImage').first()[0],
+      //   content: $('#drop-image').html(),
+      //   position: 'bottom center',
+      //   openOn: 'click'
+      // });
 
-      this.imageDrop.on('open', function () {
-        $('.quit').unbind().click(function () {
-          $(this).parent().parent().removeClass('drop-open');
-        });
+      // this.imageDrop.on('open', function () {
+      //   $('.quit').unbind().click(function () {
+      //     $(this).parent().parent().removeClass('drop-open');
+      //   });
 
-        $('.sumbitImageURL').unbind().click(function () {
-          console.log("Passed through .sumbitImageURL");
-          var editor = iframe.contentWindow.editor;
-          url = $(this).parent().children('#imageUrl').first()[0];
-          editor.insertImage(url.value);
-          $(this).parent().parent().removeClass('drop-open');
-          $(this).parent().children('#imageUrl').attr('value', '');
-        });
+      //   $('.sumbitImageURL').unbind().click(function () {
+      //     console.log("Passed through .sumbitImageURL");
+      //     var editor = iframe.contentWindow.editor;
+      //     url = $(this).parent().children('#imageUrl').first()[0];
+      //     editor.insertImage(url.value);
+      //     $(this).parent().parent().removeClass('drop-open');
+      //     $(this).parent().children('#imageUrl').attr('value', '');
+      //   });
 
-      });
+      // });
 
       this.fontDrop = new Drop({
         target: $('#selectFont').first()[0],

@@ -2,7 +2,6 @@
 namespace app\maker\controller;
 
 use app\maker\model\Code;
-use app\maker\model\Templet;
 use think\facade\Request;
 use app\maker\model\TrafficCase;
 use app\maker\model\TempletDoc;
