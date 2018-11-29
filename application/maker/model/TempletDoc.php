@@ -23,6 +23,10 @@ class TempletDoc extends Model
         return db('templet_doc')->where('templet_owner ='.$ownerId)->select();
     }
     
+    public static function getCatalogArr(){
+        return db('templet_doc')->distinct(true)->field('templet_catalog')->select();
+    }
+    
     
     /**添加一个新车辆
      * @param array $dataArr

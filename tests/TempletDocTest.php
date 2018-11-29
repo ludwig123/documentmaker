@@ -77,6 +77,11 @@ mso-pagination:none;layout-grid-mode:char;word-break:break-all"><span class="fon
         $this->assertEquals(1,$effectRow);
     }
 
+    
+    public function test_getCatalogArr_default_returnArray(){
+        $catalogArr = TempletDoc::getCatalogArr();
+        $this->assertGreaterThan(3, count($catalogArr));
+    }
 
 }
 

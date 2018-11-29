@@ -55,7 +55,6 @@ class ApiTest extends PHPUnit_Framework_TestCase
         
         $this->assertNotContains("{姓名}", $dest);
         
-        
     }
 
 
