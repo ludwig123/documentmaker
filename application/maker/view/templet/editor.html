@@ -33,7 +33,7 @@ $(document).ready(function() {
         success: function(respMsg) {
 
             if (respMsg) {
-            temp.contentWindow.editor.setHTML(respMsg.templet_content);
+            temp.contentWindow.editor._root.innerHTML = respMsg.templet_content;
 
             form.val("formDemo", {
             'templet_catalog':respMsg.templet_catalog,
@@ -55,7 +55,7 @@ $('#go_list').click(function() {
 
 $('#save').click(function() {
     var myeditor = temp.contentWindow.editor;
-    var templet_content = myeditor.getHTML();
+    var templet_content = myeditor._root.innerHTML;
     var templet_catalog = $(":input[name='templet_catalog']").val();
     var templet_name = $(":input[name='templet_name']").val();
     mydata.templet_content = templet_content;
