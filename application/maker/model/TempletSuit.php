@@ -49,6 +49,10 @@ class TempletSuit extends Model implements iCURD
             return $obj->delete();
             return false;
     }
+    
+    public static function getByOwner($ownerId){
+        return db('templet_suit')->where('suit_owner ='.$ownerId)->select();
+    }
 
     
 }

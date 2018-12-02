@@ -32,7 +32,7 @@ mso-pagination:none;layout-grid-mode:char;word-break:break-all"><span class="fon
         ];
         
         self::$id = TempletDoc::add($data);
-        $this->assertGreaterThan(14, self::$id);
+        $this->assertNotFalse(self::$id);
     }
     
     

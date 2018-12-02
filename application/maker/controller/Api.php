@@ -3,6 +3,7 @@ namespace app\maker\controller;
 
 use app\maker\model\Code;
 use think\facade\Request;
+use app\maker\model\TempletSuit;
 use app\maker\model\TrafficCase;
 use app\maker\model\TempletDoc;
 use phpDocumentor\Reflection\Types\Null_;
@@ -99,7 +100,7 @@ class Api {
 	    return json(Code::getDetail($code));
 	}
 	
-	public function tempLets(){
+	public function tempLets2(){
 	    
 	    $temp = TempletDoc::getByOwner('0');
 	    $templets = array();
@@ -107,6 +108,41 @@ class Api {
 	       unset($v['templet_content']);
 	       $templets[] = $v;
 	       
+	    }
+	    $response = array(
+	        'data'=>$templets,
+	        'code'=>'0',
+	        'count'=>count($templets)
+	    );
+	    return json($response);
+	}
+	
+	
+	public function tempLets(){
+	    
+	    $temp = TempletSuit::getByOwner('0');
+	    $templets = array();
+	    foreach ($temp as $k => $v){
+	        unset($v['suit_content']);
+	        $templets[] = $v;
+	        
+	    }
+	    $response = array(
+	        'data'=>$templets,
+	        'code'=>'0',
+	        'count'=>count($templets)
+	    );
+	    return json($response);
+	}
+	
+	public function tempLetDetail($id = '1'){
+	    
+	    $temp = TempletDoc::getByGroupId($id);
+	    $templets = array();
+	    foreach ($temp as $k => $v){
+	        unset($v['templet_content']);
+	        $templets[] = $v;
+	        
 	    }
 	    $response = array(
 	        'data'=>$templets,

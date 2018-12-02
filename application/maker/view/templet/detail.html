@@ -1,577 +1,102 @@
-{extend name="maker@common/base" /}
+{extend name="maker@common/base" /} 
+
 {block name="main"}
-<div class="site-text se-block">
-    <form class="layui-form" lay-filter="formDemo" action="">
-        <div class="site-title">
-            <fieldset>
-                <legend><a name="input">案卷信息</a></legend>
-            </fieldset>
-        </div>
-        <div class="layui-fluid">
-            <div class="layui-row">
-                <div class="layui-col-md2">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">决定书编号</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="index" lay-verify="required|index" placeholder="请输入18位决定书编号" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-col-md3">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">裁决时间</label>
-                        <div class="layui-input-block">
-                            <input type="text" class="layui-input" name="judge_time" id="judge_time" placeholder="2018年8月15日" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-col-md3">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">违法时间</label>
-                        <div class="layui-input-block">
-                            <input type="text" class="layui-input" name="time" id="time" placeholder="08时08分" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="layui-fluid">
-            <div class="layui-row">
-                <div class="layui-col-md8">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">违法地点</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="place" placeholder="泉南高速衡南服务区西往东方向" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="layui-fluid">
-            <div class="layui-row">
-                <div class="layui-col-md3">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">文书类型</label>
-                        <div class="layui-input-block">
-                            <select name="doc_type" lay-verify="">
-                                <option value=""></option>
-                                <option value="通知书">通知书</option>
-                                <option value="强措">强制措施</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-col-md3">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">文书编号</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="doc_index" lay-verify="docIndex" placeholder="请输通知书或强措的文书编号" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="layui-fluid">
-            <div class="layui-row">
-                <div class="layui-col-md3">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">违法代码1</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="code_1" placeholder="请输入标题" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-col-md6">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">违法内容1</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="code_1_content" placeholder="请输入标题" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="layui-fluid">
-            <div class="layui-row">
-                <div class="layui-col-md3">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">违法代码2</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="code_2" placeholder="请输入标题" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-col-md6">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">违法内容2</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="code_2_content" placeholder="请输入标题" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="layui-fluid">
-            <div class="layui-row">
-                <div class="layui-col-md6">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">违法证据</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="evidence" placeholder="请输入标题" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="layui-fluid">
-            <div class="layui-row">
-                <div class="layui-col-md3">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">支队</label>
-                        <div class="layui-input-block">
-                            <select name="zhidui" lay-verify="">
-                                <option value=""></option>
-                                <option value="衡阳">衡阳</option>
-                                <option value="长沙">长沙</option>
-                                <option value="株洲">株洲</option>
-                                <option value="湘潭">湘潭</option>
-                                <option value="永州">永州</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-col-md3">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">大队</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="dadui" lay-verify="" placeholder="请输入标题" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="layui-fluid">
-            <div class="layui-row">
-                <div class="layui-col-md3">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">主办民警</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="police_1" lay-verify="" placeholder="请输入主办民警姓名" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-col-md3">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">协办民警</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="police_2" lay-verify="" placeholder="请输入协办民警姓名" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- 身份证信息 -->
-        <div class="site-title">
-            <fieldset>
-                <legend><a name="input">当事人信息</a></legend>
-            </fieldset>
-        </div>
-        <div class="layui-fluid">
-            <div class="layui-row">
-                <div class="layui-col-md3">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">姓名</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="name" lay-verify="name" placeholder="请输入姓名" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-col-md3">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">籍贯</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="birth_place" placeholder="请输入标题" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="layui-fluid">
-            <div class="layui-row">
-                <div class="layui-col-md3">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">民族</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="nation" placeholder="请输入标题" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-col-md3">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">性别</label>
-                        <div class="layui-input-block">
-                            <input type="radio" name="sex" value="男" title="男">
-                            <input type="radio" name="sex" value="女" title="女" checked>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="layui-fluid">
-            <div class="layui-row">
-                <div class="layui-col-md3">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">身份证号码</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="identity" lay-verify="identity" placeholder="请输入标题" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-col-md3">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">手机号码</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="phone" lay-verify="phone" placeholder="请输入标题" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="layui-fluid">
-            <div class="layui-row">
-                <div class="layui-col-md6">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">身份证地址</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="address" placeholder="请输入标题" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="layui-fluid">
-            <div class="layui-row">
-                <div class="layui-col-md3">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">学历</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="education" placeholder="初中" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-col-md3">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">政治面貌</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="political" lay-verify="" placeholder="群众" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="layui-fluid">
-            <div class="layui-row">
-                <div class="layui-col-md6">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">工作单位</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="company" lay-verify="" placeholder="请输入标题" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- 驾驶证信息 -->
-        <div class="site-title">
-            <fieldset>
-                <legend><a name="input">驾驶证信息</a></legend>
-            </fieldset>
-        </div>
-        <div class="layui-fluid">
-            <div class="layui-row">
-                <div class="layui-col-md3">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">档案编号</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="file_num" lay-verify="" placeholder="请输入驾驶证档案编号" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-col-md3">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">准驾车型</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="driver_type" placeholder="A1A2C1" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="layui-fluid">
-            <div class="layui-row">
-                <div class="layui-col-md6">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">发证机关</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="issuer" lay-verify="" placeholder="湖南省衡阳市公安局交通警察支队" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- 车辆信息 -->
-        <div class="site-title">
-            <fieldset>
-                <legend><a name="input">车辆信息</a></legend>
-            </fieldset>
-        </div>
-        <div class="layui-fluid">
-            <div class="layui-row">
-                <div class="layui-col-md3">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">车牌号</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="car_num" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-col-md3">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">车辆类型</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="car_type" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-col-md3">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">年检有效期</label>
-                        <div class="layui-input-block">
-                            <input type="text" id="car_expire" name="car_expire" placeholder="eg:2018年11月30日" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="layui-fluid">
-            <div class="layui-row">
-                <div class="layui-col-md6">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">车辆所有人</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="car_owner" placeholder="请输入标题" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-                <button type="button" class="layui-btn layui-btn-primary" id="goPrint">打印预览</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-            </div>
-        </div>
-    </form>
+
+
+
+
+<div style="margin-left: 100px">
+    <div class="layui-row" id="toolbar"></div>
+	<table id="demo" lay-filter="test"></table>
 </div>
-<script>
-layui.use(['form', 'jquery'], function() {
-    var form = layui.form;
-
-    if (true) {
-        $.ajax({
-            type: "POST",
-            url: "/documentmaker/public/index.php/maker/api/record",
-            data: '',
-            dataType: "json",
-            success: function(respMsg) {
-                var msg = respMsg;
 
 
-                form.val("formDemo", {
-                    "index": msg['index'],
-                    "judge_time": msg['judge_time'],
-                    "time": msg['time'],
-                    "place": msg['place'],
-                    "code": msg['code_1'],
-                    "doc_type": msg['doc_type'],
-                    "doc_index": msg['doc_index'],
-                    "code_1": msg['code_1'],
-                    "code_1_content": msg['违法内容_1'],
-                    "code_2": msg['code_2'],
-                    "code_2_content": msg['违法内容_2'],
-                    "evidence": msg['evidence'],
-                    "zhidui": msg['zhidui'],
-                    "dadui": msg['dadui'],
-                    "police_1": msg["police_1"],
-                    "police_2": msg['police_2'],
-                    //当事人信息
-                    "name": msg['name'],
-                    "birth_place": msg['birth_place'],
-                    "nation": msg['nation'],
-                    "sex": msg['sex'],
-                    "identity": msg['identity'],
-                    "phone": msg['phone'],
-                    "address": msg['address'],
-                    "education": msg['education'],
-                    "political": msg['political'],
-                    "company": msg['company'],
-                    //驾驶证信息
-                    "file_num": msg['file_num'],
-                    "driver_type": msg['driver_type'],
-                    "issuer": msg['issuer'],
-                    //车辆信息
-                    "car_num": msg['car_num'],
-                    "car_type": msg['car_type'],
-                    "car_expire": msg['car_expire'],
-                    "car_owner": msg['car_owner']
-                })
-            },
-            error: function() {
-                layer.msg("初始化案件失败")
-            }
-        });
-    }
-
-
-
-    //设置导航栏下的指示器
-    $("#page-main").removeClass("layui-this");
-    $("#page-record").addClass("layui-this");
-
-    //监听提交
-    form.on('submit(formDemo)', function(data) {
- 
-            $.ajax({
-                type: "POST",
-                url: "/documentmaker/public/index.php/maker/api/handleTrafficCase",
-                data: data.field,
-                dataType: "json",
-                success: function(respMsg) {
-                    layer.msg(respMsg);
-                },
-                error: function() {
-                    layer.msg("提交失败")
-                }
-            });
-        
-
-    });
-
-    $('#getRecord').on('click', function() {
-
-        $.ajax({
-            type: "POST",
-            url: "/documentmaker/public/index.php/maker/api/updateCase",
-            data: "",
-            dataType: "json",
-            success: function(respMsg) {
-                var msg = respMsg;
-                layer.msg("获取数据成功！");
-                layer.msg(respMsg['index']);
-                $(":input[name='index']").val(respMsg['index']);
-            },
-            error: function() {
-                alert("获取数据失败，网络超时！")
-
-            }
-        });
-    })
-
-    $('#goPrint').on('click', function() {
-        
-        window.location.href = "/documentmaker/public/index.php/maker/page/gaozhibilu";
-    })
-
-    $('input[name=code_1]').keyup(function() {
-        if ($('input[name=code_1]').val().length >= 5) {
-            $.ajax({
-                type: "GET",
-                url: "/documentmaker/public/index.php/maker/api/getcodedetail/code/" + $('input[name=code_1]').val(),
-                data: "",
-                dataType: "json",
-                success: function(respMsg) {
-                    if (respMsg == null) {
-                        alert("违法代码不存在！");
-                        $('input[name=code_1').val('');
-                        return
-                    } else {
-                        $('input[name=code_1_content]').val(respMsg['违法内容']);
-                    }
-
-                },
-                error: function() {
-                    alert("获取数据失败，网络超时！")
-
-                }
-            });
-        }
-
-    });
-
-    $('input[name=code_2]').keyup(function() {
-        if ($('input[name=code_2]').val().length >= 5) {
-            $.ajax({
-                type: "GET",
-                url: "/documentmaker/public/index.php/maker/api/getcodedetail/code/" + $('input[name=code_2]').val(),
-                data: "",
-                dataType: "json",
-                success: function(respMsg) {
-                    if (respMsg == null) {
-                        alert("违法代码不存在！");
-                        $('input[name=code_2').val('');
-                        return
-                    } else {
-                        $('input[name=code_2_content]').val(respMsg['违法内容']);
-                    }
-
-                },
-                error: function() {
-                    alert("获取数据失败，网络超时！")
-
-                }
-            });
-        }
-
-    });
-
-
-    form.verify({
-
-        name: [/^[\u4e00-\u9fa5]+$/, '名字只能包含汉字'],
-        index: [/^\d{16,16}$/, '决定书编号必须16位数字，且不能出现空格'],
-        docIndex: [/^\d{16,16}$/, '法律文书必须是16位数字，且不能出现空格'],
-    });
-});
-
-
-
-// 时间控件
-layui.use('laydate', function() {
-    var laydate = layui.laydate;
-    laydate.render({
-        elem: '#time',
-        type: 'datetime',
-        format: 'yyyy年MM月dd日HH时mm分'
-    });
-
-    laydate.render({
-        elem: '#judge_time',
-        type: 'datetime',
-        format: 'yyyy年MM月dd日HH时mm分'
-    });
-
-    laydate.render({
-        elem: '#car_expire',
-        type: 'date',
-        format: 'yyyy年MM月dd日'
-    });
-});
-
-layui.use('jquery', function() {
-
-
-
-})
+<script type="text/html" id="toolbarDemo">
+  <div class="layui-btn-container">
+    <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
+    <button class="layui-btn layui-btn-sm" lay-event="delete">删除</button>
+    <button class="layui-btn layui-btn-sm" lay-event="update">编辑</button>
+  </div>
 </script>
+
+<script>
+	setPageTitle("模板详情");
+	layui.use('table', function(){
+		var table = layui.table;
+		var checkedId;
+
+  //第一个实例
+  table.render({
+  	elem: '#demo'
+  	,height: 600
+    ,url: '/documentmaker/public/index.php/maker/api/templetDetail' //数据接口
+    ,page: true //开启分页
+    ,limit: 20
+    ,initSort: {
+       field: 'update_time' //排序字段，对应 cols 设定的各字段名
+            ,type: 'desc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
+         }
+    ,toolbar:  '#toolbarDemo' 
+    ,defaultToolbar: ['filter', 'print', 'exports']
+    ,cols: [[ //表头
+     {title:'', type: 'radio', width:30, fixed: 'left'}
+    ,{align: 'center', field: 'templet_name', title: '模板名称', width:280, sort: true}
+    ,{field: 'templet_catalog', title: '模板类别', width:180}
+    ,{field: 'create_time', title: '创建时间', width:180, sort: true}
+    ,{field: 'update_time', title: '更新时间', width:180 ,sort: true}
+    ]]
+});
+  
+table.on('radio(test)', function(obj){
+	checkedId = obj.data['id'];
+	console.log(checkedId); //当前是否选中状态
+});
+
+
+table.on('toolbar(test)', function(obj){
+	var checkStatus = table.checkStatus(obj.config.id);
+	switch(obj.event){
+		case 'add':
+		window.location.href = "/documentmaker/public/index.php/maker/templet/editor";
+		break;
+
+		case 'delete':
+		if (checkedId == null) {layer.msg('请先选择一个案件');}
+		else {
+			var chooseId = {'id': checkedId};
+
+			$.ajax({
+				type: "POST",
+				url: "/documentmaker/public/index.php/maker/api/removeTemplet" ,
+				data: chooseId,
+				dataType: "json",
+				success: function(respMsg) {
+					layer.msg(respMsg);
+					window.location.href = "/documentmaker/public/index.php/maker/templet/";
+				},
+				error: function() {
+					layer.msg("删除失败")
+				}
+			});
+		}
+		break;
+
+		case 'update':
+		if (checkedId == null) {layer.msg('请先选择一个案件');}
+		else {
+			window.location.href = "/documentmaker/public/index.php/maker/templet/editor/id/" + checkedId;
+		}
+		break;
+	};
+});
+
+  //监听行双击事件
+table.on('rowDouble(test)', function(obj){
+  var record = obj.data;
+  window.location.href = "/documentmaker/public/index.php/maker/templet/editor/id/" + record['id'];
+});
+
+});
+</script>
+
 {/block}

@@ -52,4 +52,9 @@ class Templet extends Controller
         
         else return json("更新成功！");
     }
+    
+    public function list(){
+        return  $this->fetch();
+    }
+    
 }

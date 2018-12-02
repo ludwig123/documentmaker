@@ -23,6 +23,10 @@ class TempletDoc extends Model
         return db('templet_doc')->where('templet_owner ='.$ownerId)->select();
     }
     
+    public static function getByGroupId($groupId){
+        return db('templet_doc')->where('group_id ='.$groupId)->select();
+    }
+    
     public static function getCatalogArr(){
         return db('templet_doc')->distinct(true)->field('templet_catalog')->select();
     }
