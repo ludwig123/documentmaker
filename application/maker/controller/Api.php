@@ -5,6 +5,7 @@ use app\maker\model\Code;
 use think\facade\Request;
 use app\maker\model\TrafficCase;
 use app\maker\model\TempletDoc;
+use phpDocumentor\Reflection\Types\Null_;
 
 class Api {
 	public function code(){
@@ -100,7 +101,13 @@ class Api {
 	
 	public function tempLets(){
 	    
-	    $templets = TempletDoc::getByOwner('0');   
+	    $temp = TempletDoc::getByOwner('0');
+	    $templets = array();
+	    foreach ($temp as $k => $v){
+	       unset($v['templet_content']);
+	       $templets[] = $v;
+	       
+	    }
 	    $response = array(
 	        'data'=>$templets,
 	        'code'=>'0',
