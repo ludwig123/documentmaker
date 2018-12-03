@@ -17,6 +17,10 @@ layui.use('form', function() {
 
 });
 setPageTitle("编辑器 - 模板");
+
+    
+    $("#page-main").removeClass("layui-this");
+    $("#page-templet").addClass("layui-this");
 var editor, temp;
 var mydata = {};
 $(document).ready(function() {

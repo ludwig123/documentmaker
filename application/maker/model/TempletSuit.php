@@ -11,7 +11,6 @@ class TempletSuit extends Model implements iCURD
         $suit = new TempletSuit;
         $suit->suit_catalog = empty($dataArr['suit_catalog']) ? NULL : $dataArr['suit_catalog'];
         $suit->suit_name = empty($dataArr['suit_name']) ? NULL : $dataArr['suit_name'];
-        $suit->suit_content = empty($dataArr['suit_content']) ? NULL : $dataArr['suit_content'];
         $suit->suit_owner = empty($dataArr['suit_owner']) ? 0 : $dataArr['suit_owner'];
         if ($suit->save())
             return $suit->id;
@@ -29,7 +28,6 @@ class TempletSuit extends Model implements iCURD
         $suit = array();
         $suit['suit_catalog'] = empty($dataArr['suit_catalog']) ? NULL : $dataArr['suit_catalog'];
         $suit['suit_name'] = empty($dataArr['suit_name']) ? NULL : $dataArr['suit_name'];
-        $suit['suit_content'] = empty($dataArr['suit_content']) ? NULL : $dataArr['suit_content'];
         $suit['suit_owner'] = empty($dataArr['suit_owner']) ? NULL : $dataArr['suit_owner'];
         
         foreach ($suit as $k => $v){

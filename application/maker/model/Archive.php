@@ -8,6 +8,7 @@ class Archive extends Model implements iCURD
     public static function add($dataArr)
     {
         $model = new Archive();
+        $model->archive_group_id = empty($dataArr['archive_group_id']) ? NULL : $dataArr['archive_group_id'];
         $model->archive_catalog = empty($dataArr['archive_catalog']) ? NULL : $dataArr['archive_catalog'];
         $model->archive_content = empty($dataArr['archive_content']) ? NULL : $dataArr['archive_content'];
         $model->archive_name = empty($dataArr['archive_name']) ? NULL : $dataArr['archive_name'];
@@ -27,6 +28,7 @@ class Archive extends Model implements iCURD
     public static function refresh($id, $dataArr)
     {
         $model = array();
+        $model['archive_group_id'] = empty($dataArr['archive_group_id']) ? NULL : $dataArr['archive_group_id'];
         $model['archive_catalog'] = empty($dataArr['archive_catalog']) ? NULL : $dataArr['archive_catalog'];
         $model['archive_content'] = empty($dataArr['archive_content']) ? NULL : $dataArr['archive_content'];
         $model['archive_name'] = empty($dataArr['archive_name']) ? NULL : $dataArr['archive_name'];
