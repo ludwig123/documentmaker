@@ -25,6 +25,11 @@ class Archive extends Model implements iCURD
         return db('archive')->where('id', $id)->find();
     }
     
+    public static function getByArchiveGroupId($id)
+    {
+        return db('archive')->where('archive_group_id', $id)->select();
+    }
+    
     public static function refresh($id, $dataArr)
     {
         $model = array();

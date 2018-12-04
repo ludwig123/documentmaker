@@ -213,3 +213,30 @@ function clearCurrentTempletId(){
 }
 
 
+function setCurrentArchiveSuitId($id){
+    session('nowReadArchiveSuit', $id);
+    return ;
+}
+
+function getCurrentArchiveSuitId(){
+    return session('nowReadArchiveSuit');
+}
+
+function clearCurrentArchiveSuitId(){
+    session('nowReadArchiveSuit', null);
+    return ;
+}
+
+function setCurrentArchiveId($id){
+    session('nowReadArchive', $id);
+    return ;
+}
+
+function getCurrentArchiveId(){
+    return session('nowReadArchive');
+}
+
+function clearCurrentArchiveId(){
+    session('nowReadArchive', null);
+    return ;
+}

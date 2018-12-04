@@ -4,6 +4,9 @@ namespace app\maker\controller;
 use app\maker\model\Code;
 use app\maker\model\TrafficCase;
 use think\Controller;
+use think\facade\Request;
+use app\maker\model\Archive;
+use app\maker\model\ArchiveSuit;
 
 class Page extends Controller
 {
@@ -168,6 +171,36 @@ class Page extends Controller
             $this->assign('data', $list);
         }
         return $this->fetch("fengmian");
+    }
+    
+    public function editor($id){
+        setCurrentRecordId($id);
+        $archiveSuit = ArchiveSuit::getByRecordId($id);
+        
+        setCurrentArchiveSuitId($archiveSuit['id']);
+        $archives = Archive::getByArchiveGroupId($archiveSuit['id']);
+        if (empty(getCurrentArchiveId()))
+            setCurrentArchiveId($archives[0]['id']);
+        $this->assign('archives', $archives);
+        return $this->fetch();
+    }
+    
+    public function refresh(){
+        $dataArr = Request::post();
+        $id = getCurrentArchiveId();
+        if (empty($id)){
+            
+        }
+        else {
+            $id = Archive::refresh($id,$dataArr);
+        }
+        
+        
+        if (empty($id)){
+            return json("更新失败");
+        }
+        
+        else return json("更新成功！");
     }
     
     private function checkLogin(){

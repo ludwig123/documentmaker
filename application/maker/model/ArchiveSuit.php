@@ -23,6 +23,11 @@ class ArchiveSuit extends Model implements iCURD
         return db('archive_suit')->where('id', $id)->find();
     }
     
+    public static function getByRecordId($id)
+    {
+        return db('archive_suit')->where('record_id', $id)->find();
+    }
+    
     public static function refresh($id, $dataArr)
     {
         $model = array();

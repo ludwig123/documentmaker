@@ -88,7 +88,7 @@ table.on('toolbar(test)', function(obj){
 		case 'update':
 		if (checkedId == null) {layer.msg('请先选择一个案件');}
 		else {
-			window.location.href = "/documentmaker/public/index.php/maker/page/record/id/" + checkedId;
+			window.location.href = "/documentmaker/public/index.php/maker/page/editor/id/" + checkedId;
 		}
 		break;
 	};
@@ -97,7 +97,7 @@ table.on('toolbar(test)', function(obj){
   //监听行双击事件
 table.on('rowDouble(test)', function(obj){
   var record = obj.data;
-  window.location.href = "/documentmaker/public/index.php/maker/page/record/id/" + record['id'];
+  window.location.href = "/documentmaker/public/index.php/maker/page/editor/id/" + record['id'];
 });
 
 });

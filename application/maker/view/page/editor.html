@@ -1,0 +1,134 @@
+{extend name="maker@common/base" /}
+{block name="printmode"}
+<div class="layui-main site-inline ">
+    {include file="page/sidebar"}
+    <div class="site-content">
+        <div class="row">
+            <div class="col-centered">
+                <textarea id='editor-div'></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+var form;
+layui.use('form', function() {
+    form = layui.form;
+
+});
+setPageTitle("编辑器 - 模板");
+
+
+$("#page-main").removeClass("layui-this");
+$("#page-record").addClass("layui-this");
+var editor, temp;
+var mydata = {};
+$(document).ready(function() {
+    editor = new SquireUI({ replace: 'textarea#editor-div', height: 800 });
+
+    temp = $("#frame1", document.body)[0];
+
+    setTimeout(function() {
+        $.ajax({
+            type: "GET",
+            url: "/documentmaker/public/index.php/maker/api/getArchive",
+            data: '',
+            dataType: "json",
+            success: function(respMsg) {
+
+                if (respMsg) {
+                    temp.contentWindow.editor._root.innerHTML = respMsg.data.archive_content;
+
+                    form.val("formDemo", {
+                        'templet_catalog': respMsg.templet_catalog,
+                        'templet_name': respMsg.templet_name
+                    });
+                }
+
+            },
+            error: function() {
+                layer.msg("初始化编辑器失败");
+            }
+        });
+
+
+
+        $('#go_list').click(function() {
+            window.location.href = "/documentmaker/public/index.php/maker/page/records";
+        });
+
+        $("#print").click(function(){
+     $("#frame1", document.body)[0].contentWindow.print();
+});
+
+        $('#save').click(function() {
+            var myeditor = temp.contentWindow.editor;
+            var archive_content = myeditor._root.innerHTML;
+            // var templet_catalog = $(":input[name='templet_catalog']").val();
+            // var templet_name = $(":input[name='templet_name']").val();
+            mydata.archive_content = archive_content;
+            // mydata.templet_catalog = templet_catalog;
+            // mydata.templet_name = templet_name;
+
+            $.ajax({
+                type: "POST",
+                url: "/documentmaker/public/index.php/maker/page/refresh",
+                data: mydata,
+                dataType: "json",
+                success: function(respMsg) {
+                    alert("保存成功！");
+                },
+                error: function() {
+                    alert("保存失败，网络故障，稍后再试！");
+
+                }
+            });
+        });
+
+
+    }, 100);
+
+});
+
+
+//拖放文字var
+var dragged;
+
+document.addEventListener("dragstart", function(event) {
+    // 保存拖动元素的引用(ref.)
+    dragged = event.target;
+    var placehold = dragged.children[0].innerText;
+    placehold = '{' + placehold + '}';
+    event.dataTransfer.setData("text/plain", placehold);
+    // 使其半透明
+    event.target.style.opacity = .5;
+}, false);
+
+
+$("li a").click(function(event) {
+        var clickId = event.currentTarget.id;
+            $.ajax({
+            type: "GET",
+            url: "/documentmaker/public/index.php/maker/api/getArchive/id/"+clickId,
+            data: '',
+            dataType: "json",
+            success: function(respMsg) {
+
+                if (respMsg) {
+                    temp.contentWindow.editor._root.innerHTML = respMsg.data.archive_content;
+
+                    form.val("formDemo", {
+                        'templet_catalog': respMsg.templet_catalog,
+                        'templet_name': respMsg.templet_name
+                    });
+                }
+
+            },
+            error: function() {
+                layer.msg("初始化编辑器失败");
+            }
+        });
+});
+
+</script>
+{/block}

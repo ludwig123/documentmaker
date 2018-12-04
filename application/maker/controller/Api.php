@@ -121,9 +121,9 @@ class Api {
 	
 	
 	/**生成一个文档arr，不含groupId
-	 * @param unknown $info 案件基本信息
-	 * @param unknown $templet 模板
-	 * @return unknown[]|mixed[]
+	 * @param array $info 案件基本信息
+	 * @param string $templet 模板
+	 * @return string[]|mixed[]
 	 */
 	public function generateDoc($info, $templet, $archiveSuitId){
 	   
@@ -359,6 +359,18 @@ class Api {
 	    
 	    
 	    return preg_replace($patterns, $replacements, $str);
+	}
+	
+	public function getArchive($id = ''){
+	    if (empty($id))
+	       $id = getCurrentArchiveId();
+	    $data = Archive::getById($id);
+	    $response = array(
+	        'data'=>$data,
+	        'code'=>'0',
+	        'count'=>count($data)
+	    );
+	    return json($response);
 	}
 	
 }

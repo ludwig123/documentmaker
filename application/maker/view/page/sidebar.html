@@ -1,0 +1,21 @@
+<div class="site-tree">
+
+<ul class="layui-tree">
+	<li><h2>案卷目录</h2></li>
+	{foreach $archives as $key => $vo}
+                <li class="site-tree-noicon ">
+                    <a id={$vo.id}">
+                        <cite>{$vo.archive_name}</cite>
+                        <em>{$vo.archive_remark}</em>
+                    </a>
+                </li>
+	{/foreach}
+               
+            </ul>
+
+</div>
+
+<script type="text/javascript">
+	
+
+</script>
