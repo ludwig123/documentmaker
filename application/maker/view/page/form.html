@@ -386,8 +386,7 @@ layui.use(['form', 'jquery'], function() {
             dataType: "json",
             success: function(respMsg) {
                 var msg = respMsg;
-
-
+                if (msg != '') {
                 form.val("formDemo", {
                     "index": msg['index'],
                     "judge_time": msg['judge_time'],
@@ -425,10 +424,11 @@ layui.use(['form', 'jquery'], function() {
                     "car_type": msg['car_type'],
                     "car_expire": msg['car_expire'],
                     "car_owner": msg['car_owner']
-                })
+                });
+            }
             },
             error: function() {
-                layer.msg("初始化案件失败")
+                layer.msg("初始化案件失败");
             }
         });
     }
@@ -444,14 +444,14 @@ layui.use(['form', 'jquery'], function() {
  
             $.ajax({
                 type: "POST",
-                url: "/documentmaker/public/index.php/maker/api/handleTrafficCase",
+                url: "/documentmaker/public/index.php/maker/api/handleTrafficCase?XDEBUG_SESSION_START",
                 data: data.field,
                 dataType: "json",
                 success: function(respMsg) {
                     layer.msg(respMsg);
                 },
                 error: function() {
-                    layer.msg("提交失败")
+                    layer.msg("提交失败");
                 }
             });
         
@@ -472,17 +472,18 @@ layui.use(['form', 'jquery'], function() {
                 $(":input[name='index']").val(respMsg['index']);
             },
             error: function() {
-                alert("获取数据失败，网络超时！")
+                alert("获取数据失败，网络超时！");
 
             }
         });
-    })
+    });
 
     $('#goPrint').on('click', function() {
         
-        window.location.href = "/documentmaker/public/index.php/maker/page/gaozhibilu";
-    })
+        window.location.href = "/documentmaker/public/index.php/maker/page/editor";
+    });
 
+//查询代码1的违法内容
     $('input[name=code_1]').keyup(function() {
         if ($('input[name=code_1]').val().length >= 5) {
             $.ajax({
@@ -494,21 +495,21 @@ layui.use(['form', 'jquery'], function() {
                     if (respMsg == null) {
                         alert("违法代码不存在！");
                         $('input[name=code_1').val('');
-                        return
+                        return;
                     } else {
                         $('input[name=code_1_content]').val(respMsg['违法内容']);
                     }
 
                 },
                 error: function() {
-                    alert("获取数据失败，网络超时！")
+                    alert("获取数据失败，网络超时！");
 
                 }
             });
         }
 
     });
-
+//查询代码2的违法内容
     $('input[name=code_2]').keyup(function() {
         if ($('input[name=code_2]').val().length >= 5) {
             $.ajax({
@@ -520,14 +521,14 @@ layui.use(['form', 'jquery'], function() {
                     if (respMsg == null) {
                         alert("违法代码不存在！");
                         $('input[name=code_2').val('');
-                        return
+                        return;
                     } else {
                         $('input[name=code_2_content]').val(respMsg['违法内容']);
                     }
 
                 },
                 error: function() {
-                    alert("获取数据失败，网络超时！")
+                    alert("获取数据失败，网络超时！");
 
                 }
             });
@@ -572,6 +573,6 @@ layui.use('jquery', function() {
 
 
 
-})
+});
 </script>
 {/block}

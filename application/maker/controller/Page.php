@@ -17,8 +17,11 @@ class Page extends Controller
             $this->error('你还没有登陆！', '@user/Login');
             ;
         }
-        //
-        setCurrentRecordId($id);
+        if(empty($id)){
+            clearCurrentRecordId($id);
+        }
+        else 
+            setCurrentRecordId($id);
         
         return $this->fetch("form");
     }
@@ -173,8 +176,8 @@ class Page extends Controller
         return $this->fetch("fengmian");
     }
     
-    public function editor($id){
-        setCurrentRecordId($id);
+    public function editor(){
+        $id = getCurrentRecordId();
         $archiveSuit = ArchiveSuit::getByRecordId($id);
         
         setCurrentArchiveSuitId($archiveSuit['id']);

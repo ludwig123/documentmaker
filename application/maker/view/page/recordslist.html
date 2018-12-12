@@ -15,7 +15,7 @@
   <div class="layui-btn-container">
     <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
     <button class="layui-btn layui-btn-sm" lay-event="delete">删除</button>
-    <button class="layui-btn layui-btn-sm" lay-event="update">编辑</button>
+    <button class="layui-btn layui-btn-sm" lay-event="edit">编辑</button>
   </div>
 </script>
 
@@ -71,7 +71,7 @@ table.on('toolbar(test)', function(obj){
 
 			$.ajax({
 				type: "POST",
-				url: "/documentmaker/public/index.php/maker/api/removeTrafficCase" ,
+				url: "/documentmaker/public/index.php/maker/api/removeArchiveSuit?XDEBUG_SESSION_START" ,
 				data: chooseId,
 				dataType: "json",
 				success: function(respMsg) {
@@ -79,25 +79,25 @@ table.on('toolbar(test)', function(obj){
 					window.location.href = "/documentmaker/public/index.php/maker/page/records";
 				},
 				error: function() {
-					layer.msg("删除失败")
+					layer.msg("删除失败");
 				}
 			});
 		}
 		break;
 
-		case 'update':
+		case 'edit':
 		if (checkedId == null) {layer.msg('请先选择一个案件');}
 		else {
-			window.location.href = "/documentmaker/public/index.php/maker/page/editor/id/" + checkedId;
+			window.location.href = "/documentmaker/public/index.php/maker/page/record/id/" + checkedId;
 		}
 		break;
-	};
+	}
 });
 
   //监听行双击事件
 table.on('rowDouble(test)', function(obj){
   var record = obj.data;
-  window.location.href = "/documentmaker/public/index.php/maker/page/editor/id/" + record['id'];
+  window.location.href = "/documentmaker/public/index.php/maker/page/record/id/" + record['id'];
 });
 
 });
