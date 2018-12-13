@@ -367,9 +367,9 @@
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                <button class="layui-btn" lay-submit lay-filter="formDemo" >立即提交</button>
                 <button type="button" class="layui-btn layui-btn-primary" id="goPrint">打印预览</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                <button type="reset" class="layui-btn layui-btn-primary">清空所有内容</button>
             </div>
         </div>
     </form>
@@ -387,45 +387,45 @@ layui.use(['form', 'jquery'], function() {
             success: function(respMsg) {
                 var msg = respMsg;
                 if (msg != '') {
-                form.val("formDemo", {
-                    "index": msg['index'],
-                    "judge_time": msg['judge_time'],
-                    "time": msg['time'],
-                    "place": msg['place'],
-                    "code": msg['code_1'],
-                    "doc_type": msg['doc_type'],
-                    "doc_index": msg['doc_index'],
-                    "code_1": msg['code_1'],
-                    "code_1_content": msg['违法内容_1'],
-                    "code_2": msg['code_2'],
-                    "code_2_content": msg['违法内容_2'],
-                    "evidence": msg['evidence'],
-                    "zhidui": msg['zhidui'],
-                    "dadui": msg['dadui'],
-                    "police_1": msg["police_1"],
-                    "police_2": msg['police_2'],
-                    //当事人信息
-                    "name": msg['name'],
-                    "birth_place": msg['birth_place'],
-                    "nation": msg['nation'],
-                    "sex": msg['sex'],
-                    "identity": msg['identity'],
-                    "phone": msg['phone'],
-                    "address": msg['address'],
-                    "education": msg['education'],
-                    "political": msg['political'],
-                    "company": msg['company'],
-                    //驾驶证信息
-                    "file_num": msg['file_num'],
-                    "driver_type": msg['driver_type'],
-                    "issuer": msg['issuer'],
-                    //车辆信息
-                    "car_num": msg['car_num'],
-                    "car_type": msg['car_type'],
-                    "car_expire": msg['car_expire'],
-                    "car_owner": msg['car_owner']
-                });
-            }
+                    form.val("formDemo", {
+                        "index": msg['index'],
+                        "judge_time": msg['judge_time'],
+                        "time": msg['time'],
+                        "place": msg['place'],
+                        "code": msg['code_1'],
+                        "doc_type": msg['doc_type'],
+                        "doc_index": msg['doc_index'],
+                        "code_1": msg['code_1'],
+                        "code_1_content": msg['违法内容_1'],
+                        "code_2": msg['code_2'],
+                        "code_2_content": msg['违法内容_2'],
+                        "evidence": msg['evidence'],
+                        "zhidui": msg['zhidui'],
+                        "dadui": msg['dadui'],
+                        "police_1": msg["police_1"],
+                        "police_2": msg['police_2'],
+                        //当事人信息
+                        "name": msg['name'],
+                        "birth_place": msg['birth_place'],
+                        "nation": msg['nation'],
+                        "sex": msg['sex'],
+                        "identity": msg['identity'],
+                        "phone": msg['phone'],
+                        "address": msg['address'],
+                        "education": msg['education'],
+                        "political": msg['political'],
+                        "company": msg['company'],
+                        //驾驶证信息
+                        "file_num": msg['file_num'],
+                        "driver_type": msg['driver_type'],
+                        "issuer": msg['issuer'],
+                        //车辆信息
+                        "car_num": msg['car_num'],
+                        "car_type": msg['car_type'],
+                        "car_expire": msg['car_expire'],
+                        "car_owner": msg['car_owner']
+                    });
+                }
             },
             error: function() {
                 layer.msg("初始化案件失败");
@@ -441,25 +441,30 @@ layui.use(['form', 'jquery'], function() {
 
     //监听提交
     form.on('submit(formDemo)', function(data) {
- 
-            $.ajax({
-                type: "POST",
-                url: "/documentmaker/public/index.php/maker/api/handleTrafficCase?XDEBUG_SESSION_START",
-                data: data.field,
-                dataType: "json",
-                success: function(respMsg) {
-                    layer.msg(respMsg);
-                },
-                error: function() {
-                    layer.msg("提交失败");
-                }
-            });
-        
+
+        $.ajax({
+            type: "POST",
+            url: "/documentmaker/public/index.php/maker/api/handleTrafficCase?XDEBUG_SESSION_START",
+            data: data.field,
+            dataType: "json",
+            success: function(respMsg) {
+                layer.msg(respMsg);
+            },
+            error: function() {
+                layer.msg("提交失败");
+            }
+        });
+
 
     });
 
-    $('#getRecord').on('click', function() {
 
+    $('#goPrint').on('click', function() {
+        
+        window.location.href = "/documentmaker/public/index.php/maker/page/editor";
+    });
+
+    function submit() {
         $.ajax({
             type: "POST",
             url: "/documentmaker/public/index.php/maker/api/updateCase",
@@ -476,14 +481,8 @@ layui.use(['form', 'jquery'], function() {
 
             }
         });
-    });
-
-    $('#goPrint').on('click', function() {
-        
-        window.location.href = "/documentmaker/public/index.php/maker/page/editor";
-    });
-
-//查询代码1的违法内容
+    }
+    //查询代码1的违法内容
     $('input[name=code_1]').keyup(function() {
         if ($('input[name=code_1]').val().length >= 5) {
             $.ajax({
@@ -509,7 +508,7 @@ layui.use(['form', 'jquery'], function() {
         }
 
     });
-//查询代码2的违法内容
+    //查询代码2的违法内容
     $('input[name=code_2]').keyup(function() {
         if ($('input[name=code_2]').val().length >= 5) {
             $.ajax({

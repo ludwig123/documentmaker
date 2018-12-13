@@ -6,12 +6,12 @@ use think\facade\Request;
 use app\maker\model\TempletSuit;
 use app\maker\model\TrafficCase;
 use app\maker\model\TempletDoc;
-use phpDocumentor\Reflection\Types\Null_;
 use app\maker\model\Archive;
 use app\maker\model\ArchiveSuit;
 use app\maker\model\Record;
+use think\Controller;
 
-class Api
+class Api extends Controller
 {
 
     public function code()
@@ -46,12 +46,11 @@ class Api
      */
     public function record($id = '')
     {
-        if (! is_police_login()) {
-            $this->error('你还没有登陆！', '@user/Login');
-            ;
-        }
+            if (! is_police_login()) {
+                $this->error('你还没有登陆！', '@user/Login');
+            }
         $id = getCurrentRecordId();
-        if(empty($id))
+        if (empty($id))
             return json('');
         $case = TrafficCase::findById($id);
         // 不能直接返回json_encode是因为框架会自动给他套上json，根据请求类型转换为为html或json
@@ -60,24 +59,22 @@ class Api
 
     public function handleTrafficCase()
     {
-       
         if (empty(getCurrentRecordId())) {
             
             $this->addTrafficCase();
-//             $info = $this->postInfo();
-//             $case = new TrafficCase();
-//             $caseId = $case->add($info);
-//             if (empty($caseId))
-//                 return json('添加失败');
+            // $info = $this->postInfo();
+            // $case = new TrafficCase();
+            // $caseId = $case->add($info);
+            // if (empty($caseId))
+            // return json('添加失败');
             
-//             $templetSuitId = '1';
-//             $archiveSuitId = $this->saveDocs($info, $templetSuitId);
-//             if (empty($archiveSuitId))
-//                 return json('添加失败');
+            // $templetSuitId = '1';
+            // $archiveSuitId = $this->saveDocs($info, $templetSuitId);
+            // if (empty($archiveSuitId))
+            // return json('添加失败');
             
-//             return json('添加成功！');
-        } 
-        else
+            // return json('添加成功！');
+        } else
             $this->refreshTrafficCase(getCurrentRecordId());
     }
 
@@ -88,16 +85,15 @@ class Api
      */
     public function addTrafficCase()
     {
-       
-            
-            $info = $this->postInfo();
-            $case = new TrafficCase();
-            $caseId = $case->add($info);
-            if (empty($caseId))
-                return json('添加失败');
-            
+        $info = $this->postInfo();
+        $case = new TrafficCase();
+        $caseId = $case->add($info);
+        if (empty($caseId))
+            return json('添加失败');
+        else {
+            setCurrentRecordId($caseId);
             return json('添加成功！');
-
+        }
     }
 
     /**
@@ -130,8 +126,7 @@ class Api
         // 确保保存的案卷数和模板文件数量一致
         if (count($added) == count($templets)) {
             return $archiveSuitId;
-        } 
-        else
+        } else
             return false;
     }
 
@@ -183,7 +178,7 @@ class Api
     {
         $info = $this->postInfo();
         if (empty($info))
-            return 
+            return;
         $case = new TrafficCase();
         $data = $case->refresh($id, $info);
         
@@ -297,8 +292,7 @@ class Api
         $templetId = getCurrentTempletId();
         if (! empty($templetId)) {
             return json(TempletDoc::getById($templetId));
-        } 
-        else
+        } else
             return null;
     }
 

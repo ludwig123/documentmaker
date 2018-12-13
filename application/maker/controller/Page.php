@@ -2,11 +2,14 @@
 namespace app\maker\controller;
 
 use app\maker\model\Code;
+use app\maker\model\TempletDoc;
+use app\maker\model\TempletSuit;
 use app\maker\model\TrafficCase;
 use think\Controller;
 use think\facade\Request;
 use app\maker\model\Archive;
 use app\maker\model\ArchiveSuit;
+use app\maker\middleware\Producer;
 
 class Page extends Controller
 {
@@ -17,55 +20,29 @@ class Page extends Controller
             $this->error('你还没有登陆！', '@user/Login');
             ;
         }
-        if(empty($id)){
-            clearCurrentRecordId($id);
-        }
-        else 
+        if (empty($id)) {
+            clearCurrentRecordId();
+        } else
             setCurrentRecordId($id);
         
         return $this->fetch("form");
     }
-    
-    public function records(){
-        if (!is_police_login()){
-            $this->error('你还没有登陆！', '@user/Login');;
+
+    public function records()
+    {
+        if (! is_police_login()) {
+            $this->error('你还没有登陆！', '@user/Login');
+            ;
         }
         clearCurrentRecordId();
         return $this->fetch('recordslist');
     }
-    
-    /**查获经过
-     * @return mixed|string
-     */
-    public function chahuojingguo(){
-        $id = getCurrentRecordId();
-        if (empty($id)){
-            $this->error('请先选择一个案件！', 'records');;
-        }
-        $list = TrafficCase::findById($id);
-        if (!empty($list)){
-            $this->assign('data', $list);
-        }
-        
-        return $this->fetch('chahuojingguo');
-    }
-    
-    public function chahuojingguo2(){
-        setCurrentRecordId('1');
-        $id = getCurrentRecordId();
-        
-//         $list = TrafficCase::findById($id);
-//         if (!empty($list)){
-//             $this->assign('data', $list);
-//         }
-        
-        return $this->fetch('chahuojingguo2');
-    }
-    
-    public function footer(){
+
+    public function footer()
+    {
         return $this->fetch('maker@common/footer');
     }
-    
+
     /**
      * 告知笔录
      *
@@ -74,15 +51,16 @@ class Page extends Controller
     public function gaozhibilu()
     {
         $id = getCurrentRecordId();
-        if (empty($id)){
-                $this->error('请先选择一个案件！', 'records');;
+        if (empty($id)) {
+            $this->error('请先选择一个案件！', 'records');
+            ;
         }
         
         $data = TrafficCase::findById($id);
         
         $code_1 = $code_2 = array();
         if (! empty($data['code_1'])) {
-            $code =  Code::getDetail($data['code_1']);
+            $code = Code::getDetail($data['code_1']);
             if (! empty($code)) {
                 
                 foreach ($code as $k => $v) {
@@ -90,26 +68,25 @@ class Page extends Controller
                 }
             }
         }
-        if (! empty($data['code_2'])){
-            $code =  Code::getDetail($data['code_2']);
-            foreach ($code as $k =>$v){
-                $code_2[$k.'_2'] = $v;
+        if (! empty($data['code_2'])) {
+            $code = Code::getDetail($data['code_2']);
+            foreach ($code as $k => $v) {
+                $code_2[$k . '_2'] = $v;
             }
         }
         
         $data = array_merge($data, $code_1, $code_2);
         
-        if (!empty($data)){
+        if (! empty($data)) {
             $this->assign('data', $data);
         }
         
         $content = $punish = $activity = '';
         
-        
-        if (!empty($data['违法内容_2'])){
-            $content = '。'.$data['违法内容_2'].'行为违反了'.$data['违法条款_2'].'之规定，根据'.$data['处罚依据_2'].'之规定，对你作出处罚';
-            $punish = ';对你'.$data['违法内容_2'].'的违法行为，给予罚款'.$data['罚款金额_2'].'元的处罚;以上两项违法行为，分别裁决、合并执行拟给予你罚款？？？元的处罚';
-            $activity = '，'.$data['违法内容_2'];
+        if (! empty($data['违法内容_2'])) {
+            $content = '。' . $data['违法内容_2'] . '行为违反了' . $data['违法条款_2'] . '之规定，根据' . $data['处罚依据_2'] . '之规定，对你作出处罚';
+            $punish = ';对你' . $data['违法内容_2'] . '的违法行为，给予罚款' . $data['罚款金额_2'] . '元的处罚;以上两项违法行为，分别裁决、合并执行拟给予你罚款？？？元的处罚';
+            $activity = '，' . $data['违法内容_2'];
         }
         ;
         $this->assign('activity', $activity);
@@ -117,12 +94,13 @@ class Page extends Controller
         $this->assign('content', $content);
         return $this->fetch('gaozhibilu');
     }
-    
-    public function juedingshu(){
-        
+
+    public function juedingshu()
+    {
         $id = getCurrentRecordId();
-        if (empty($id)){
-            $this->error('请先选择一个案件！', 'records');;
+        if (empty($id)) {
+            $this->error('请先选择一个案件！', 'records');
+            ;
         }
         $list = TrafficCase::findById($id);
         
@@ -135,83 +113,68 @@ class Page extends Controller
                 }
             }
         }
-        if (! empty($list['code_2'])){
+        if (! empty($list['code_2'])) {
             $code = Code::getDetail($list['code_2']);
-            foreach ($code as $k =>$v){
-                $code_2[$k.'_2'] = $v;
+            foreach ($code as $k => $v) {
+                $code_2[$k . '_2'] = $v;
             }
         }
         
         $list = array_merge($list, $code_1, $code_2);
         
-        if (!empty($list)){
+        if (! empty($list)) {
             $this->assign('data', $list);
         }
         
         return $this->fetch('juedingshu');
     }
-    
-    
-    public function shenpibiao(){
-        $id = getCurrentRecordId();
-        if (empty($id)){
-            $this->error('请先选择一个案件！', 'records');;
-        }
-        $list = TrafficCase::findById($id);
-        if (!empty($list)){
-            $this->assign('data', $list);
-        }
-        return $this->fetch("shenpibiao");
-    }
-    
-    public function fengmian(){
-        $id = getCurrentRecordId();
-        if (empty($id)){
-            $this->error('请先选择一个案件！', 'records');;
-        }
-        $list = TrafficCase::findById($id);
-        if (!empty($list)){
-            $this->assign('data', $list);
-        }
-        return $this->fetch("fengmian");
-    }
-    
-    public function editor(){
-        $id = getCurrentRecordId();
-        $archiveSuit = ArchiveSuit::getByRecordId($id);
+
+    public function editor()
+    {
+        $recordId = getCurrentRecordId();
+        $archiveSuit = ArchiveSuit::getByRecordId($recordId);
         
-        setCurrentArchiveSuitId($archiveSuit['id']);
-        $archives = Archive::getByArchiveGroupId($archiveSuit['id']);
+        // 如果没有卷宗，需要生成卷宗
+        if (empty($archiveSuit)) {
+            $producer = new Producer();
+            
+            $info = TrafficCase::findById($recordId);
+            //暂时全部指定为模板套件1
+            $templetSuitId = '1';
+            $archiveSuitId = $producer->saveDocs($info, $templetSuitId);
+        } else {
+            $archiveSuitId = $archiveSuit['id'];
+        }
+        setCurrentArchiveSuitId($archiveSuitId);
+        $archives = Archive::getByArchiveGroupId($archiveSuitId);
         if (empty(getCurrentArchiveId()))
             setCurrentArchiveId($archives[0]['id']);
         $this->assign('archives', $archives);
         return $this->fetch();
     }
-    
-    public function refresh(){
+
+    public function refresh()
+    {
         $dataArr = Request::post();
         $id = getCurrentArchiveId();
-        if (empty($id)){
-            
-        }
-        else {
-            $id = Archive::refresh($id,$dataArr);
+        if (empty($id)) {} else {
+            $id = Archive::refresh($id, $dataArr);
         }
         
-        
-        if (empty($id)){
+        if (empty($id)) {
             return json("更新失败");
+        } 
+        else
+            return json("更新成功！");
+    }
+
+    private function checkLogin()
+    {
+        if (! is_police_login()) {
+            $this->error('你还没有登陆！', '@user/Login');
+            ;
         }
         
-        else return json("更新成功！");
+        return;
     }
-    
-    private function checkLogin(){
-        if (!is_police_login()){
-            $this->error('你还没有登陆！', '@user/Login');;
-        }
-        
-        return ;
-    }
-    
 }

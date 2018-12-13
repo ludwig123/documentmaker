@@ -163,7 +163,7 @@ function data_auth_sign($data) {
 
 function get_cur_domain()
 {
-    return is_http_secure() ? 'https://' : 'http://' . $_SERVER['HTTP_HOST'];
+   // return is_http_secure() ? 'https://' : 'http://' . $_SERVER['HTTP_HOST'];
 }
 
 function get_cur_url($is_domain = false)
@@ -173,6 +173,7 @@ function get_cur_url($is_domain = false)
         
         return $_SERVER['REQUEST_URI'];
 }
+
 
 function is_police_login(){
     $user = session ( 'user' );
@@ -184,6 +185,7 @@ function is_police_login(){
     return true;
 }
 
+//模板套装
 function setCurrentRecordId($id){
     session('nowReadRecord', $id);
     return ;
@@ -198,6 +200,7 @@ function clearCurrentRecordId(){
     return ;
 }
 
+//模板
 function setCurrentTempletId($id){
     session('nowReadRecord', $id);
     return ;
@@ -212,7 +215,7 @@ function clearCurrentTempletId(){
     return ;
 }
 
-
+//文件卷宗
 function setCurrentArchiveSuitId($id){
     session('nowReadArchiveSuit', $id);
     return ;
@@ -227,6 +230,7 @@ function clearCurrentArchiveSuitId(){
     return ;
 }
 
+//文件
 function setCurrentArchiveId($id){
     session('nowReadArchive', $id);
     return ;

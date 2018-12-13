@@ -39,7 +39,7 @@ class Templet extends Controller
         $dataArr = Request::post();
         $id = getCurrentTempletId();
         if (empty($id)){
-            $id = TempletDoc::add($data);
+            $id = TempletDoc::add($dataArr);
         }
         else {
             $id = TempletDoc::refresh($id,$dataArr);

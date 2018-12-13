@@ -36,14 +36,6 @@ class Api extends Controller
         
     }
     
-    
-    /**获取自己的指定模板
-     *
-     */
-    public function getTemplets(){
-        
-    }
-    
     public function submitTemplet(){
         $data = Request::post();
         

@@ -19,7 +19,8 @@
 		"topthink/framework" : "5.1.*",
 		"topthink/think-testing" : "2.*",
 		"topthink/think-captcha" : "2.*",
-		"topthink/think-mongo" : "~2.0"
+		"topthink/think-mongo" : "~2.0",
+		"phpstan/phpstan" : "0.10.x-dev"
 	},
 	"autoload" : {
 		"psr-4" : {
