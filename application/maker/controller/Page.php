@@ -164,8 +164,9 @@ class Page extends Controller
         if (empty($id)) {
             return json("更新失败");
         } 
-        else
+        else{
             return json("更新成功！");
+        }
     }
 
     private function checkLogin()

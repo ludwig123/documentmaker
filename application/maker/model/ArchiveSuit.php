@@ -49,6 +49,10 @@ class ArchiveSuit extends Model implements iCURD
         return false;
     }
 
+    /**删除一条记录
+     * @param string $id
+     * @return string|boolean
+     */
     public static function remove($id)
     {
         $model = ArchiveSuit::get($id);
