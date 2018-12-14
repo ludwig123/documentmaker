@@ -24,7 +24,7 @@ class TempletDoc extends Model
     }
     
     public static function getByGroupId($groupId){
-        return db('templet_doc')->where('group_id ='.$groupId)->select();
+        return db('templet_doc')->where('templet_group_id ='.$groupId)->select();
     }
     
     public static function getCatalogArr(){
@@ -38,6 +38,7 @@ class TempletDoc extends Model
      */
     public static function add($dataArr){
         $templet = new TempletDoc;
+        $templet->templet_group_id = empty($dataArr['templet_group_id']) ? 0 : $dataArr['templet_group_id'];
         $templet->templet_catalog = empty($dataArr['templet_catalog']) ? NULL : $dataArr['templet_catalog'];
         $templet->templet_name = empty($dataArr['templet_name']) ? NULL : $dataArr['templet_name'];
         $templet->templet_content = empty($dataArr['templet_content']) ? NULL : $dataArr['templet_content'];
@@ -55,8 +56,13 @@ class TempletDoc extends Model
             return false;
     }
     
+    public static function removeByGroupId($id){
+        return db('templet_doc')->where('templet_group_id', $id)->delete();
+    }
+    
     public static function refresh($id = '', $dataArr){
         $templet = array();
+        $templet['templet_group_id'] = empty($dataArr['templet_group_id']) ? NULL : $dataArr['templet_group_id'];
         $templet['templet_catalog'] = empty($dataArr['templet_catalog']) ? NULL : $dataArr['templet_catalog'];
         $templet['templet_name'] = empty($dataArr['templet_name']) ? NULL : $dataArr['templet_name'];
         $templet['templet_content'] = empty($dataArr['templet_content']) ? NULL : $dataArr['templet_content'];

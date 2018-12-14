@@ -13,7 +13,10 @@ class Templet extends Controller
         if (empty($id)){
             clearCurrentTempletId();
         }
-        setCurrentTempletId($id);
+        else {
+            setCurrentTempletId($id);
+        }
+        
         $catalogs = TempletDoc::getCatalogArr();
         $this->assign('catalogs', $catalogs);
         
@@ -30,23 +33,27 @@ class Templet extends Controller
       return  $this->fetch();
     }
     
-    public function detail(){
+    public function detail($id){
+        setCurrentTempletSuitId($id);
         return $this->fetch();
     }
     
     
-    public function refresh(){
+    public function refreshTempletDoc(){
         $dataArr = Request::post();
-        $id = getCurrentTempletId();
-        if (empty($id)){
-            $id = TempletDoc::add($dataArr);
+        $templetSuitId = getCurrentTempletSuitId();
+        $templetDocId = getCurrentTempletId();
+        //新增模板文件
+        if (empty($templetDocId)){
+            $dataArr['templet_group_id'] = $templetSuitId;
+            $templetDocId = TempletDoc::add($dataArr);
         }
         else {
-            $id = TempletDoc::refresh($id,$dataArr);
+            $templetDocId = TempletDoc::refresh($templetDocId,$dataArr);
         }
         
 
-        if (empty($id)){
+        if (empty($templetDocId)){
             return json("更新失败");
         }
         
@@ -55,6 +62,10 @@ class Templet extends Controller
     
     public function list(){
         return  $this->fetch();
+    }
+    
+    public function addSuit(){
+        return $this->fetch();
     }
     
 }

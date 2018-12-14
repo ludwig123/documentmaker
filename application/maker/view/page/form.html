@@ -454,7 +454,7 @@ layui.use(['form', 'jquery'], function() {
                 layer.msg("提交失败");
             }
         });
-
+        return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
 
     });
 
@@ -464,24 +464,6 @@ layui.use(['form', 'jquery'], function() {
         window.location.href = "/documentmaker/public/index.php/maker/page/editor";
     });
 
-    function submit() {
-        $.ajax({
-            type: "POST",
-            url: "/documentmaker/public/index.php/maker/api/updateCase",
-            data: "",
-            dataType: "json",
-            success: function(respMsg) {
-                var msg = respMsg;
-                layer.msg("获取数据成功！");
-                layer.msg(respMsg['index']);
-                $(":input[name='index']").val(respMsg['index']);
-            },
-            error: function() {
-                alert("获取数据失败，网络超时！");
-
-            }
-        });
-    }
     //查询代码1的违法内容
     $('input[name=code_1]').keyup(function() {
         if ($('input[name=code_1]').val().length >= 5) {
@@ -568,10 +550,5 @@ layui.use('laydate', function() {
     });
 });
 
-layui.use('jquery', function() {
-
-
-
-});
 </script>
 {/block}

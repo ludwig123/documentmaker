@@ -3,8 +3,8 @@ namespace app\maker\middleware;
 
 use app\maker\model\Archive;
 use app\maker\model\ArchiveSuit;
+use app\maker\model\TempletDoc;
 use app\maker\model\TempletSuit;
-use app\repo\model\TempletDoc;
 
 class Producer{
     /**

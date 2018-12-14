@@ -21,9 +21,10 @@
 
 <script>
 	setPageTitle("我的模板");
-	    $("#page-main").removeClass("layui-this");
+	$("#page-main").removeClass("layui-this");
     $("#page-templet").addClass("layui-this");
-	layui.use('table', function(){
+
+	layui.use(['table','layer'], function(){
 		var table = layui.table;
 		var checkedId;
 
@@ -59,8 +60,31 @@ table.on('toolbar(test)', function(obj){
 	var checkStatus = table.checkStatus(obj.config.id);
 	switch(obj.event){
 		case 'add':
-		window.location.href = "/documentmaker/public/index.php/maker/templet/detail";
+			// layer.open({
+			// 	  type: 2,
+			// 	  title: false,
+			// 	  closeBtn: 0, //不显示关闭按钮
+			// 	  shade: [0],
+			// 	  area: ['340px', '215px'],
+			// 	  offset: 'rb', //右下角弹出
+			// 	  time: 1, //2秒后自动关闭
+			// 	  anim: 2,
+			// 	  content: '', //iframe的url，no代表不显示滚动条
+			// 	  end: function(){ //此处用于演示
+			// 	    layer.open({
+			// 	      type: 2,
+			// 	      title: '请添加模板套装',
+			// 	      shadeClose: true,
+			// 	      shade: false,
+			// 	      maxmin: true, //开启最大化最小化按钮
+			// 	      area: ['893px', '600px'],
+			// 	      content: '/documentmaker/public/index.php/maker/templet/addsuit'
+			// 	    });
+			// 	  }
+			// 	});
+		 window.location.href = "/documentmaker/public/index.php/maker/templet/addsuit";
 		break;
+
 
 		case 'delete':
 		if (checkedId == null) {layer.msg('请先选择一个案件');}
@@ -69,15 +93,15 @@ table.on('toolbar(test)', function(obj){
 
 			$.ajax({
 				type: "POST",
-				url: "/documentmaker/public/index.php/maker/api/removeTemplet" ,
+				url: "/documentmaker/public/index.php/maker/api/removeTempletSuit" ,
 				data: chooseId,
 				dataType: "json",
 				success: function(respMsg) {
 					layer.msg(respMsg);
-					window.location.href = "/documentmaker/public/index.php/maker/templet/list";
+					window.location.href = "/documentmaker/public/index.php/maker/templet/";
 				},
 				error: function() {
-					layer.msg("删除失败")
+					layer.msg("删除失败");
 				}
 			});
 		}
@@ -89,7 +113,7 @@ table.on('toolbar(test)', function(obj){
 			window.location.href = "/documentmaker/public/index.php/maker/templet/detail/id/" + checkedId;
 		}
 		break;
-	};
+	}
 });
 
   //监听行双击事件

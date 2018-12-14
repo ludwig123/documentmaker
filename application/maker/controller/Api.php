@@ -95,6 +95,18 @@ class Api extends Controller
             return json('添加成功！');
         }
     }
+    
+    public function addTempletSuit()
+    {
+        $info = $this->postInfo();
+        
+        $id = TempletSuit::add($info);
+        if (empty($id))
+            return json('添加失败');
+            else {
+                return json('添加成功！');
+            }
+    }
 
     /**
      * 将案件的元素信息生成案件，并保存文档
@@ -197,7 +209,19 @@ class Api extends Controller
         $case = new TrafficCase();
         $case->remove($info['id']);
         
-        if ($case !== false) {
+        if ($case != false) {
+            return json('删除成功');
+        }
+        
+        return json('删除失败');
+    }
+    
+    public function removeTempletSuit()
+    {
+        $info = $this->postInfo();
+        $id = TempletSuit::remove($info['id']);
+        
+        if ($id != false) {
             return json('删除成功');
         }
         
@@ -258,8 +282,9 @@ class Api extends Controller
         return json($response);
     }
 
-    public function tempLetDetail($id = '1')
+    public function tempLetDetail()
     {
+        $id = getCurrentTempletSuitId();
         $temp = TempletDoc::getByGroupId($id);
         $templets = array();
         foreach ($temp as $k => $v) {

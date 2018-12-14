@@ -1,0 +1,78 @@
+{extend name="maker@common/base" /}
+{block name="main"}
+<div class="site-text se-block">
+    <form class="layui-form" lay-filter="formDemo" action="">
+        <div class="site-title">
+            <fieldset>
+                <legend><a name="input">案卷信息</a></legend>
+            </fieldset>
+        </div>
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <div class="layui-col-md4">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">模板名称</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="suit_name" placeholder="B2准驾不符,面包车改型,轻微财损的事故证明" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <div class="layui-col-md4">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">模板类别</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="suit_catalog" placeholder="交通不拘留案卷，交通拘留案卷，事故" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-fluid">
+            <div class="layui-col-md4">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">备注</label>
+                    <div class="layui-input-block">
+                        <textarea name="suit_remark" placeholder="本模板的详细描述" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">清空所有内容</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+layui.use(['form', 'jquery'], function() {
+    var form = layui.form;
+
+    //监听提交
+    form.on('submit(formDemo)', function(data) {
+
+        $.ajax({
+            type: "POST",
+            url: "/documentmaker/public/index.php/maker/api/addTempletSuit",
+            data: data.field,
+            dataType: "json",
+            success: function(respMsg) {
+                layer.msg(respMsg);
+                window.location.href = "/documentmaker/public/index.php/maker/Templet/index";
+            },
+            error: function() {
+                layer.msg("提交失败");
+            }
+        });
+        return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+
+    });
+
+});
+</script>
+{/block}

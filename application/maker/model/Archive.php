@@ -58,4 +58,9 @@ class Archive extends Model implements iCURD
             return $model->delete();
             return false;
     }
+    
+    public static function removeByGroupId($groupId){
+        return db('archive')->where('archive_group_id', $groupId)->delete();
+        
+    }
 }

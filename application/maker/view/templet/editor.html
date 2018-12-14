@@ -68,7 +68,7 @@ $('#save').click(function() {
 
     $.ajax({
         type: "POST",
-        url: "/documentmaker/public/index.php/maker/templet/refresh",
+        url: "/documentmaker/public/index.php/maker/templet/refreshTempletDoc",
         data: mydata,
         dataType: "json",
         success: function(respMsg) {

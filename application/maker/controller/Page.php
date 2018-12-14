@@ -133,18 +133,27 @@ class Page extends Controller
     {
         $recordId = getCurrentRecordId();
         $archiveSuit = ArchiveSuit::getByRecordId($recordId);
-        
+        $record = TrafficCase::findById($recordId);
         // 如果没有卷宗，需要生成卷宗
         if (empty($archiveSuit)) {
             $producer = new Producer();
             
-            $info = TrafficCase::findById($recordId);
+            
             //暂时全部指定为模板套件1
             $templetSuitId = '1';
-            $archiveSuitId = $producer->saveDocs($info, $templetSuitId);
+            
+            
+            
+            $archiveSuitId = $producer->saveDocs($$record, $templetSuitId);
         } else {
+            
             $archiveSuitId = $archiveSuit['id'];
+            $archiveSuitCreatTime = $archiveSuit['create_time'];
+            $recordIdUpdateTime = $record['update_time'];
+           
         }
+        
+        
         setCurrentArchiveSuitId($archiveSuitId);
         $archives = Archive::getByArchiveGroupId($archiveSuitId);
         if (empty(getCurrentArchiveId()))

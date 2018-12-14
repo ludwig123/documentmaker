@@ -57,7 +57,8 @@ class ArchiveSuit extends Model implements iCURD
     {
         $model = ArchiveSuit::get($id);
         if (! empty($model)) {
-            db('archive')->where('archive_group_id', $id)->delete();
+//             db('archive')->where('archive_group_id', $id)->delete();
+            Archive::removeByGroupId($id);
             return $model->delete();
         }
         

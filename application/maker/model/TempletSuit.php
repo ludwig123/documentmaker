@@ -12,6 +12,7 @@ class TempletSuit extends Model implements iCURD
         $suit->suit_catalog = empty($dataArr['suit_catalog']) ? NULL : $dataArr['suit_catalog'];
         $suit->suit_name = empty($dataArr['suit_name']) ? NULL : $dataArr['suit_name'];
         $suit->suit_owner = empty($dataArr['suit_owner']) ? 0 : $dataArr['suit_owner'];
+        $suit->suit_remark = empty($dataArr['suit_remark']) ? 0 : $dataArr['suit_remark'];
         if ($suit->save())
             return $suit->id;
             
@@ -29,6 +30,7 @@ class TempletSuit extends Model implements iCURD
         $suit['suit_catalog'] = empty($dataArr['suit_catalog']) ? NULL : $dataArr['suit_catalog'];
         $suit['suit_name'] = empty($dataArr['suit_name']) ? NULL : $dataArr['suit_name'];
         $suit['suit_owner'] = empty($dataArr['suit_owner']) ? NULL : $dataArr['suit_owner'];
+        $suit['suit_remark'] = empty($dataArr['suit_remark']) ? NULL : $dataArr['suit_remark'];
         
         foreach ($suit as $k => $v){
             if ($v == NULL) unset($suit[$k]);
@@ -43,8 +45,10 @@ class TempletSuit extends Model implements iCURD
     public static function remove($id)
     {
         $obj = TempletSuit::get($id);
-        if (!empty($obj))
+        if (!empty($obj)){
+            TempletDoc::removeByGroupId($id);
             return $obj->delete();
+        }
             return false;
     }
     
