@@ -71,7 +71,7 @@ table.on('toolbar(test)', function(obj){
 
 			$.ajax({
 				type: "POST",
-				url: "/documentmaker/public/index.php/maker/api/removeArchiveSuit?XDEBUG_SESSION_START" ,
+				url: "/documentmaker/public/index.php/maker/api/removeTrafficCase" ,
 				data: chooseId,
 				dataType: "json",
 				success: function(respMsg) {

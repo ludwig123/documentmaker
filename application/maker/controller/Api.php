@@ -206,9 +206,11 @@ class Api extends Controller
     public function removeTrafficCase()
     {
         $info = $this->postInfo();
+        $recordId = $info['id'];
         $case = new TrafficCase();
-        $case->remove($info['id']);
+        $case->remove($recordId);
         
+        $num = ArchiveSuit::removeByRecordId($recordId);
         if ($case != false) {
             return json('删除成功');
         }

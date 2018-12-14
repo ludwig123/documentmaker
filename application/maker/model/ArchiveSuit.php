@@ -67,14 +67,14 @@ class ArchiveSuit extends Model implements iCURD
 
     public static function removeByRecordId($recordId)
     {
-        $dest = db('archive_suit')->where('record_id', $recordId)->select();
-        if (empty($dest))
+        $archiveSuit = db('archive_suit')->where('record_id', $recordId)->select();
+        if (empty($archiveSuit))
             return false;
         
-        $id = $dest['id'];
+        $archiveSuitId = $archiveSuit['id'];
         
         //删除文档
-        $num = db('archive')->where('archive_group_id', $id)->delete();
+        $num = db('archive')->where('archive_group_id', $archiveSuitId)->delete();
         if (empty($num))
             return false;
         
