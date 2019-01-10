@@ -16,6 +16,17 @@ class TempletRepository extends RepositoryBase{
     public function refresh($id, $data)
     {}
 
+    public function temples($user){
+        
+    }
+    
+    public function templet($user, $templetId){
+         
+    }
+    
+    public function search($user, $keyword){
+        
+    }
 
 
     
