@@ -20,13 +20,9 @@ class Api extends BaseController
     public function code()
     {
         $code = Code::all();
-        $data = array(
-            'data' => $code,
-            'code' => '0',
-            'count' => count($code)
-        );
+        $list4LayUITable = $this->list4LayUITable($code);
         
-        return json($data);
+        return json($list4LayUITable);
     }
 
     public function records()
@@ -34,12 +30,9 @@ class Api extends BaseController
         $trafficCase = new TrafficCase();
         $records = $trafficCase->all();
         
-        $response = array(
-            'data' => $records,
-            'code' => '0',
-            'count' => count($records)
-        );
-        return json($response);
+        $list4LayUITable = $this->list4LayUITable($records);
+        
+        return json($list4LayUITable);
     }
 
     /**
@@ -49,9 +42,6 @@ class Api extends BaseController
      */
     public function record($id = '')
     {
-//             if (! is_police_login()) {
-//                 $this->error('你还没有登陆！', '@user/Login');
-//             }
         $id = getCurrentRecordId();
         if (empty($id))
             return json('');
@@ -178,12 +168,11 @@ class Api extends BaseController
             unset($v['suit_content']);
             $templets[] = $v;
         }
-        $response = array(
-            'data' => $templets,
-            'code' => '0',
-            'count' => count($templets)
-        );
-        return json($response);
+        
+        $list4LayUITable = $this->list4LayUITable($templets);
+        
+        return json($list4LayUITable);
+
     }
 
     public function tempLetDetail()
@@ -195,12 +184,10 @@ class Api extends BaseController
             unset($v['templet_content']);
             $templets[] = $v;
         }
-        $response = array(
-            'data' => $templets,
-            'code' => '0',
-            'count' => count($templets)
-        );
-        return json($response);
+        
+        $list4LayUITable = $this->list4LayUITable($templets);
+        
+        return json($list4LayUITable);
     }
 
     public function refreshTemplet($id = '')
@@ -237,11 +224,22 @@ class Api extends BaseController
         if (empty($id))
             $id = getCurrentArchiveId();
         $data = Archive::getById($id);
-        $response = array(
-            'data' => $data,
-            'code' => '0',
-            'count' => count($data)
+        
+        $list4LayUITable = $this->list4LayUITable($data);
+        
+        return json($list4LayUITable);
+    }
+    
+    /**把数组列表转化成Layui table 要求的形式
+     * @param array $dataArr
+     * @param string $codeStatus
+     * @return array
+     */
+    private function list4LayUITable($dataArr, $codeStatus = '0'){
+       return array(
+           'data' => $dataArr,
+           'code' => $codeStatus,
+          'count' => count($dataArr)
         );
-        return json($response);
     }
 }
