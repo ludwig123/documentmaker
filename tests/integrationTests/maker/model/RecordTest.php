@@ -1,4 +1,5 @@
 <?php
+use PHPUnit\Framework\TestCase;
 use app\maker\model\Record;
 
 require_once 'application/maker/model/Record.php';
@@ -6,7 +7,7 @@ require_once 'application/maker/model/Record.php';
 /**
  * Record test case.
  */
-class RecordTest extends PHPUnit_Framework_TestCase
+class RecordTest extends TestCase
 {
 
     /**
@@ -15,36 +16,6 @@ class RecordTest extends PHPUnit_Framework_TestCase
      */
     private $record;
 
-    /**
-     * Prepares the environment before running a test.
-     */
-    protected function setUp()
-    {
-        parent::setUp();
-        
-        // TODO Auto-generated RecordTest::setUp()
-        
-        $this->record = new Record(/* parameters */);
-    }
-
-    /**
-     * Cleans up the environment after running a test.
-     */
-    protected function tearDown()
-    {
-        // TODO Auto-generated RecordTest::tearDown()
-        $this->record = null;
-        
-        parent::tearDown();
-    }
-
-    /**
-     * Constructs the test case.
-     */
-    public function __construct()
-    {
-        // TODO Auto-generated constructor
-    }
 
     /**
      * Tests Record->man()
@@ -126,7 +97,6 @@ class RecordTest extends PHPUnit_Framework_TestCase
             ,'identity' => '430444198912222222'
             ,'car_num' => '湘D8888'  //car
             ,'file_num' =>'4224110000'
-            ,'name' => '陶一斤'
             ,'sex' => '女'
             ,'index' => '435405000029019'
         ];
@@ -140,7 +110,6 @@ class RecordTest extends PHPUnit_Framework_TestCase
             ,'identity' => '4304441989133333'
             ,'car_num' => '湘D8885'  //car
             ,'file_num' =>'4224113333'
-            ,'name' => '陶一斤'
             ,'sex' => '女'
             ,'index' => '435405000029014'
         ];

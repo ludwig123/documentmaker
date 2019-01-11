@@ -1,4 +1,5 @@
 <?php
+use PHPUnit\Framework\TestCase;
 use app\maker\model\TrafficCase;
 
 
@@ -6,7 +7,7 @@ use app\maker\model\TrafficCase;
 /**
  * TrafficCase test case.
  */
-class TrafficCaseTest extends PHPUnit_Framework_TestCase
+class TrafficCaseTest extends TestCase
 {
 
     /**
@@ -14,37 +15,6 @@ class TrafficCaseTest extends PHPUnit_Framework_TestCase
      * @var TrafficCase
      */
     private $trafficCase;
-
-    /**
-     * Prepares the environment before running a test.
-     */
-    protected function setUp()
-    {
-        parent::setUp();
-        
-        // TODO Auto-generated TrafficCaseTest::setUp()
-        
-        $this->trafficCase = new TrafficCase('1');
-    }
-
-    /**
-     * Cleans up the environment after running a test.
-     */
-    protected function tearDown()
-    {
-        // TODO Auto-generated TrafficCaseTest::tearDown()
-        $this->trafficCase = null;
-        
-        parent::tearDown();
-    }
-
-    /**
-     * Constructs the test case.
-     */
-    public function __construct()
-    {
-        // TODO Auto-generated constructor
-    }
 
     /**
      * Tests TrafficCase->getDecisionNum()

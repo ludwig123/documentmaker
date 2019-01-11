@@ -1,4 +1,5 @@
 <?php
+use PHPUnit\Framework\TestCase;
 use app\maker\model\Code;
 
 require_once 'application/maker/model/Code.php';
@@ -6,7 +7,7 @@ require_once 'application/maker/model/Code.php';
 /**
  * Code test case.
  */
-class CodeTest extends PHPUnit_Framework_TestCase
+class CodeTest extends TestCase
 {
 
     /**
@@ -15,33 +16,7 @@ class CodeTest extends PHPUnit_Framework_TestCase
      */
     private $code;
 
-    /**
-     * Prepares the environment before running a test.
-     */
-    protected function setUp()
-    {
-        parent::setUp();
-        
-        
-        $this->code = new Code(/* parameters */);
-    }
-
-    /**
-     * Cleans up the environment after running a test.
-     */
-    protected function tearDown()
-    {
-        $this->code = null;
-        
-        parent::tearDown();
-    }
-
-    /**
-     * Constructs the test case.
-     */
-    public function __construct()
-    {
-    }
+     
 
     /**
      * Tests Code::getDetail()

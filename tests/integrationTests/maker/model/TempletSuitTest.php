@@ -1,18 +1,19 @@
 <?php
+use PHPUnit\Framework\TestCase;
 use app\maker\model\TempletSuit;
-use phpDocumentor\Reflection\Types\Null_;
 
 
 /**
  * TempletSuit test case.
  */
-class TempletSuitTest extends PHPUnit_Framework_TestCase
+class TempletSuitTest extends TestCase
 {
 
     protected static $id, $owner, $otherOwner;
     
     public function __construct()
     {
+        parent::__construct();
         self::$owner = '0';
         self::$otherOwner = '999';
     }
@@ -29,7 +30,6 @@ class TempletSuitTest extends PHPUnit_Framework_TestCase
         self::$id = TempletSuit::add($data, self::$owner);
         $this->assertGreaterThan(1, self::$id);
     }
-    
     
     /**
      *@depends testAdd_default_returnId

@@ -1,12 +1,9 @@
 <?php
 
-
-/**
- * ArchiveSuit test case.
- */
 use app\maker\model\ArchiveSuit;
+use PHPUnit\Framework\TestCase;
 
-class ArchiveSuitTest extends PHPUnit_Framework_TestCase
+class ArchiveSuitTest extends TestCase
 {
 
     protected static $id;

@@ -1,5 +1,6 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
 use app\maker\model\TempletDoc;
 
 require_once 'application/maker/controller/Templet.php';
@@ -7,12 +8,10 @@ require_once 'application/maker/controller/Templet.php';
 /**
  * Templet test case.
  */
-class TempletDocTest extends PHPUnit_Framework_TestCase
+class TempletDocTest extends TestCase
 {
     
     protected static $id;
-
-
 
     public function testAdd_addDefaultTemplet_returnId()
     {

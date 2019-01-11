@@ -2,6 +2,7 @@
 parameters:
 	level: 0
 	autoload_directories:
+		- %rootDir%/../../../application
 		- %rootDir%/../../../tests
 		- %rootDir%/../../../extend
 	ignoreErrors:

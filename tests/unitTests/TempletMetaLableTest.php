@@ -4,9 +4,10 @@
  * MetaLable test case.
  */
 
+use PHPUnit\Framework\TestCase;
 use app\maker\model\TempletMetaLabel;
 
-class TempletMetaLableTest extends PHPUnit_Framework_TestCase
+class TempletMetaLableTest extends TestCase
 {
 
 

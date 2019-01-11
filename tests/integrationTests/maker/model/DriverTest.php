@@ -1,4 +1,5 @@
 <?php
+use PHPUnit\Framework\TestCase;
 use app\maker\model\Driver;
 
 require_once 'application/maker/model/Driver.php';
@@ -6,7 +7,7 @@ require_once 'application/maker/model/Driver.php';
 /**
  * Driver test case.
  */
-class DriverTest extends PHPUnit_Framework_TestCase
+class DriverTest extends TestCase
 {
 
     /**
@@ -15,36 +16,6 @@ class DriverTest extends PHPUnit_Framework_TestCase
      */
     private $driver;
 
-    /**
-     * Prepares the environment before running a test.
-     */
-    protected function setUp()
-    {
-        parent::setUp();
-        
-        // TODO Auto-generated DriverTest::setUp()
-        
-        $this->driver = new Driver(/* parameters */);
-    }
-
-    /**
-     * Cleans up the environment after running a test.
-     */
-    protected function tearDown()
-    {
-        // TODO Auto-generated DriverTest::tearDown()
-        $this->driver = null;
-        
-        parent::tearDown();
-    }
-
-    /**
-     * Constructs the test case.
-     */
-    public function __construct()
-    {
-        // TODO Auto-generated constructor
-    }
 
     /**
      * Tests Driver::add()

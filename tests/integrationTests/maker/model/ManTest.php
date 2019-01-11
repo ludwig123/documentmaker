@@ -1,4 +1,5 @@
 <?php
+use PHPUnit\Framework\TestCase;
 use app\maker\model\Man;
 
 require_once 'application/maker/model/Man.php';
@@ -6,7 +7,7 @@ require_once 'application/maker/model/Man.php';
 /**
  * Man test case.
  */
-class ManTest extends PHPUnit_Framework_TestCase
+class ManTest extends TestCase
 {
 
     /**
@@ -15,36 +16,6 @@ class ManTest extends PHPUnit_Framework_TestCase
      */
     private $man;
 
-    /**
-     * Prepares the environment before running a test.
-     */
-    protected function setUp()
-    {
-        parent::setUp();
-        
-        // TODO Auto-generated ManTest::setUp()
-        
-        $this->man = new Man(/* parameters */);
-    }
-
-    /**
-     * Cleans up the environment after running a test.
-     */
-    protected function tearDown()
-    {
-        // TODO Auto-generated ManTest::tearDown()
-        $this->man = null;
-        
-        parent::tearDown();
-    }
-
-    /**
-     * Constructs the test case.
-     */
-    public function __construct()
-    {
-        // TODO Auto-generated constructor
-    }
 
     /**
      * Tests Man::add()

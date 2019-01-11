@@ -1,11 +1,11 @@
 <?php
 use app\maker\model\Car;
-use PHPUnit\Framework;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Car test case.
  */
-class CarTest extends PHPUnit_Framework_TestCase
+class CarTest extends TestCase
 {
 
     /**
