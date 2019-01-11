@@ -5,42 +5,23 @@
     <meta charset="UTF-8">
     <title>酸辣季真</title>
     <link rel="shortcut icon" href="__STATIC__/favicon.ico">
-    
-    {load href="__STATIC__/layui/css/layui.css" /} 
-    {load href="__STATIC__/layui/css/global.css" /} 
-    {load href="__STATIC__/maker/tools.js" /} 
-    {load href="__STATIC__/police.css"/} 
-    {load href="__STATIC__/jquery-3.3.1.min.js"/} 
-    {load href="__STATIC__/jquery.print.min.js"/} 
-    {load href="__STATIC__/layui/layui.js"/} 
-    {load href="__STATIC__/squire/squire-raw.js"/} 
-    {load href="__STATIC__/squire/Squire-UI.js"/} 
-
+    {load href="__STATIC__/layui/css/layui.css" /}
+    {load href="__STATIC__/layui/css/global.css" /}
+    {load href="__STATIC__/maker/tools.js" /}
+    {load href="__STATIC__/police.css"/}
+    {load href="__STATIC__/jquery-3.3.1.min.js"/}
+    {load href="__STATIC__/layui/layui.js"/}
+    {load href="__STATIC__/squire/squire-raw.js"/}
+    {load href="__STATIC__/squire/Squire-UI.js"/}
     {load href="__STATIC__/squire/Squire-UI.css"/}
-    {load href="__STATIC__/common.js"/}  
-    {block name="style"}{/block}
+    {load href="__STATIC__/common.js"/}
+    <!--     {block name="style"}{/block} -->
 </head>
 
 <body>
-    {include file="maker@common/menu" /}
-    {block name="printmode"}{/block}
-    {block name="main"}{/block}
-
-    
-    {include file="maker@common/footer" /}
-    
-    <script type="text/javascript">
-    //主动加载jquery模块
-    layui.use(['jquery', 'layer'], function() {
-        var $ = layui.$; //重点处
-        
-        var layer = layui.layer;
-
-        var element = layui.element;        //后面就跟你平时使用jQuery一样
-    });
-
-
-</script>
+    {include file='maker@common/menu' /}
 </body>
+{block name="printmode"}{/block}
+{block name="main"}{/block}
 
 </html>

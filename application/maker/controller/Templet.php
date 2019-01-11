@@ -7,8 +7,11 @@ use think\facade\Request;
 use app\maker\model\TempletMetaLabel;
 
 
-class Templet extends Controller
+class Templet extends BaseController
 {
+    public function __construct(){
+        parent::__construct();
+    }
     public function editor($id = ''){
         if (empty($id)){
             clearCurrentTempletId();

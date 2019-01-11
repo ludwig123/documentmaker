@@ -1,4 +1,5 @@
 <?php
+namespace app\maker\model;
 use app\maker\model\iCURD;
 use think\Model;
 

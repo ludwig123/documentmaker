@@ -1,88 +1,89 @@
 <div class="layui-header header header-doc" autumn="">
-        <div class="layui-main">
-            <a class="logo" href="/documentmaker/public/index.php">
-				<img src="__STATIC__/maker/logo.png">
-			</a>
-            <div class="layui-form component" lay-filter="LAY-site-header-component">
-                <select lay-search="" lay-filter="component">
-                    <option value="">搜索案卷编号</option>
-                    <option value="element/layout.html">grid 栅格布局</option>
-                    <option value="element/layout.html#admin">admin 后台布局</option>
-                    <option value="element/color.html">color 颜色</option>
-                    <option value="element/icon.html">iconfont 字体图标</option>
-                    <option value="element/anim.html">animation 动画</option>
-                    <option value="element/button.html">button 按钮</option>
-                    <option value="element/form.html">form 表单组</option>
-
-                </select>
-                <div class="layui-form-select">
-                    <div class="layui-select-title">
-                        <input type="text" placeholder="搜索组件或模块" value="" class="layui-input">
-                        <i class="layui-edge"></i>
-                    </div>
-                    <dl class="layui-anim layui-anim-upbit">
-                        <dd lay-value="" class="layui-select-tips">搜索组件或模块</dd>
-                        <dd lay-value="element/layout.html" class="">grid 栅格布局</dd>
-                        <dd lay-value="element/layout.html#admin" class="">admin 后台布局</dd>
-                        <dd lay-value="element/color.html" class="">color 颜色</dd>
-                        <dd lay-value="element/icon.html" class="">iconfont 字体图标</dd>
-                        <dd lay-value="element/anim.html" class="">animation 动画</dd>
-                        <dd lay-value="element/button.html" class="">button 按钮</dd>
-                        <dd lay-value="element/form.html" class="">form 表单组</dd>
-                        <dd lay-value="element/form.html#input" class="">input 输入框</dd>
-                        <dd lay-value="element/form.html#select" class="">select 下拉选择框</dd>
-
-                    </dl>
+    <div class="layui-main">
+        <a class="logo" href="/documentmaker/public/index.php">
+                <img src="__STATIC__/maker/logo.png">
+            </a>
+        <div class="layui-form component" lay-filter="LAY-site-header-component">
+            <select lay-search="" lay-filter="component">
+                <option value="">搜索案卷编号</option>
+                <option value="element/layout.html">grid 栅格布局</option>
+                <option value="element/layout.html#admin">admin 后台布局</option>
+                <option value="element/color.html">color 颜色</option>
+                <option value="element/icon.html">iconfont 字体图标</option>
+                <option value="element/anim.html">animation 动画</option>
+                <option value="element/button.html">button 按钮</option>
+                <option value="element/form.html">form 表单组</option>
+            </select>
+            <div class="layui-form-select">
+                <div class="layui-select-title">
+                    <input type="text" placeholder="搜索组件或模块" value="" class="layui-input">
+                    <i class="layui-edge"></i>
                 </div>
+                <dl class="layui-anim layui-anim-upbit">
+                    <dd lay-value="" class="layui-select-tips">搜索组件或模块</dd>
+                    <dd lay-value="element/layout.html" class="">grid 栅格布局</dd>
+                    <dd lay-value="element/layout.html#admin" class="">admin 后台布局</dd>
+                    <dd lay-value="element/color.html" class="">color 颜色</dd>
+                    <dd lay-value="element/icon.html" class="">iconfont 字体图标</dd>
+                    <dd lay-value="element/anim.html" class="">animation 动画</dd>
+                    <dd lay-value="element/button.html" class="">button 按钮</dd>
+                    <dd lay-value="element/form.html" class="">form 表单组</dd>
+                    <dd lay-value="element/form.html#input" class="">input 输入框</dd>
+                    <dd lay-value="element/form.html#select" class="">select 下拉选择框</dd>
+                </dl>
             </div>
-            <ul class="layui-nav">
-                <li class="layui-nav-item layui-this" id='page-main'>
-                    <a href="/documentmaker/public/">首页<!--  --></a>
-                </li>
-                <li class="layui-nav-item ">
-                    <a href="/documentmaker/public/index.php/maker/page/records" id="page-record">我的案卷<!-- <span class="layui-badge-dot"></span> --></a>
-                </li>
-                <li class="layui-nav-item layui-hide-xs">
-                    <a href="/documentmaker/public/index.php/maker/index/code" id="page-code">违法代码<span class="layui-badge-dot"></span></a>
-                </li>
-                <li class="layui-nav-item layui-hide-xs">
-                    <a href="/documentmaker/public/index.php/maker/templet/index" id="page-templet">我的模板</a>
-                </li>
-                <li class="layui-nav-item">
-                    <!--<span class="layui-badge-dot" style="margin: -4px 3px 0;"></span>-->
-                    <a href="javascript:;">常用资料<span class="layui-nav-more"></span></a>
-                    <dl class="layui-nav-child layui-anim layui-anim-upbit">
-                        <dd class="layui-hide-sm layui-show-xs">
-                            <a href="//fly.layui.com/extend/">扩展组件</a>
-                        </dd>
-                        <dd class="layui-hide-sm layui-show-xs">
-                            <a href="//fly.layui.com/" target="_blank">社区交流</a>
-                            <hr>
-                        </dd>
-                        <dd><a href="//layim.layui.com/" target="_blank">即时聊天</a></dd>
-                        <hr>
-                        <dd><a href="/admin/" target="_blank">后台模板</a></dd>
-                        <dd><a href="/template/fly/" target="_blank">社区模板</a></dd>
-                        <dd><a href="/template/xianyan/" target="_blank">轻博客模板<span class="layui-badge-dot"></span></a></dd>
-                        <hr>
-                        <dd><a href="/alone.html" target="_blank">独立组件</a></dd>
-                        <dd><a href="//fly.layui.com/jie/24209/" target="_blank">Axure组件</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item layui-hide-xs" lay-unselect="">
-                    <a href="/documentmaker/public/index.php/user/login/" id="page-me">个人中心<span class="layui-badge-dot"></span></a>
-                </li>
-                <span class="layui-nav-bar" style="left: 162px; top: 55px; width: 0px; opacity: 0;">
-				</span>
-            </ul>
         </div>
+        <ul class="layui-nav" lay-filter="">
+            <li class="layui-nav-item layui-this" id='page-main'>
+                <a href="/documentmaker/public/">首页</a>
+            </li>
+            <li class="layui-nav-item ">
+                <a href="/documentmaker/public/index.php/maker/page/records" id="page-record">我的案卷</a>
+            </li>
+            <li class="layui-nav-item layui-hide-xs">
+                <a href="/documentmaker/public/index.php/maker/index/code" id="page-code">违法代码<span class="layui-badge-dot"></span></a>
+            </li>
+            <li class="layui-nav-item layui-hide-xs">
+                <a href="/documentmaker/public/index.php/maker/templet/index" id="page-templet">我的模板</a>
+            </li>
+            <li class="layui-nav-item">
+                <span class="layui-badge-dot" style="margin: -4px 3px 0;"></span>
+                <a href="javascript:;">常用资料<span class="layui-nav-more"></span></a>
+                <dl class="layui-nav-child layui-anim layui-anim-upbit">
+                    <dd class="layui-hide-sm layui-show-xs">
+                        <a href="//fly.layui.com/extend/">扩展组件</a>
+                    </dd>
+                    <dd class="layui-hide-sm layui-show-xs">
+                        <a href="//fly.layui.com/" target="_blank">社区交流</a>
+                        <hr>
+                    </dd>
+                    <dd><a href="//layim.layui.com/" target="_blank">即时聊天</a></dd>
+                    <hr>
+                    <dd><a href="/admin/" target="_blank">后台模板</a></dd>
+                    <dd><a href="/template/fly/" target="_blank">社区模板</a></dd>
+                    <dd><a href="/template/xianyan/" target="_blank">轻博客模板<span class="layui-badge-dot"></span></a></dd>
+                    <hr>
+                    <dd><a href="/alone.html" target="_blank">独立组件</a></dd>
+                    <dd><a href="//fly.layui.com/jie/24209/" target="_blank">Axure组件</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item layui-hide-xs" lay-unselect="">
+                <a href="/documentmaker/public/index.php/user/login/" id="page-me">个人中心</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;">修改信息</a></dd>
+                    <dd><a href="javascript:;">安全管理</a></dd>
+                    <dd><a href="/documentmaker/public/index.php/user/login/out">退出</a></dd>
+                </dl>
+            </li>
+            <!-- <li class="layui-nav-item"><a href="/documentmaker/public/index.php/user/login/">登录\退出</a></li> -->
+        </ul>
     </div>
-
-    <script>
+</div>
+<script>
 //注意：导航 依赖 element 模块，否则无法进行功能性操作
-layui.use('element', function(){
-  var element = layui.element;
-  
-  //…
+layui.use('element', function() {
+    var element = layui.element;
+
+    //…
 });
 </script>

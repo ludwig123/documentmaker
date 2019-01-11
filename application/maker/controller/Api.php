@@ -9,11 +9,14 @@ use app\maker\model\TempletDoc;
 use app\maker\model\Archive;
 use app\maker\model\ArchiveSuit;
 use app\maker\model\Record;
-use think\Controller;
 
-class Api extends Controller
+class Api extends BaseController
 {
 
+    public function __construct(){
+        parent::__construct();
+    }
+    
     public function code()
     {
         $code = Code::all();
@@ -46,9 +49,9 @@ class Api extends Controller
      */
     public function record($id = '')
     {
-            if (! is_police_login()) {
-                $this->error('你还没有登陆！', '@user/Login');
-            }
+//             if (! is_police_login()) {
+//                 $this->error('你还没有登陆！', '@user/Login');
+//             }
         $id = getCurrentRecordId();
         if (empty($id))
             return json('');

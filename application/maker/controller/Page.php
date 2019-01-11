@@ -11,15 +11,14 @@ use app\maker\model\Archive;
 use app\maker\model\ArchiveSuit;
 use app\maker\middleware\Producer;
 
-class Page extends Controller
+class Page extends BaseController
 {
-
+    public function __construct(){
+        parent::__construct();
+    }
     public function record($id = "")
     {
-        if (! is_police_login()) {
-            $this->error('你还没有登陆！', '@user/Login');
-            ;
-        }
+
         if (empty($id)) {
             clearCurrentRecordId();
         } else
@@ -30,11 +29,7 @@ class Page extends Controller
 
     public function records()
     {
-        if (! is_police_login()) {
-            $this->error('你还没有登陆！', '@user/Login');
-            ;
-        }
-        clearCurrentRecordId();
+
         return $this->fetch('recordslist');
     }
 
@@ -176,15 +171,5 @@ class Page extends Controller
         else{
             return json("更新成功！");
         }
-    }
-
-    private function checkLogin()
-    {
-        if (! is_police_login()) {
-            $this->error('你还没有登陆！', '@user/Login');
-            ;
-        }
-        
-        return;
     }
 }

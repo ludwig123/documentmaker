@@ -1,6 +1,7 @@
 <?php
 namespace app\user\controller;
 
+use app\maker\controller\BaseController;
 use service\LogService;
 use service\NodeService;
 use think\Controller;
@@ -9,6 +10,7 @@ use think\Validate;
 
 class Login extends Controller
 {
+
     public function index(){
         if ($this->request->isGet()) {
             return $this->fetch('', ['title' => '用户登录']);
@@ -46,6 +48,17 @@ class Login extends Controller
         //!empty($user['authorize']) && NodeService::applyAuthNode();
         LogService::write('页面打印', '用户登录系统成功');
         $this->success('登录成功，正在进入系统...', '@maker/index/recordslist');
+    }
+    
+    /**
+     * 退出登录
+     */
+    public function out()
+    {
+        session('user') && LogService::write('系统管理', '用户退出系统成功');
+        !empty($_SESSION) && $_SESSION = [];
+        [session_unset(), session_destroy()];
+        $this->success('退出登录成功！', '@index/index');
     }
 }
 

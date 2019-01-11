@@ -2,12 +2,12 @@
 use app\maker\middleware\Producer;
 use app\maker\model\TempletDoc;
 use app\maker\model\TrafficCase;
-
+use PHPUnit\Framework\TestCase;
 
 /**
  * Producer test case.
  */
-class ProducerTest extends PHPUnit_Framework_TestCase
+class ProducerTest extends TestCase
 {
 
     /**
@@ -21,35 +21,16 @@ class ProducerTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-
         
-        $this->producer = new Producer(/* parameters */);
     }
 
-    /**
-     * Cleans up the environment after running a test.
-     */
-    protected function tearDown()
-    {
-
-        $this->producer = null;
-        
-        parent::tearDown();
-    }
-
-    /**
-     * Constructs the test case.
-     */
-    public function __construct()
-    {
-        // TODO Auto-generated constructor
-    }
 
     public function test_templetReplace_default_returnString(){
         $src = TempletDoc::getById('4');
         $case = new TrafficCase();
         $record = $case->findById('1');
-        $dest = $this->producer->templetReplace($src['templet_content'], $record);
+        $producer = new Producer();
+        $dest = $producer->templetReplace($src['templet_content'], $record);
         
         $this->assertContains("陶大暴", $dest);
         $this->assertNotContains("{", $dest);
