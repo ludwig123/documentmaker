@@ -7,7 +7,7 @@ interface iCURD
      * @param string $id
      */
     public static function getById($id, $owner);
-    public static function add($dataArr);
-    public static function refresh($id, $dataArr);
+    public static function add($dataArr, $owner);
+    public static function refresh($id, $dataArr, $owner);
     public static function remove($id, $owner);
 }

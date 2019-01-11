@@ -18,7 +18,7 @@ class TempletSuitTest extends PHPUnit_Framework_TestCase
     }
     
     
-    public function testAdd_addDefaultTemplet_returnId()
+    public function testAdd_default_returnId()
     {
         $data = ['suit_catalog' => '测试模板类别'
             ,'suit_name' => '集成测试模板名称'
@@ -26,13 +26,13 @@ class TempletSuitTest extends PHPUnit_Framework_TestCase
             ,'suit_owner' => self::$owner
         ];
         
-        self::$id = TempletSuit::add($data);
+        self::$id = TempletSuit::add($data, self::$owner);
         $this->assertGreaterThan(1, self::$id);
     }
     
     
     /**
-     *@depends testAdd_addDefaultTemplet_returnId
+     *@depends testAdd_default_returnId
      **/
     public function test_getById_Default_returnArr(){
         $result = TempletSuit::getById(self::$id, self::$owner);
@@ -40,7 +40,7 @@ class TempletSuitTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     *@depends testAdd_addDefaultTemplet_returnId
+     *@depends testAdd_default_returnId
      **/
     public function test_getById_notOwned_returnNull(){
         $result = TempletSuit::getById(self::$id, self::$otherOwner);
@@ -48,8 +48,10 @@ class TempletSuitTest extends PHPUnit_Framework_TestCase
     }
     
     
+    
+    
     /**
-     *@depends testAdd_addDefaultTemplet_returnId
+     *@depends testAdd_default_returnId
      **/
     public function testRefresh_default_returnId()
     {
@@ -59,7 +61,7 @@ class TempletSuitTest extends PHPUnit_Framework_TestCase
             ,'suit_owner' => self::$owner
         ];
         
-        $effectId = TempletSuit::refresh(self::$id, $data);
+        $effectId = TempletSuit::refresh(self::$id, $data, self::$owner);
         $this->assertEquals(self::$id, $effectId);
         
         $result = TempletSuit::getById(self::$id, self::$owner);
@@ -67,7 +69,26 @@ class TempletSuitTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     *@depends testAdd_addDefaultTemplet_returnId
+     *@depends testAdd_default_returnId
+     **/
+    public function testRefresh_dontOwnedSuit_returnFalse()
+    {
+        $data = ['suit_catalog' => '测试模板类别更新'
+            ,'suit_name' => '集成测试模板名称更新'
+            ,'suit_remark' => '测试模板套件备注更新'
+            ,'suit_owner' => self::$owner
+        ];
+        
+        $effectId = TempletSuit::refresh(self::$id, $data, self::$otherOwner);
+        $this->assertEquals(false, $effectId);
+        
+    }
+    
+    
+    
+    
+    /**
+     *@depends testAdd_default_returnId
      **/
     public function testRemove_notOwner_returnFalse()
     {
@@ -76,7 +97,7 @@ class TempletSuitTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     *@depends testAdd_addDefaultTemplet_returnId
+     *@depends testAdd_default_returnId
      **/
     public function testRemove_default_returnId()
     {

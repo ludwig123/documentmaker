@@ -9,12 +9,16 @@ use app\maker\model\TempletDoc;
 use app\maker\model\Archive;
 use app\maker\model\ArchiveSuit;
 use app\maker\model\Record;
+use app\maker\model\User;
+use app\user\common\UserLogin;
 
 class Api extends BaseController
 {
-
+    private $owner;
+    
     public function __construct(){
         parent::__construct();
+        $this->owner = $this->getUserId();
     }
     
     public function code()
@@ -79,8 +83,7 @@ class Api extends BaseController
     public function addTempletSuit()
     {
         $info = $this->postInfo();
-        
-        $id = TempletSuit::add($info);
+        $id = TempletSuit::add($info, $this->owner);
         if (empty($id))
             return json('添加失败');
             else {
@@ -131,13 +134,13 @@ class Api extends BaseController
         $info = $this->postInfo();
         $templetSuitId = $info['id'];
         $userId = session('user');
-        $id = TempletSuit::remove($templetSuitId);
+        $id = TempletSuit::remove($templetSuitId, $userId['id']);
         
         if ($id != false) {
             return json('删除成功');
         }
         
-        return json('删除失败');
+        return json('删除失败,你无权删除该模板套件');
     }
 
     public function removeArchiveSuit()
@@ -243,5 +246,10 @@ class Api extends BaseController
            'code' => $codeStatus,
           'count' => count($dataArr)
         );
+    }
+    
+    private function getUserId(){
+        $user = new UserLogin();
+        return $user->id();
     }
 }

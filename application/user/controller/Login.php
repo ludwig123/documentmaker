@@ -7,6 +7,7 @@ use service\NodeService;
 use think\Controller;
 use think\Db;
 use think\Validate;
+use app\user\common\User;
 
 class Login extends Controller
 {

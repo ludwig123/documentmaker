@@ -6,12 +6,12 @@ use think\Model;
 
 class TempletSuit extends Model implements iCURD
 {
-    public static function add($dataArr)
+    public static function add($dataArr, $owner)
     {
         $suit = new TempletSuit;
         $suit->suit_catalog = empty($dataArr['suit_catalog']) ? NULL : $dataArr['suit_catalog'];
         $suit->suit_name = empty($dataArr['suit_name']) ? NULL : $dataArr['suit_name'];
-        $suit->suit_owner = empty($dataArr['suit_owner']) ? 0 : $dataArr['suit_owner'];
+        $suit->suit_owner = $owner;
         $suit->suit_remark = empty($dataArr['suit_remark']) ? 0 : $dataArr['suit_remark'];
         if ($suit->save())
             return $suit->id;
@@ -29,12 +29,18 @@ class TempletSuit extends Model implements iCURD
         }
     }
 
-    public static function refresh($id, $dataArr)
+    public static function refresh($id, $dataArr, $owner)
     {
+        $suit = self::getById($id, $owner);
+        if ($suit['suit_owner'] != $owner)
+        {
+            return false;
+        }
+        
         $suit = array();
         $suit['suit_catalog'] = empty($dataArr['suit_catalog']) ? NULL : $dataArr['suit_catalog'];
         $suit['suit_name'] = empty($dataArr['suit_name']) ? NULL : $dataArr['suit_name'];
-        $suit['suit_owner'] = empty($dataArr['suit_owner']) ? NULL : $dataArr['suit_owner'];
+        $suit['suit_owner'] = $owner;
         $suit['suit_remark'] = empty($dataArr['suit_remark']) ? NULL : $dataArr['suit_remark'];
         
         foreach ($suit as $k => $v){
@@ -61,8 +67,8 @@ class TempletSuit extends Model implements iCURD
         }
     }
     
-    public static function getByOwner($ownerId){
-        return db('templet_suit')->where('suit_owner ='.$ownerId)->select();
+    public static function getByOwner($owner){
+        return db('templet_suit')->where('suit_owner ='.$owner)->select();
     }
 
     

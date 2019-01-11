@@ -3,11 +3,12 @@ namespace app\user\common;
 
 use think\Db;
 
-class User{
+class UserLogin{
     private $user;
-    public function __construct($id){
-        $this->user = Db::name('user')->where('id',$id)->find();
+    public function __construct(){
+        $this->user = session('user');
     }
+    
     public function id(){
         return $this->user['id'];
     }
@@ -19,4 +20,5 @@ class User{
     public function updatePassWord($password){
         $this->user['password'] = $password;
     }
+    
 }

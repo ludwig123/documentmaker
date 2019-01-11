@@ -16,7 +16,7 @@ class Producer{
      */
     public function saveDocs($info, $templetSuitId)
     {
-        $templetSuit = TempletSuit::getById($templetSuitId);
+        $templetSuit = TempletSuit::getById($templetSuitId, NULL);
         $templets = TempletDoc::getByGroupId($templetSuitId);
         
         $archiveSuit = array();
