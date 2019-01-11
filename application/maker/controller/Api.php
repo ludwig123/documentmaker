@@ -129,7 +129,9 @@ class Api extends BaseController
     public function removeTempletSuit()
     {
         $info = $this->postInfo();
-        $id = TempletSuit::remove($info['id']);
+        $templetSuitId = $info['id'];
+        $userId = session('user');
+        $id = TempletSuit::remove($templetSuitId);
         
         if ($id != false) {
             return json('删除成功');

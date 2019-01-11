@@ -4,7 +4,7 @@ namespace app\maker\model;
 use think\Db;
 use think\Model;
 
-class Car extends Model implements iCURD
+class Car extends Model 
 {
     
     /**添加一个新车辆

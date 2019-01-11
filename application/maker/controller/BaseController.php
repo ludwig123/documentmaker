@@ -7,7 +7,7 @@ class BaseController extends Controller{
     
     public function __construct(){
         if (! is_police_login()) {
-            return $this->error('你还没有登陆！', '@user/Login');
+             $this->error('你还没有登陆！', '@user/Login');
         }
         
         parent::__construct();

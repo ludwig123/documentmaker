@@ -3,7 +3,7 @@ namespace app\maker\model;
 
 use think\Model;
 
-class ArchiveSuit extends Model implements iCURD
+class ArchiveSuit extends Model 
 {
 
     public static function add($dataArr)

@@ -19,9 +19,14 @@ class TempletSuit extends Model implements iCURD
             return false;
     }
 
-    public static function getById($id)
+    public static function getById($id, $owner)
     {
+        if (empty($owner))
         return db('templet_suit')->where('id', $id)->find();
+        
+        else {
+            return db('templet_suit')->where('id', $id)->where('suit_owner', $owner)->find();
+        }
     }
 
     public static function refresh($id, $dataArr)
@@ -42,14 +47,18 @@ class TempletSuit extends Model implements iCURD
             return false;
     }
 
-    public static function remove($id)
+    public static function remove($id, $owner)
     {
-        $obj = TempletSuit::get($id);
-        if (!empty($obj)){
-            TempletDoc::removeByGroupId($id);
-            return $obj->delete();
-        }
+        $deletCount = db('templet_suit')->where('id', $id)
+            ->where('suit_owner', $owner)
+            ->delete();
+        
+        if ($deletCount == 0)
             return false;
+        else {
+            TempletDoc::removeByGroupId($id);
+            return $deletCount;
+        }
     }
     
     public static function getByOwner($ownerId){

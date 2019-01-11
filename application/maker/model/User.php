@@ -3,7 +3,8 @@ namespace app\maker\model;
 use app\maker\model\iCURD;
 use think\Model;
 
-class User extends Model implements iCURD{
+class User extends Model 
+{
     public static function add($dataArr)
     {
         $user = new User;
