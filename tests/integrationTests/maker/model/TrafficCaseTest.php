@@ -16,15 +16,12 @@ class TrafficCaseTest extends TestCase
      */
     private $trafficCase;
 
-    /**
-     * Tests TrafficCase->getDecisionNum()
-     */
-    public function testGetDecisionNum()
-    {
-        // TODO Auto-generated TrafficCaseTest->testGetDecisionNum()
-        $this->markTestIncomplete("getDecisionNum test not implemented");
-        
-        $this->trafficCase->getDecisionNum(/* parameters */);
+    public function setUp(){
+        $this->trafficCase = new TrafficCase();
+    }
+    
+    public function tearDown(){
+        $this->trafficCase = NULL;
     }
 
     /**
