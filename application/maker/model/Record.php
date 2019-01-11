@@ -11,7 +11,7 @@ class Record extends Model
         return Db::table('record')->where('id='.$id)->field(['id','time','index','code_1','code_2','man','driver', 'car'])->find();
     }
     
-    public static function add($dataArr)
+    public static function add($dataArr, $owner)
     {
         $record = new Record;
         $record->index = empty($dataArr['index']) ? NULL : $dataArr['index'];
@@ -44,8 +44,12 @@ class Record extends Model
             return false;
     }
     
+    public static function getById($id, $owner){
+        
+    }
+    
     //必须保证传入的每个数据库键值都存在
-    public static function refresh($id, $dataArr)
+    public static function refresh($id, $dataArr, $owner)
     {
         $record = Record::get($id);
         $record = $record->toArray();
@@ -84,7 +88,7 @@ class Record extends Model
             return false;
     }
     
-    public static function remove($id)
+    public static function remove($id, $owner)
     {
         $record = Record::get($id);
         if (!empty($record)){

@@ -127,7 +127,7 @@ class Page extends BaseController
     public function editor()
     {
         $recordId = getCurrentRecordId();
-        $archiveSuit = ArchiveSuit::getByRecordId($recordId);
+        $archiveSuit = ArchiveSuit::getByRecordId($recordId, getUserId());
         $record = TrafficCase::findById($recordId);
         // 如果没有卷宗，需要生成卷宗
         if (empty($archiveSuit)) {

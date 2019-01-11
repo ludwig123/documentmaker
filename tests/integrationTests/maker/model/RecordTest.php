@@ -10,67 +10,17 @@ require_once 'application/maker/model/Record.php';
 class RecordTest extends TestCase
 {
 
-    /**
-     *
-     * @var Record
-     */
-    private $record;
-
-
-    /**
-     * Tests Record->man()
-     */
-    public function testMan()
+    protected static $id, $owner, $otherOwner;
+    
+    public function __construct()
     {
-        // TODO Auto-generated RecordTest->testMan()
-        $this->markTestIncomplete("man test not implemented");
-        
-        $this->record->man(/* parameters */);
+        parent::__construct();
+        self::$owner = '1';
+        self::$otherOwner = '999';
     }
+    
 
-    /**
-     * Tests Record->car()
-     */
-    public function testCar()
-    {
-        // TODO Auto-generated RecordTest->testCar()
-        $this->markTestIncomplete("car test not implemented");
-        
-        $this->record->car(/* parameters */);
-    }
-
-    /**
-     * Tests Record->driver()
-     */
-    public function testDriver()
-    {
-        // TODO Auto-generated RecordTest->testDriver()
-        $this->markTestIncomplete("driver test not implemented");
-        
-        $this->record->driver(/* parameters */);
-    }
-
-    /**
-     * Tests Record->code_1()
-     */
-    public function testCode_1()
-    {
-        // TODO Auto-generated RecordTest->testCode_1()
-        $this->markTestIncomplete("code_1 test not implemented");
-        
-        $this->record->code_1(/* parameters */);
-    }
-
-    /**
-     * Tests Record->code_2()
-     */
-    public function testCode_2()
-    {
-        // TODO Auto-generated RecordTest->testCode_2()
-        $this->markTestIncomplete("code_2 test not implemented");
-        
-        $this->record->code_2(/* parameters */);
-    }
+    
 
     /**
      * Tests Record->getDetail()
@@ -88,25 +38,37 @@ class RecordTest extends TestCase
     }
     
 
-    /**
-     * Tests Record->addRecord()
-     */
-    public function testAddRecord()
+    public function testAdd_default_returnId()
     {
         $data = ['name' => '陶怡瑾22'
             ,'identity' => '430444198912222222'
-            ,'car_num' => '湘D8888'  //car
+            ,'car_num' => '湘D8888'  
             ,'file_num' =>'4224110000'
             ,'sex' => '女'
             ,'index' => '435405000029019'
         ];
         
-        $id = Record::add($data);
-        $this->assertNotFalse($id);
+        self::$id = Record::add($data, self::$owner);
+        $this->assertNotFalse(self::$id);        
         
-        
-        
-        $data = ['name' => '陶怡瑾33'
+    }
+    
+    
+    
+    /***
+     * @depends testAdd_default_returnId
+     */
+    public function test_getById_returnArray(){
+        $result = Record::getById(self::$id, self::$owner);
+        $this->assertEquals(self::$id, $result['id']);
+    }
+    
+    
+    /***
+     * @depends testAdd_default_returnId
+     */
+    public function test_refresh_default_returnInt(){
+        $data = ['name' => '陶怡瑾更新'
             ,'identity' => '4304441989133333'
             ,'car_num' => '湘D8885'  //car
             ,'file_num' =>'4224113333'
@@ -115,11 +77,21 @@ class RecordTest extends TestCase
         ];
         
         
-        $id = Record::refresh($id, $data);
+        $id = Record::refresh(self::$id, $data, self::$owner);
         $this->assertNotFalse($id);
-        
-        $this->assertNotFalse(Record::remove($id));
-        
     }
+    
+    /***
+     * @depends testAdd_default_returnId
+     */
+    public function test_remove_default_returnInt(){
+       $effectCount = Record::remove(self::$id, self::$owner);
+       $this->assertEquals(1, $effectCount);
+    }
+    
+    
+    
+    
+    
 }
 

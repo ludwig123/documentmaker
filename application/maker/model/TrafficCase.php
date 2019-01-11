@@ -79,16 +79,16 @@ class TrafficCase
     }
     
     
-    public function add($data){
-        return Record::add($data);
+    public function add($data, $owner){
+        return Record::add($data, $owner);
     }
     
-    public function refresh($id, $dataArr){
-        return Record::refresh($id, $dataArr);
+    public function refresh($id, $dataArr, $owner){
+        return Record::refresh($id, $dataArr, $owner);
     }
     
-    public function remove($id){
-       return Record::remove($id);
+    public function remove($id, $owner){
+        return Record::remove($id, $owner);
     }
     
 

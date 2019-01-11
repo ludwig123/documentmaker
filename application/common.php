@@ -221,7 +221,8 @@ function setCurrentArchiveSuitId($id){
     return ;
 }
 
-function getCurrentArchiveSuitId(){
+function getCurrentArchiveSuitId()
+{
     return session('nowReadArchiveSuit');
 }
 
@@ -257,4 +258,12 @@ function getCurrentTempletSuitId(){
 function clearCurrentTempletSuitId(){
     session('nowReadTempletSuit', null);
     return ;
+}
+
+/**
+ * 返回档当前登陆用户的Id
+ */
+function getUserId(){
+    $user = session('user');
+    return $user['id'];
 }

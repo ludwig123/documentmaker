@@ -9,7 +9,6 @@ use app\maker\model\TempletDoc;
 use app\maker\model\Archive;
 use app\maker\model\ArchiveSuit;
 use app\maker\model\Record;
-use app\maker\model\User;
 use app\user\common\UserLogin;
 
 class Api extends BaseController
@@ -121,7 +120,7 @@ class Api extends BaseController
         $case = new TrafficCase();
         $case->remove($recordId);
         
-        $num = ArchiveSuit::removeByRecordId($recordId);
+        $num = ArchiveSuit::removeByRecordId($recordId, $this->owner);
         if ($case != false) {
             return json('删除成功');
         }
@@ -148,12 +147,12 @@ class Api extends BaseController
         $info = $this->postInfo();
         $record_id = $info['id'];
         $flag = true;
-        $flag = Record::remove($record_id);
+        $flag = Record::remove($record_id, $this->owner);
         if ($flag == false) {
             return json('删除失败');
         }
         
-        $flag = ArchiveSuit::removeByRecordId($record_id);
+        $flag = ArchiveSuit::removeByRecordId($record_id, $this->owner);
         if ($flag == false) {
             return json('删除失败');
         } else

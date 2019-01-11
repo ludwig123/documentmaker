@@ -14,7 +14,7 @@ class Producer{
      * @param int $templetSuitId
      * @return boolean | int 返回卷宗编号
      */
-    public function saveDocs($info, $templetSuitId)
+    public function saveDocs($info, $templetSuitId, $owner)
     {
         $templetSuit = TempletSuit::getById($templetSuitId, NULL);
         $templets = TempletDoc::getByGroupId($templetSuitId);
@@ -25,7 +25,7 @@ class Producer{
         $archiveSuit['archive_suit_remark'] = $templetSuit['suit_remark'];
         $archiveSuit['archive_suit_owner'] = $templetSuit['suit_owner'];
         
-        $archiveSuitId = ArchiveSuit::add($archiveSuit);
+        $archiveSuitId = ArchiveSuit::add($archiveSuit,$owner);
         
         $docs = $this->generateDocs($info, $templets, $archiveSuitId);
         
