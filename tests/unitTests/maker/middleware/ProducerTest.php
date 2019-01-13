@@ -16,15 +16,6 @@ class ProducerTest extends TestCase
      */
     private $producer;
 
-    /**
-     * Prepares the environment before running a test.
-     */
-    protected function setUp()
-    {
-        
-    }
-
-
     public function test_templetReplace_default_returnString(){
         $src = TempletDoc::getById('4');
         $case = new TrafficCase();

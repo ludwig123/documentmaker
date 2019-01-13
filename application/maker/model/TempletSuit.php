@@ -68,7 +68,7 @@ class TempletSuit extends Model implements iCURD
     }
     
     public static function getByOwner($owner){
-        return db('templet_suit')->where('suit_owner ='.$owner)->select();
+        return db('templet_suit')->where('suit_owner', $owner)->select();
     }
 
     
