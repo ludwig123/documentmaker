@@ -1,13 +1,10 @@
 <?php
 namespace app\user\controller;
 
-use app\maker\controller\BaseController;
 use service\LogService;
-use service\NodeService;
 use think\Controller;
 use think\Db;
 use think\Validate;
-use app\user\common\User;
 
 class Login extends Controller
 {

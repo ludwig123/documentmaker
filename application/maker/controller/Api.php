@@ -31,7 +31,7 @@ class Api extends BaseController
     public function records()
     {
         $trafficCase = new TrafficCase();
-        $records = $trafficCase->all();
+        $records = $trafficCase->all($this->owner);
         
         $list4LayUITable = $this->list4LayUITable($records);
         
@@ -48,7 +48,7 @@ class Api extends BaseController
         $id = getCurrentRecordId();
         if (empty($id))
             return json('');
-        $case = TrafficCase::findById($id, getUserId());
+            $case = TrafficCase::findById($id, $this->owner);
         // 不能直接返回json_encode是因为框架会自动给他套上json，根据请求类型转换为为html或json
         return json($case);
     }
@@ -159,14 +159,21 @@ class Api extends BaseController
             return json('删除成功');
     }
 
+    /**获取违法代码的详细
+     * @param string $code
+     * @return \think\response\Json
+     */
     public function getCodeDetail($code)
     {
         return json(Code::getDetail($code));
     }
 
+    /**获取当前登陆用户的全部模板
+     * @return \think\response\Json
+     */
     public function tempLets()
     {
-        $temp = TempletSuit::getByOwner('0');
+        $temp = TempletSuit::getByOwner($this->owner);
         $templets = array();
         foreach ($temp as $k => $v) {
             unset($v['suit_content']);
@@ -183,11 +190,7 @@ class Api extends BaseController
     {
         $id = getCurrentTempletSuitId();
         $temp = TempletDoc::getByGroupId($id);
-        $templets = array();
-        foreach ($temp as $k => $v) {
-            unset($v['templet_content']);
-            $templets[] = $v;
-        }
+        $templets = $this->removeContentOfTemplets($temp);
         
         $list4LayUITable = $this->list4LayUITable($templets);
         
@@ -250,5 +253,14 @@ class Api extends BaseController
     private function getUserId(){
         $user = new UserLogin();
         return $user->id();
+    }
+    
+    private function removeContentOfTemplets($templets){
+        $temp = array();
+        foreach ($templets as $k => $v) {
+            unset($v['templet_content']);
+            $temp[] = $v;
+        }
+        return $temp;
     }
 }

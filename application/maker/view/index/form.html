@@ -479,32 +479,13 @@ layui.use(['form', 'jquery'], function() {
         }
     });
 
-    // var $ = layui.$;
-    $('#getRecord').on('click', function() {
-
-        $.ajax({
-            type: "POST",
-            url: "/documentmaker/public/index.php/maker/api/updateCase",
-            data: "",
-            dataType: "json",
-            success: function(respMsg) {
-                var msg = respMsg;
-                layer.msg("获取数据成功！");
-                layer.msg(respMsg['index']);
-                $(":input[name='index']").val(respMsg['index']);
-            },
-            error: function() {
-                alert("获取数据失败，网络超时！")
-
-            }
-        });
-    })
-
+//进入打印预览
     $('#goPrint').on('click', function() {
         
-        window.location.href = "/documentmaker/public/index.php/maker/index/gaozhibilu/id/" + id;
+        window.location.href = "/documentmaker/public/index.php/maker/page/editor";
     })
 
+//实时搜索违法代码1的违法详情
     $('input[name=code_1]').keyup(function() {
         if ($('input[name=code_1]').val().length >= 5) {
             $.ajax({
@@ -531,6 +512,7 @@ layui.use(['form', 'jquery'], function() {
 
     });
 
+//实时搜索违法代码2的违法详情
     $('input[name=code_2]').keyup(function() {
         if ($('input[name=code_2]').val().length >= 5) {
             $.ajax({
@@ -557,7 +539,7 @@ layui.use(['form', 'jquery'], function() {
 
     });
 
-
+//表单字段验证
     form.verify({
 
         name: [/^[\u4e00-\u9fa5]+$/, '名字只能包含汉字'],

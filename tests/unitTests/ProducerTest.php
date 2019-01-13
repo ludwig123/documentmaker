@@ -37,7 +37,7 @@ class ProducerTest extends TestCase
     }
     
     public function test_generateDoc_default_returnString(){
-        $info = TrafficCase::findById('1');
+        $info = TrafficCase::findById('1', getUserId());
         $this->assertNotNull($info);
     }
     

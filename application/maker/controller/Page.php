@@ -38,7 +38,7 @@ class Page extends BaseController
     {
         $recordId = getCurrentRecordId();
         $archiveSuit = ArchiveSuit::getByRecordId($recordId, getUserId());
-        $record = TrafficCase::findById($recordId);
+        $record = TrafficCase::findById($recordId, getUserId());
         // 如果没有卷宗，需要生成卷宗
         if (empty($archiveSuit)) {
             $producer = new Producer();
@@ -49,7 +49,7 @@ class Page extends BaseController
             
             
             
-            $archiveSuitId = $producer->saveDocs($$record, $templetSuitId);
+            $archiveSuitId = $producer->saveDocs($record, $templetSuitId);
         } else {
             
             $archiveSuitId = $archiveSuit['id'];
