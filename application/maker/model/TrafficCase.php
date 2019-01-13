@@ -13,7 +13,7 @@ use think\Db;
 class TrafficCase
 {
     
-    public function all(){
+    public function all($owner){
         $records = Record::field(['identity'],true)->select();
         if (empty($records)){
             return NULL;
@@ -48,7 +48,7 @@ class TrafficCase
     }
     
     //这里不应该把违法的详细内容提供出去，应该等需要的时候再查询
-    public  static function findById($id){
+    public  static function findById($id, $owner){
         $record = Record::where('id', $id)->field(['identity','car_num','car_type'],true)->find();
       if (empty($record)){
           return NULL;
@@ -92,6 +92,10 @@ class TrafficCase
     }
     
 
+    /**根据代码查找代码的内容
+     * @param string $code
+     * @return string|array
+     */
     public static function getCodeContent($code){
         return Db::table('code')->where("违法代码=".$code)->field('违法内容')->find();
     }

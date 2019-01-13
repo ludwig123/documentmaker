@@ -48,7 +48,7 @@ class Api extends BaseController
         $id = getCurrentRecordId();
         if (empty($id))
             return json('');
-        $case = TrafficCase::findById($id);
+        $case = TrafficCase::findById($id, getUserId());
         // 不能直接返回json_encode是因为框架会自动给他套上json，根据请求类型转换为为html或json
         return json($case);
     }
