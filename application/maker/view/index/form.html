@@ -454,7 +454,7 @@ layui.use(['form', 'jquery'], function() {
                     layer.msg(respMsg);
                 },
                 error: function() {
-                    layer.msg("提交失败")
+                    layer.msg("提交失败");
                 }
             });
         }
@@ -472,7 +472,7 @@ layui.use(['form', 'jquery'], function() {
                     layer.msg(respMsg);
                 },
                 error: function() {
-                    layer.msg("提交失败")
+                    layer.msg("提交失败");
                 }
             });
             return false;
@@ -483,7 +483,7 @@ layui.use(['form', 'jquery'], function() {
     $('#goPrint').on('click', function() {
         
         window.location.href = "/documentmaker/public/index.php/maker/page/editor";
-    })
+    });
 
 //实时搜索违法代码1的违法详情
     $('input[name=code_1]').keyup(function() {

@@ -30,19 +30,19 @@ class TrafficCaseTest extends TestCase
     public function testFindByUndefinedId()
     {
         $Id = '9999';
-        $case =  $this->trafficCase::findById($Id);
+        $case =  $this->trafficCase::findById($Id, '1');
         $this->assertNull($case);
     }
     
     public function testFindById(){
         $id = '1';
-        $case =  $this->trafficCase::findById($id);
+        $case =  $this->trafficCase::findById($id, '1');
         $this->assertGreaterThan(38, count($case), "应该返回38个键值对");
     }
 
     public function testFindAll()
     {
-        $cases = $this->trafficCase->all();
+        $cases = $this->trafficCase->all('1');
         $this->assertNotEmpty($cases);
         $this->assertEquals(1, $cases[0]['id']);
         
@@ -52,7 +52,7 @@ class TrafficCaseTest extends TestCase
     public function testRefresh()
     {
         $id = '1';
-       $data = $this->trafficCase->findById($id);
+       $data = $this->trafficCase->findById($id, '1');
     
     //改过去
     $data2 =  $data;
@@ -60,8 +60,8 @@ class TrafficCaseTest extends TestCase
     $data2['code_2']= '11110';
     $data2['car_num'] = '浙D99999';
     $data2['file_num'] = '330220666777';
-    $this->trafficCase->refresh($id, $data2);
-    $data3 = $this->trafficCase->findById($id);
+    $this->trafficCase->refresh($id, $data2, '1');
+    $data3 = $this->trafficCase->findById($id, '1');
     
     
     
@@ -72,8 +72,8 @@ class TrafficCaseTest extends TestCase
     
     
     //回复原状
-    $this->trafficCase->refresh($id, $data);
-    $this->assertEquals($data, $this->trafficCase->findById($id));
+    $this->trafficCase->refresh($id, $data, '1');
+    $this->assertEquals($data, $this->trafficCase->findById($id, '1'));
     
     
     }

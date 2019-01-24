@@ -199,7 +199,11 @@ class Producer{
         return preg_replace($patterns, $replacements, $src);
     }
     
-    public function getrr(){
+    public function getrr($docInfo, $templet){
+        $patterns[0] = '/{'.$name.'}/';
+        $replacements[0] = $value;
         
     }
+    
+    
 }
