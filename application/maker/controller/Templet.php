@@ -42,27 +42,6 @@ class Templet extends BaseController
     }
     
     
-    public function refreshTempletDoc(){
-        $dataArr = Request::post();
-        $templetSuitId = getCurrentTempletSuitId();
-        $templetDocId = getCurrentTempletId();
-        //新增模板文件
-        if (empty($templetDocId)){
-            $dataArr['templet_group_id'] = $templetSuitId;
-            $templetDocId = TempletDoc::add($dataArr);
-        }
-        else {
-            $templetDocId = TempletDoc::refresh($templetDocId,$dataArr);
-        }
-        
-
-        if (empty($templetDocId)){
-            return json("更新失败");
-        }
-        
-        else return json("更新成功！");
-    }
-    
     public function list(){
         return  $this->fetch();
     }

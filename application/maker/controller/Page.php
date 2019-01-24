@@ -67,21 +67,6 @@ class Page extends BaseController
         return $this->fetch();
     }
 
-//     public function refresh()
-//     {
-//         $dataArr = Request::post();
-//         $id = getCurrentArchiveId();
-//         if (empty($id)) {} else {
-//             $id = Archive::refresh($id, $dataArr);
-//         }
-        
-//         if (empty($id)) {
-//             return json("更新失败");
-//         } 
-//         else{
-//             return json("更新成功！");
-//         }
-//     }
     
     public function input(){
         $metas = array(

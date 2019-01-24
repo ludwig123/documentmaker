@@ -14,7 +14,7 @@ class MetaTest extends TestCase
      *
      * @var Meta
      */
-    private $meta, $name, $value;
+    private $meta, $name, $value, $catalog;
 
     /**
      * Prepares the environment before running a test.
@@ -25,7 +25,8 @@ class MetaTest extends TestCase
         
         $this->name = '当事人';
         $this->value = '李大嘴';
-        $this->meta = new Meta($this->name, $this->value);
+        $this->catalog =  '交管';
+        $this->meta = new Meta($this->name, $this->value, $this->catalog);
     }
 
     /**

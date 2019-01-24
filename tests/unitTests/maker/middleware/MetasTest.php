@@ -28,6 +28,7 @@ class MetasTest extends TestCase
         $name = '驾驶员';
         $value = '李大嘴';
         $remark = '我是备注';
+        $catalog = '交管';
         $this->meta = new Meta($name, $value, $remark);
         
         $this->metas->add($this->meta);
@@ -80,7 +81,7 @@ class MetasTest extends TestCase
     }
     
     public function test_refesh_change_value(){
-        $newMeta = new Meta('驾驶员', '李大嘴2');
+        $newMeta = new Meta('驾驶员', '李大嘴2', '交管');
         
         $this->metas->refresh($newMeta);
         $this->assertContains('李大嘴2', $this->metas->serialize());
@@ -88,7 +89,7 @@ class MetasTest extends TestCase
     }
     
     public function test_refesh_change_name(){
-        $newMeta = new Meta('驾驶员2', '李大嘴');
+        $newMeta = new Meta('驾驶员2', '李大嘴', '交管');
         
         $this->metas->refresh($newMeta);
         $this->assertContains('驾驶员2', $this->metas->serialize());

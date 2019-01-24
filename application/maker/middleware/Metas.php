@@ -5,7 +5,8 @@ use Serializable;
 
 /**
  * @author ludwig
- *
+ *metas中name字段是唯一的
+ *meta是value object
  */
 class Metas implements Serializable{
     protected $metas = array();
@@ -20,7 +21,7 @@ class Metas implements Serializable{
         $this->metas = unserialize($serialized);
     }
 
-    /**添加一个meta。如果存在就该名字，就删除它再添加
+    /**添加一个meta。如果存在该名字，就删除它再添加
      * @param Meta $meta
      */
     public function add(Meta $meta){
@@ -33,6 +34,8 @@ class Metas implements Serializable{
         return ;
     }
     
+    //在更新一个meta的时候，需要把文档中所有用到的meta的display-name都更正过来！
+    //暂时还未实现！！！
     public function refresh($meta){
         return $this->add($meta);
     }
@@ -55,5 +58,12 @@ class Metas implements Serializable{
     
     public function getMetas(){
         return $this->metas;
+    }
+    
+    public function sortMetas(){
+        $sortedMetas = array();
+        foreach ($this->metas as $k => $v){
+            
+        }
     }
 }

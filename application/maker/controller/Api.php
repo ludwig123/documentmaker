@@ -11,6 +11,7 @@ use app\maker\model\ArchiveSuit;
 use app\maker\model\Record;
 use app\user\common\UserLogin;
 use app\maker\model\TempletMetaLabel;
+use app\maker\middleware\TempletRepository;
 
 class Api extends BaseController
 {
@@ -247,13 +248,7 @@ class Api extends BaseController
         
         $info = $this->postInfo();
         
-        $data['templet_owner_meta'] = $templetSuitId;
-        $data['templet_meta_name'] = $info['name'];
-        $data['templet_meta_attr'] = $info['catalog'];
-        $data['templet_meta_remark'] = $info['type'];
-        
-        $result = TempletMetaLabel::add($data);
-        
+        $result = (new TempletRepository()).addMeta($templetSuitId, $info);        
         if (empty($result)){
             return json('失败');
         }

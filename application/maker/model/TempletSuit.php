@@ -13,6 +13,7 @@ class TempletSuit extends Model implements iCURD
         $suit->suit_name = empty($dataArr['suit_name']) ? NULL : $dataArr['suit_name'];
         $suit->suit_owner = $owner;
         $suit->suit_remark = empty($dataArr['suit_remark']) ? 0 : $dataArr['suit_remark'];
+        $suit->suit_metas = empty($dataArr['suit_metas']) ? NULL : $dataArr['suit_metas'];
         if ($suit->save())
             return $suit->id;
             
@@ -42,7 +43,9 @@ class TempletSuit extends Model implements iCURD
         $suit['suit_name'] = empty($dataArr['suit_name']) ? NULL : $dataArr['suit_name'];
         $suit['suit_owner'] = $owner;
         $suit['suit_remark'] = empty($dataArr['suit_remark']) ? NULL : $dataArr['suit_remark'];
+        $suit['suit_metas'] = empty($dataArr['suit_metas']) ? NULL : $dataArr['suit_metas'];
         
+        //去除未更新的字段
         foreach ($suit as $k => $v){
             if ($v == NULL) unset($suit[$k]);
         }

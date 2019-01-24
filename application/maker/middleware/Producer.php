@@ -200,8 +200,8 @@ class Producer{
     }
     
     public function getrr($docInfo, $templet){
-        $patterns[0] = '/{'.$name.'}/';
-        $replacements[0] = $value;
+//         $patterns[0] = '/{'.$name.'}/';
+//         $replacements[0] = $value;
         
     }
     

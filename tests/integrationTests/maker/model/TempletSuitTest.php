@@ -25,10 +25,12 @@ class TempletSuitTest extends TestCase
             ,'suit_name' => '集成测试模板名称'
             ,'suit_remark' => '测试模板套件备注'
             ,'suit_owner' => self::$owner
+            ,'suit_metas' => 'i m  metas'
         ];
         
         self::$id = TempletSuit::add($data, self::$owner);
-        $this->assertGreaterThan(1, self::$id);
+        $result = TempletSuit::getById(self::$id, self::$owner);
+        $this->assertArraySubset($data, $result);
     }
     
     /**
@@ -62,16 +64,15 @@ class TempletSuitTest extends TestCase
         ];
         
         $effectId = TempletSuit::refresh(self::$id, $data, self::$owner);
-        $this->assertEquals(self::$id, $effectId);
-        
         $result = TempletSuit::getById(self::$id, self::$owner);
-        $this->assertContains('更新', $result['suit_name']);
+        $this->assertArraySubset($data, $result);
+        
     }
     
     /**
      *@depends testAdd_default_returnId
      **/
-    public function testRefresh_dontOwnedSuit_returnFalse()
+    public function testRefresh_othersSuit_returnFalse()
     {
         $data = ['suit_catalog' => '测试模板类别更新'
             ,'suit_name' => '集成测试模板名称更新'
@@ -90,10 +91,11 @@ class TempletSuitTest extends TestCase
     /**
      *@depends testAdd_default_returnId
      **/
-    public function testRemove_notOwner_returnFalse()
+    public function testRemove_othersSuit_returnFalse()
     {
         $effectRow = TempletSuit::remove(self::$id, self::$otherOwner);
         $this->assertEquals(false,$effectRow);
+
     }
     
     /**
@@ -103,6 +105,9 @@ class TempletSuitTest extends TestCase
     {
         $effectRow = TempletSuit::remove(self::$id, self::$owner);
         $this->assertEquals(1,$effectRow);
+        
+        $result = TempletSuit::getById(self::$id, self::$owner);
+        $this->assertEmpty($result);
     }
     
     
