@@ -1,4 +1,4 @@
-<?php
+$r<?php
 namespace app\maker\controller;
 
 use app\maker\model\Code;
@@ -10,6 +10,7 @@ use app\maker\model\Archive;
 use app\maker\model\ArchiveSuit;
 use app\maker\model\Record;
 use app\user\common\UserLogin;
+use app\maker\model\TempletMetaLabel;
 
 class Api extends BaseController
 {
@@ -147,6 +148,9 @@ class Api extends BaseController
         $info = $this->postInfo();
         $record_id = $info['id'];
         $flag = true;
+        
+        //分两步，第一步是删除案件的信息
+        //第二步，删除案件文档
         $flag = Record::remove($record_id, $this->owner);
         if ($flag == false) {
             return json('删除失败');
@@ -235,6 +239,28 @@ class Api extends BaseController
         $list4LayUITable = $this->list4LayUITable($data);
         
         return json($list4LayUITable);
+    }
+    
+    
+    public function addMeta(){
+        $templetSuitId = getCurrentArchiveSuitId();
+        
+        $info = $this->postInfo();
+        
+        $data['templet_owner_meta'] = $templetSuitId;
+        $data['templet_meta_name'] = $info['name'];
+        $data['templet_meta_attr'] = $info['catalog'];
+        $data['templet_meta_remark'] = $info['type'];
+        
+        $result = TempletMetaLabel::add($data);
+        
+        if (empty($result)){
+            return json('失败');
+        }
+        else {
+            return json('成功');
+        }
+        
     }
     
     /**把数组列表转化成Layui table 要求的形式

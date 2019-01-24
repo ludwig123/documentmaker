@@ -36,22 +36,43 @@
     </div>
 </div>
 <script>
-
 //注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
-layui.use('element', function() {
+layui.use(['form', 'element'], function() {
     var element = layui.element;
+    var form = layui.form;
 
-    //…
-});
 
-var formHtml = '<form class="layui-form" lay-filter="formDemo" action=""> <div class="site-title"> <fieldset class="layui-elem-field"> <legend>占位符</legend> <div class="layui-field-box"> 拖动占位符到文档的指定位置，意味着填写模板时的信息将在生成文档时替换掉该占位符 </div> </fieldset> </div> <div class="layui-fluid"> <div class="layui-row"> <div class="layui-col-md12"> <div class="layui-form-item"> <label class="layui-form-label">名称</label> <div class="layui-input-block"> <input type="text" name="index" lay-verify="required|index" placeholder="占位符代表的信息名称，如：驾驶人姓名，身份证号码，籍贯" autocomplete="off" class="layui-input"> </div> </div> </div> </div> </div> <div class="layui-fluid"> <div class="layui-row"> <div class="layui-col-md12"> <div class="layui-form-item"> <label class="layui-form-label">类别</label> <div class="layui-input-block"> <input type="text" name="index" lay-verify="required|index" placeholder="同一类的占位符将自动归类，如：驾驶人，受害者，车属单位" autocomplete="off" class="layui-input"> </div> </div> </div> </div> </div> <div class="layui-fluid"> <div class="layui-row"> <div class="layui-col-md12"> <div class="layui-form-item"> <label class="layui-form-label">数据类型</label> <div class="layui-input-block"> <input type="text" name="index" lay-verify="required|index" placeholder="如：文本，时间，数字，日期" autocomplete="off" class="layui-input"> </div> </div> </div> </div> </div> <div class="layui-form-item"> <div class="layui-input-block"> <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button> </div> </div> </form>';
-$('#add').on('click', function(){
-    layer.open({
-  type: 1,
-  skin: 'layui-layer-rim', //加上边框
-  area: ['600px', '420px'], //宽高
-  title: '添加',
-  content: formHtml
-});
+
+    var formHtml = '<form class="layui-form" lay-filter="formDemo" action=""> <div class="site-title"> <fieldset class="layui-elem-field"> <legend>占位符</legend> <div class="layui-field-box"> 拖动占位符到文档的指定位置，意味着填写模板时的信息将在生成文档时替换掉该占位符 </div> </fieldset> </div> <div class="layui-fluid"> <div class="layui-row"> <div class="layui-col-md12"> <div class="layui-form-item"> <label class="layui-form-label">名称</label> <div class="layui-input-block"> <input type="text" name="name" lay-verify="required|index" placeholder="占位符代表的信息名称，如：驾驶人姓名，身份证号码，籍贯" autocomplete="off" class="layui-input"> </div> </div> </div> </div> </div> <div class="layui-fluid"> <div class="layui-row"> <div class="layui-col-md12"> <div class="layui-form-item"> <label class="layui-form-label">类别</label> <div class="layui-input-block"> <input type="text" name="catalog" lay-verify="required|index" placeholder="同一类的占位符将自动归类，如：驾驶人，受害者，车属单位" autocomplete="off" class="layui-input"> </div> </div> </div> </div> </div> <div class="layui-fluid"> <div class="layui-row"> <div class="layui-col-md12"> <div class="layui-form-item"> <label class="layui-form-label">数据类型</label> <div class="layui-input-block"> <input type="text" name="type" lay-verify="required|index" placeholder="如：文本，时间，数字，日期" autocomplete="off" class="layui-input"> </div> </div> </div> </div> </div> <div class="layui-form-item"> <div class="layui-input-block"> <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button> </div> </div> </form>';
+
+    $('#add').on('click', function() {
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-rim', //加上边框
+            area: ['600px', '420px'], //宽高
+            title: '添加',
+            content: formHtml
+        });
+    });
+
+    form.on('submit(formDemo)', function(data) {
+        var record = data.field;
+        console.log(record);
+        $.ajax({
+            type: "POST",
+            url: "/documentmaker/public/index.php/maker/api/addMeta",
+            data: data.field,
+            dataType: "json",
+            success: function(respMsg) {
+                layer.msg(respMsg);
+            },
+            error: function() {
+                layer.msg("提交失败");
+            }
+        });
+    });
+
+
+
 });
 </script>
