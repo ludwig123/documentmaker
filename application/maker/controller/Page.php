@@ -67,19 +67,30 @@ class Page extends BaseController
         return $this->fetch();
     }
 
-    public function refresh()
-    {
-        $dataArr = Request::post();
-        $id = getCurrentArchiveId();
-        if (empty($id)) {} else {
-            $id = Archive::refresh($id, $dataArr);
-        }
+//     public function refresh()
+//     {
+//         $dataArr = Request::post();
+//         $id = getCurrentArchiveId();
+//         if (empty($id)) {} else {
+//             $id = Archive::refresh($id, $dataArr);
+//         }
         
-        if (empty($id)) {
-            return json("更新失败");
-        } 
-        else{
-            return json("更新成功！");
-        }
+//         if (empty($id)) {
+//             return json("更新失败");
+//         } 
+//         else{
+//             return json("更新成功！");
+//         }
+//     }
+    
+    public function input(){
+        $metas = array(
+            '当事人信息' => array(
+                '司机' => '李大嘴'
+            )
+            
+        );
+        $this->assign('metas', $metas);
+        return $this->fetch();
     }
 }

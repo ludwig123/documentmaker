@@ -71,4 +71,6 @@ class Templet extends BaseController
         return $this->fetch();
     }
     
+    
+    
 }

@@ -1,17 +1,21 @@
 <?php
 namespace app\maker\middleware;
 
+use Serializable;
+
+//这里作为一个值对象
 class Meta{
-    protected $name, $value, $identify;
+    protected $name, $value, $identify, $remark;
     
     
     /**
      * @param string $name 显示的名称
      * @param string $value 显示的值
      */
-    public function __construct($name, $value){
+    public function __construct($name, $value, $remark = null){
         $this->name = $name;
         $this->value = $value;
+        $this->remark = $remark;
         $this->identify = md5($name.$value.microtime());
     }
     
@@ -26,5 +30,7 @@ class Meta{
     public function value(){
         return $this->value;  
     }
+
+
     
 }

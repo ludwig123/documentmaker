@@ -1,4 +1,4 @@
-$r<?php
+<?php
 namespace app\maker\controller;
 
 use app\maker\model\Code;
