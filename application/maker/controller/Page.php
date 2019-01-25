@@ -10,6 +10,7 @@ use think\facade\Request;
 use app\maker\model\Archive;
 use app\maker\model\ArchiveSuit;
 use app\maker\middleware\Producer;
+use app\maker\middleware\TempletRepository;
 
 class Page extends BaseController
 {
@@ -75,6 +76,9 @@ class Page extends BaseController
             )
             
         );
+        $repo = new TempletRepository();
+        $metas = $repo->getMetas($suitId);
+        $metas = $metas->sort();
         $this->assign('metas', $metas);
         return $this->fetch();
     }

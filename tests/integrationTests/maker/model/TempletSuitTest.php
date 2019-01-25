@@ -111,6 +111,27 @@ class TempletSuitTest extends TestCase
     }
     
     
+    public function test_getMetas_default(){
+        $suit_id = '50';
+        $owner = '0';
+        $result = TempletSuit::getMetas($suit_id, $owner);
+        
+        $this->assertContains('i m  metas', $result);
+        
+    }
+    
+    public function test_addMeta_default(){
+        
+    }
+    
+    
+    /**生成一个模拟的meta 数据
+     * 
+     */
+    private function genarateMeta(){
+        
+    }
+    
    
 
 }

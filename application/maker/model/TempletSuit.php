@@ -73,6 +73,23 @@ class TempletSuit extends Model implements iCURD
     public static function getByOwner($owner){
         return db('templet_suit')->where('suit_owner', $owner)->select();
     }
+    
+    
+    public static function addMeta($suit_id, $meta){
+        return '1';
+    }
+    
+    public static function refreshMeta($suit_id, $meta){
+        return '2';
+    }
+    
+    public static function removeMeta($suit_id, $meta){
+        return '3';
+    }
 
+    public static function getMetas($suit_id, $owner){
+        $result = self::getById($suit_id, $owner);
+        return $result['suit_metas'];
+    }
     
 }

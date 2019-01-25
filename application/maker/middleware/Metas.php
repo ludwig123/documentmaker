@@ -11,6 +11,13 @@ use Serializable;
 class Metas implements Serializable{
     protected $metas = array();
     
+    /**传入序列化的数组字符串
+     * @param unknown $dataStr
+     */
+    public function __construct($dataStr){
+           $this->unserialize($dataStr);
+        }
+    
     public function serialize()
     {
         return serialize($this->metas);
@@ -20,13 +27,15 @@ class Metas implements Serializable{
     {
         $this->metas = unserialize($serialized);
     }
+    
+    
 
     /**添加一个meta。如果存在该名字，就删除它再添加
      * @param Meta $meta
      */
-    public function add(Meta $meta){
-        if ($this->is_exist($meta)){
-            $this->remove($meta);
+    public function add ($meta){
+        if ($this->is_exist($meta['name'])){
+            $this->remove($meta['name']);
         }
         
         $this->metas[$meta->name()] = $meta;
@@ -44,8 +53,8 @@ class Metas implements Serializable{
      * @param Meta $meta
      * @return boolean
      */
-    public function is_exist(Meta $meta){
-        return array_key_exists($meta->name(), $this->metas);
+    public function is_exist($name){
+        return array_key_exists($name, $this->metas);
     }
     
     /**删除一个 meta
@@ -60,7 +69,8 @@ class Metas implements Serializable{
         return $this->metas;
     }
     
-    public function sortMetas(){
+    //把metas 调整的符合分类显示的情形
+    public function sort(){
         $sortedMetas = array();
         foreach ($this->metas as $k => $v){
             
