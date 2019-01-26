@@ -2,23 +2,25 @@
 namespace app\maker\middleware;
 
 use app\maker\model\TempletSuit;
-use phpDocumentor\Reflection\Types\This;
 
 class TempletRepository{
     
+    /**
+     * @param string $suitId
+     * @param array $data
+     * @param string $owner
+     */
     public function addMeta($suitId, $data, $owner){
-        
        
-        
         $suit = $this->getSuit($suitId, $owner);
         
         $metas = new Metas($suit['suit_metas']);
         
-        $metas->add($meta);
+        $metas->add($data);
         
         $suit['suit_metas'] = $metas->serialize();
         
-        $this->update($suit);
+        return $this->refreshSuit($suitId, $suit, $owner);
         
     }
     
@@ -30,15 +32,21 @@ class TempletRepository{
         
     }
     
-    /**数组形式返回metas
+    /**对象形式返回metas, key 是 name
      * @param string $suitId
      */
     public function getMetas($suitId, $owner){
-        $temp = TempletSuit::getMetas($suit_id);
+        $temp = TempletSuit::getMetas($suitId, $owner);
+        $metas = new Metas($temp);
+        return $metas;
     }
     
     public function getSuit($suitId, $owner){
         return TempletSuit::getById($suitId, $owner);
+    }
+    
+    public function refreshSuit($suitId, $dataArr, $owner){
+      return  TempletSuit::refresh($suitId, $dataArr, $owner);
     }
     
 }

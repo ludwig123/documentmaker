@@ -16,8 +16,8 @@
                 <ul class="layui-tree">
                     {foreach $vo as $k=>$v}
                     <li><a draggable="true">
-                                   <cite>{$v.templet_meta_name}</cite>
-                       <em>{$v.templet_meta_remark}</em>
+                                   <cite>{$v.name}</cite>
+                       <em>{$v.type}</em>
                    </a>
                     </li>
                     {/foreach}
@@ -64,7 +64,7 @@ layui.use(['form', 'element'], function() {
             data: data.field,
             dataType: "json",
             success: function(respMsg) {
-                layer.msg(respMsg);
+                layer.msg('提交成功');
             },
             error: function() {
                 layer.msg("提交失败");

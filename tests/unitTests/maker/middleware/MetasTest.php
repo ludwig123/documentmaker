@@ -1,7 +1,7 @@
 <?php
 use PHPUnit\Framework\TestCase;
 use app\maker\middleware\Metas;
-use app\maker\middleware\Meta;
+
 
 require_once 'application/maker/middleware/Metas.php';
 
@@ -24,12 +24,18 @@ class MetasTest extends TestCase
     {
         parent::setUp();
         $this->metas = new Metas();
-        
+
         $name = '驾驶员';
         $value = '李大嘴';
         $remark = '我是备注';
         $catalog = '交管';
-        $this->meta = new Meta($name, $value, $remark);
+        
+        $this->meta = array(
+            'name' => $name,
+            'catalog' => $catalog,
+            'remark' => $remark,
+            'value' => $value
+        );
         
         $this->metas->add($this->meta);
     }
@@ -39,7 +45,6 @@ class MetasTest extends TestCase
      */
     protected function tearDown()
     {
-        // TODO Auto-generated MetasTest::tearDown()
         $this->metas = null;
         
         parent::tearDown();
@@ -58,40 +63,29 @@ class MetasTest extends TestCase
     {
         $result = $this->metas->serialize();
         $obj = $this->metas->unserialize($result);
-        $this->assertTrue($this->metas->is_exist($this->meta));
+        $this->assertTrue($this->metas->is_exist($this->meta['name']));
     }
 
 
     public function testAdd_default()
     {
         
-        $this->assertTrue($this->metas->is_exist($this->meta));
+        $this->assertTrue($this->metas->is_exist($this->meta['name']));
     }
 
- 
-    public function testIs_exist_default()
-    {
-        
-        $this->assertTrue($this->metas->is_exist($this->meta));
-    }
     
     public function test_getMetas_defualt_return_arrays(){
         $metas = $this->metas->getMetas();
         $this->assertEquals(1, count($metas));
     }
     
-    public function test_refesh_change_value(){
-        $newMeta = new Meta('驾驶员', '李大嘴2', '交管');
-        
-        $this->metas->refresh($newMeta);
-        $this->assertContains('李大嘴2', $this->metas->serialize());
-        
-    }
+ 
     
     public function test_refesh_change_name(){
-        $newMeta = new Meta('驾驶员2', '李大嘴', '交管');
+        $destValue = '驾驶员2';
+        $this->meta['name'] = $destValue;
         
-        $this->metas->refresh($newMeta);
+        $this->metas->refresh($this->meta);
         $this->assertContains('驾驶员2', $this->metas->serialize());
         
     }
@@ -99,8 +93,8 @@ class MetasTest extends TestCase
 
     public function testRemove_default()
     {   
-        $this->metas->remove($this->meta);
-        $this->assertFalse($this->metas->is_exist($this->meta));
+        $this->metas->remove($this->meta['name']);
+        $this->assertFalse($this->metas->is_exist($this->meta['name']));
     }
 }
 

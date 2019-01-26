@@ -12,9 +12,10 @@ class Metas implements Serializable{
     protected $metas = array();
     
     /**传入序列化的数组字符串
-     * @param unknown $dataStr
+     * @param string $dataStr
      */
-    public function __construct($dataStr){
+    public function __construct($dataStr = null){
+        if (!empty($dataStr))
            $this->unserialize($dataStr);
         }
     
@@ -38,7 +39,7 @@ class Metas implements Serializable{
             $this->remove($meta['name']);
         }
         
-        $this->metas[$meta->name()] = $meta;
+        $this->metas[$meta['name']] = $meta;
         
         return ;
     }
@@ -60,8 +61,8 @@ class Metas implements Serializable{
     /**删除一个 meta
      * @param Meta $meta
      */
-    public function remove(Meta $meta){
-        unset($this->metas[$meta->name()]);
+    public function remove($metaName){
+        unset($this->metas[$metaName]);
         return ;
     }
     
@@ -71,9 +72,11 @@ class Metas implements Serializable{
     
     //把metas 调整的符合分类显示的情形
     public function sort(){
-        $sortedMetas = array();
+        $sortBycatalog = array();
         foreach ($this->metas as $k => $v){
-            
+            $sortBycatalog[$v['catalog']][] = $v;
         }
+        
+        return $sortBycatalog;
     }
 }

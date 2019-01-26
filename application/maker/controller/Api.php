@@ -244,11 +244,13 @@ class Api extends BaseController
     
     
     public function addMeta(){
-        $templetSuitId = getCurrentArchiveSuitId();
+        $templetSuitId = getCurrentTempletSuitId();
         
         $info = $this->postInfo();
+        $templetRepo = new TempletRepository();
+        $owner = $this->owner;
+        $result = $templetRepo->addMeta($templetSuitId, $info, $owner); 
         
-        $result = (new TempletRepository()).addMeta($templetSuitId, $info);        
         if (empty($result)){
             return json('失败');
         }

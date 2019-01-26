@@ -5,6 +5,7 @@ use think\Controller;
 use app\maker\model\TempletDoc;
 use think\facade\Request;
 use app\maker\model\TempletMetaLabel;
+use app\maker\middleware\TempletRepository;
 
 
 class Templet extends BaseController
@@ -23,11 +24,17 @@ class Templet extends BaseController
         $catalogs = TempletDoc::getCatalogArr();
         $this->assign('catalogs', $catalogs);
         
-        $temp= TempletMetaLabel::getMetaArr();
-        $meta_labels = array();
-        foreach ($temp as $k=>$v){
-            $meta_labels[$v['templet_meta_attr']][] = $v;
-        }
+        $templetRepo = new TempletRepository();
+        $suitId = getCurrentTempletSuitId();
+        $owner = getUserId();
+       $metas = $templetRepo->getMetas($suitId, $owner);
+        $meta_labels = $metas->sort();
+//         $temp= TempletMetaLabel::getMetaArr();
+//         $meta_labels = array();
+//         foreach ($temp as $k=>$v){
+//             $meta_labels[$v['templet_meta_attr']][] = $v;
+//         }
+
         $this->assign('meta_labels', $meta_labels);
        return $this->fetch();
     }

@@ -1,6 +1,7 @@
 <?php
 use PHPUnit\Framework\TestCase;
 use app\maker\model\TempletSuit;
+use app\maker\middleware\Metas;
 
 
 /**
@@ -61,6 +62,7 @@ class TempletSuitTest extends TestCase
             ,'suit_name' => '集成测试模板名称更新'
             ,'suit_remark' => '测试模板套件备注更新'
             ,'suit_owner' => self::$owner
+            ,'suit_metas' => 'fdafa'
         ];
         
         $effectId = TempletSuit::refresh(self::$id, $data, self::$owner);
@@ -78,6 +80,7 @@ class TempletSuitTest extends TestCase
             ,'suit_name' => '集成测试模板名称更新'
             ,'suit_remark' => '测试模板套件备注更新'
             ,'suit_owner' => self::$owner
+            ,'suit_metas' => 'fdafda'
         ];
         
         $effectId = TempletSuit::refresh(self::$id, $data, self::$otherOwner);
@@ -129,8 +132,9 @@ class TempletSuitTest extends TestCase
      * 
      */
     private function genarateMeta(){
-        
+
     }
+    
     
    
 

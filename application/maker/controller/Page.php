@@ -69,6 +69,9 @@ class Page extends BaseController
     }
 
     
+    /**输入模板需要的信息的页面
+     * @return mixed|string
+     */
     public function input(){
         $metas = array(
             '当事人信息' => array(
@@ -76,8 +79,12 @@ class Page extends BaseController
             )
             
         );
+
+$suitId = '1';
+$owner = '1';
+        
         $repo = new TempletRepository();
-        $metas = $repo->getMetas($suitId);
+        $metas = $repo->getMetas($suitId, $owner);
         $metas = $metas->sort();
         $this->assign('metas', $metas);
         return $this->fetch();
