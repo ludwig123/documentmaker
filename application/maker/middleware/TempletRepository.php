@@ -5,7 +5,7 @@ use app\maker\model\TempletSuit;
 
 class TempletRepository{
     
-    /**
+    /**新增
      * @param string $suitId
      * @param array $data
      * @param string $owner
@@ -24,6 +24,11 @@ class TempletRepository{
         
     }
     
+    /**删除一个meta
+     * @param unknown $suitId
+     * @param unknown $meta
+     * @param unknown $owner
+     */
     public function removeMeta($suitId, $meta, $owner){
         
     }

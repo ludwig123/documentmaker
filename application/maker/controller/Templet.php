@@ -29,11 +29,6 @@ class Templet extends BaseController
         $owner = getUserId();
        $metas = $templetRepo->getMetas($suitId, $owner);
         $meta_labels = $metas->sort();
-//         $temp= TempletMetaLabel::getMetaArr();
-//         $meta_labels = array();
-//         foreach ($temp as $k=>$v){
-//             $meta_labels[$v['templet_meta_attr']][] = $v;
-//         }
 
         $this->assign('meta_labels', $meta_labels);
        return $this->fetch();

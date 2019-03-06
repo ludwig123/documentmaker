@@ -1,7 +1,6 @@
 <?php
 namespace app\maker\middleware;
 
-use Serializable;
 
 //这里作为一个值对象
 class Meta{
@@ -30,6 +29,10 @@ class Meta{
     
     public function value(){
         return $this->value;  
+    }
+    
+    public function catalog(){
+        return $this->catalog;
     }
     
 

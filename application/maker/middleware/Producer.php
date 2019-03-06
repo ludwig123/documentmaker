@@ -6,38 +6,52 @@ use app\maker\model\ArchiveSuit;
 use app\maker\model\TempletDoc;
 use app\maker\model\TempletSuit;
 
-class Producer{
+class Producer
+{
+
     /**
      * 将案件的元素信息生成案件，并保存文档
      *
      * @param array $docInfo
+     *            二维数组，需要含有 name="?" value="?"
      * @param int $templetSuitId
      * @return boolean | int 返回卷宗编号
      */
     public function saveDocs($docInfo, $templetSuitId, $owner)
     {
-        $templetSuit = TempletSuit::getById($templetSuitId, NULL);
-        $archiveSuit = $this->getArchiveSuitFromTempletSuit($templetSuit);
-        
-        //怎么把模板的替换规则加进去
-        $templets = TempletDoc::getByGroupId($templetSuitId);
-        $archiveSuitId = ArchiveSuit::add($archiveSuit,$owner);       
+        $templets = $this->getTemplets($templetSuitId);
+        $archiveSuitId = $this->addArchiveSuit($templetSuitId, $owner);
+
         $docs = $this->generateDocs($docInfo, $templets, $archiveSuitId);
-        
-        $added = array();
-        foreach ($docs as $k => $v) {
-            $added[] = Archive::add($v);
-        }
-        
-        // 确保保存的案卷数和模板文件数量一致
-        if (count($added) == count($templets)) {
+     
+        $docsCount = $this->addArchives($docs);
+
+        if ($docsCount == count($templets)) {
             return $archiveSuitId;
         } else
             return false;
     }
-    /**
-     * @param templetSuit
-     */private function getArchiveSuitFromTempletSuit($templetSuit)
+
+    public function addArchiveSuit($templetSuitId, $owner)
+    {
+        $templetSuit = TempletSuit::getById($templetSuitId, NULL);
+        $archiveSuit = $this->newArchiveSuit($templetSuit);
+        $archiveSuitId = ArchiveSuit::add($archiveSuit, $owner);
+        return $archiveSuitId;
+    }
+    
+    public function addArchives($docs){
+        $added = array();
+        foreach ($docs as $k => $v) {
+            $added[] = Archive::add($v);
+        }
+        return count($added);
+    }
+
+    /**把templetSuit 中的信息原封不动的存到 archiveSuit
+     * @param array $templetSuit
+     */
+    public function newArchiveSuit($templetSuit)
     {
         $archiveSuit = array();
         $archiveSuit['archive_suit_catalog'] = $templetSuit['suit_catalog'];
@@ -47,6 +61,14 @@ class Producer{
         return $archiveSuit;
     }
 
+    public function newArchiveDocs($docInfo, $templetSuitId){
+        
+    }
+    
+    private function getTemplets($templetSuitId){
+        return TempletDoc::getByGroupId($templetSuitId);
+    }
+    
     
     /**
      * 生成多个文档
@@ -64,9 +86,9 @@ class Producer{
         }
         return $docs;
     }
-    
+
     /**
-     * 生成一个文档array,用于数据库提交，不含groupId
+     * 生成单个文档array,用于数据库提交，不含groupId
      *
      * @param array $docInfo
      *            案件基本信息
@@ -86,124 +108,33 @@ class Producer{
         
         return $doc;
     }
-    
-    
-    
-    
+
     /**
-     * 把字符串中的meta用array替换掉
+     * 把字符串中{驾驶人}用array替换掉
      *
-     * @param string $src 模板文件
+     * @param string $src
+     *            模板文件 html 格式
      * @param array $docInfo
      * @return mixed
      */
     public function templetReplace($src, $docInfo)
     {
+        
         $patterns = array();
         $replacements = array();
-        
-        // 驾驶员信息
-        $patterns[0] = '/{驾驶证准驾车型}/';
-        $replacements[0] = $docInfo['sex'];
-        
-        $patterns[1] = '/{驾驶员身份证}/';
-        $replacements[1] = $docInfo['identity'];
-        
-        $patterns[2] = '/{驾驶员姓名}/';
-        $replacements[2] = $docInfo['name'];
-        
-        $patterns[3] = '/{驾驶证档案编号}/';
-        $replacements[3] = $docInfo['file_num'];
-        
-        $patterns[4] = '/{驾驶证发证机关}/';
-        $replacements[4] = $docInfo['issuer'];
-        
-        $patterns[4] = '/{驾驶员手机号码}/';
-        $replacements[4] = $docInfo['phone'];
-        
-        $patterns[4] = '/{驾驶员住址}/';
-        $replacements[4] = $docInfo['address'];
-        
-        $patterns[4] = '/{驾驶员学历}/';
-        $replacements[4] = $docInfo['education'];
-        
-        $patterns[4] = '/{驾驶员政治面貌}/';
-        $replacements[4] = $docInfo['political'];
-        
-        $patterns[4] = '/{驾驶员公司}/';
-        $replacements[4] = $docInfo['company'];
-        
-        $patterns[4] = '/{驾驶员国籍}/';
-        $replacements[4] = $docInfo['nation'];
-        
-        $patterns[4] = '/{驾驶员籍贯}/';
-        $replacements[4] = $docInfo['birth_place'];
-        
-        // 所驾车辆信息
-        $patterns[5] = '/{车牌号}/';
-        $replacements[5] = $docInfo['car_num'];
-        
-        $patterns[6] = '/{车辆类型}/';
-        $replacements[6] = $docInfo['car_type'];
-        
-        $patterns[7] = '/{车辆所有人}/';
-        $replacements[7] = $docInfo['car_owner'];
-        
-        // 违法信息
-        $patterns[8] = '/{主办民警}/';
-        $replacements[8] = $docInfo['police_1'];
-        
-        $patterns[9] = '/{协办民警}/';
-        $replacements[9] = $docInfo['police_2'];
-        
-        $patterns[10] = '/{违法代码1}/';
-        $replacements[10] = $docInfo['code_1'];
-        
-        $patterns[11] = '/{违法代码2}/';
-        $replacements[11] = $docInfo['code_2'];
-        
-        $patterns[12] = '/{违法发生时间}/';
-        $replacements[12] = $docInfo['time'];
-        
-        $patterns[121] = '/{违法发生地点}/';
-        $replacements[121] = $docInfo['place'];
-        
-        $patterns[13] = '/{违法发现支队}/';
-        $replacements[13] = $docInfo['zhidui'];
-        
-        $patterns[14] = '/{违法发现大队}/';
-        $replacements[14] = $docInfo['dadui'];
-        
-        $patterns[15] = '/{开具的文书类型}/';
-        $replacements[15] = $docInfo['doc_type'];
-        
-        $patterns[16] = '/{开具的文书编号}/';
-        $replacements[16] = $docInfo['doc_index'];
-        
-        // 裁决信息
-        $patterns[17] = '/{处罚决定书编号}/';
-        $replacements[17] = $docInfo['index'];
-        
-        $patterns[18] = '/{违法裁决时间}/';
-        $replacements[18] = $docInfo['judge_time'];
-        
-        $patterns[19] = '/{违法裁决支队}/';
-        $replacements[19] = $docInfo['judge_zhidui'];
-        
-        $patterns[20] = '/{违法裁决大队}/';
-        $replacements[20] = $docInfo['judge_dadui'];
-        
-        $patterns[21] = '/{违法证据}/';
-        $replacements[21] = $docInfo['evidence'];
+        $i = 0;
+        foreach ($docInfo as $k => $info){
+            $patterns[$i] = '/{'.$info['name'].'}/';
+            $replacements[$i] = $info['value'];
+            $i++;
+        }
         
         return preg_replace($patterns, $replacements, $src);
     }
-    
-    public function getrr($docInfo, $templet){
-//         $patterns[0] = '/{'.$name.'}/';
-//         $replacements[0] = $value;
-        
+
+    public function getrr($docInfo, $templet)
+    {
+        // $patterns[0] = '/{'.$name.'}/';
+        // $replacements[0] = $value;
     }
-    
-    
 }

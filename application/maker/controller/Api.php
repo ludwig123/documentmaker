@@ -215,6 +215,9 @@ class Api extends BaseController
         }
     }
 
+    /**获取文档的具体内容，方法命名需要改一下
+     * @return \think\response\Json|NULL
+     */
     public function editorHTML()
     {
         $templetId = getCurrentTempletId();
