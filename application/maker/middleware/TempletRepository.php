@@ -26,11 +26,20 @@ class TempletRepository{
     
     /**删除一个meta
      * @param unknown $suitId
-     * @param unknown $meta
+     * @param unknown $metaName
      * @param unknown $owner
      */
-    public function removeMeta($suitId, $meta, $owner){
+    public function removeMeta($suitId, $metaName, $owner){
         
+        $suit = $this->getSuit($suitId, $owner);
+        
+        $metas = new Metas($suit['suit_metas']);
+        
+        $metas->remove($metaName);
+        
+        $suit['suit_metas'] = $metas->serialize();
+        
+        return $this->refreshSuit($suitId, $suit, $owner);
     }
     
     public function refreshMeta($suitId, $meta, $owner){

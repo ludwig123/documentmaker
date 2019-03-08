@@ -263,6 +263,22 @@ class Api extends BaseController
         
     }
     
+    public function removeMeta(){
+        $templetSuitId = getCurrentTempletSuitId();
+        
+        $info = $this->postInfo();
+        $templetRepo = new TempletRepository();
+        $owner = $this->owner;
+        $result = $templetRepo->removeMeta($templetSuitId, $info['name'], $owner);
+        
+        if (empty($result)){
+            return json('失败');
+        }
+        else {
+            return json('成功');
+        }
+    }
+    
     /**把数组列表转化成Layui table 要求的形式
      * @param array $dataArr
      * @param string $codeStatus

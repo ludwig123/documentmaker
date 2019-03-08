@@ -86,10 +86,21 @@ layui.use(['form', 'element'], function() {
         });
     });
 
-//TO-DO 删除一个meta啊
-    $("i").click(function() {
-      var msg = event.target.id;
-      console.log(msg);
+    //TO-DO 删除一个meta啊
+    $("i.layui-icon-delete").click(function() {
+        var data = {name : event.target.id};
+        $.ajax({
+            type: "POST",
+            url: "/documentmaker/public/index.php/maker/api/removeMeta",
+            data: data,
+            dataType: "json",
+            success: function(respMsg) {
+                layer.msg('删除成功');
+            },
+            error: function() {
+                layer.msg("删除失败");
+            }
+        });
     })
 
 
