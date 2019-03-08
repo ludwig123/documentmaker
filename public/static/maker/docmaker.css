@@ -1,0 +1,15 @@
+.layui-icon-delete  {
+	display: none;
+}
+
+.layui-icon-delete:hover {
+	cursor: pointer;
+}
+
+.layui-tree li a[draggable=true] {
+	cursor: grab
+}
+
+.layui-tree li a[draggable=false] {
+	cursor: not-allowed
+}
