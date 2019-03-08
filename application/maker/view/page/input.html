@@ -1,47 +1,29 @@
 {extend name="maker@common/base" /}
 {block name="main"}
-<div class="site-text se-block">
+<div class="site-content">
     <form class="layui-form" lay-filter="formDemo" action="">
-        <div class="site-title">
-            <fieldset>
-                <legend><a name="input">案卷信息</a></legend>
-            </fieldset>
-        </div>
-        <div class="layui-fluid">
-            <div class="layui-row">
-                <div class="layui-col-md12">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">决定书编号六七八九十</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="index" lay-verify="required|index" placeholder="请输入18位决定书编号" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         {foreach $metas as $key=>$vo }
         <div class="site-title">
             <fieldset>
                 <legend><a name="input">{$key}</a></legend>
             </fieldset>
         </div>
-            {foreach $vo as $k=>$v }
-            <div class="layui-fluid">
-                <div class="layui-row">
-                    <div class="layui-col-md12">
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">{$k}</label>
-                            <div class="layui-input-block">
-                                <input type="text" name="{$k}" lay-verify="required|index" placeholder=" 请输入18位决定书编号" value="{$v}" autocomplete="off" class="layui-input">
-                            </div>
+        {foreach $vo as $k=>$v }
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">{$v.name}</label>
+                        <div class="layui-input-block">
+                            <input type="text" name={$v.name} lay-verify="required|index" placeholder={$v.remark} autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>
             </div>
-            {/foreach}
+        </div>
         {/foreach}
-
-                <div class="layui-form-item">
+        {/foreach}
+        <div class="layui-form-item">
             <div class="layui-input-block">
                 <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
                 <button type="reset" class="layui-btn layui-btn-primary">清空所有内容</button>
@@ -49,7 +31,6 @@
         </div>
     </form>
 </div>
-
 <script>
 layui.use(['form', 'jquery'], function() {
     var form = layui.form;

@@ -279,6 +279,11 @@ class Api extends BaseController
         }
     }
     
+    //TO-DO 添加一个文件
+    public function addArchive(){
+        
+    }
+    
     /**把数组列表转化成Layui table 要求的形式
      * @param array $dataArr
      * @param string $codeStatus
